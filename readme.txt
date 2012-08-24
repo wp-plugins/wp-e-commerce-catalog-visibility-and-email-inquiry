@@ -45,7 +45,7 @@ Find detailed step-by-step set up and configuration instructions in the [plugins
 
 For those who want more control there is a PRO Version upgrade. The PRO version advanced features include:
 
-<strong>Global Settings:</strong>
+= Global Settings: =
 * Set custom email recipient (different to the default WPEC admin email)
 * Set a cc recipient
 * Set your own custom Email Button title and set custom style for email button.
@@ -56,7 +56,7 @@ For those who want more control there is a PRO Version upgrade. The PRO version 
 
 And for ultimate control:
 
-<strong>Customize Single Product Page:</strong>
+= Customize Single Product Page: =
 * Customize Catalog visibility settings and email inquiry settings on any single product page. 
 * Over-ride any of the global Catalog Visibility options from the product page.
 * Change the Email Inquiry form primary recipient and cc recipient
