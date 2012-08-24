@@ -17,13 +17,13 @@ WP e-Commerce Catalog Visibility and Email Inquiry Lite Version allows you to co
 
 1. Add to Cart Button to show with an Email Inquiry button with a stylish pop-up product email inquiry form
 OR
-2. Hide the add to cart Button and just show the Email Inquiry Button turning you site into a brochure site.
+2. Hide the add to cart Button and just show the Email Inquiry Button turning your site into a brochure site.
 OR
 3. Hide the Add to Cart Button and don't show Email Button.
 PLUS
 4. Choose to apply the above setting to logged in users.
 
-WP e-Commerce Catalog Visibility and Email Inquiry uses the WordPress email config and requires not external email plugin. The email sent to the WP e-Commerce email admin address from each product inquiry contains:
+WP e-Commerce Catalog Visibility and Email Inquiry uses the WordPress email config and requires no external email plugin. The email sent to the WP e-Commerce email admin address from each product inquiry contains:
 
 * Senders Name
 * Senders Email address
