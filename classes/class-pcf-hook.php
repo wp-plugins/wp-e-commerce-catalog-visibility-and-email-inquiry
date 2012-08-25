@@ -36,8 +36,8 @@ class WPEC_PCF_Hook_Filter{
 		if ($wpec_pcf_hide_addcartbt == 1 && ( !is_user_logged_in() || $wpec_pcf_user == 1 ) && $post->post_type == 'wpsc-product') {
 		?>
         <style type="text/css">
-			input#product_<?php echo $product_id; ?>_submit_button { display:none !important; }
-			.product_<?php echo $product_id; ?> .wpsc_buy_button { display:none !important; }
+			body input#product_<?php echo $product_id; ?>_submit_button, input#product_<?php echo $product_id; ?>_submit_button { display:none !important; visibility:hidden !important; height:0 !important;}
+			body .product_<?php echo $product_id; ?> .wpsc_buy_button, .product_<?php echo $product_id; ?> .wpsc_buy_button { display:none !important; visibility:hidden !important; height:0 !important;}
 		</style>
         <?php
 		}
@@ -55,6 +55,9 @@ class WPEC_PCF_Hook_Filter{
 		global $post;
 		$product_id = $post->ID;
 		$wpsc_pcf_custom = array();
+		
+		if (!isset($wpsc_pcf_custom['wpec_pcf_hide_addcartbt'])) $wpec_pcf_hide_addcartbt = esc_attr(get_option('wpec_pcf_hide_addcartbt'));
+		else $wpec_pcf_hide_addcartbt = esc_attr($wpsc_pcf_custom['wpec_pcf_hide_addcartbt']);
 		
 		if (!isset($wpsc_pcf_custom['wpec_pcf_show_button'])) $wpec_pcf_show_button = esc_attr(get_option('wpec_pcf_show_button'));
 		else $wpec_pcf_show_button = esc_attr($wpsc_pcf_custom['wpec_pcf_show_button']);
@@ -151,6 +154,19 @@ class WPEC_PCF_Hook_Filter{
                     })(jQuery);
                 </script>
         <?php
+				}
+				if ($wpec_pcf_hide_addcartbt == 1 && ( !is_user_logged_in() || $wpec_pcf_user == 1 ) && $post->post_type == 'wpsc-product') {
+		?>
+        		<script type="text/javascript">
+                    (function($){		
+                        $(function(){
+							if($("input#product_<?php echo $product_id; ?>_submit_button").length > 0){
+								$("input#product_<?php echo $product_id; ?>_submit_button").remove();
+							}
+                        });		  
+                    })(jQuery);
+                </script>
+        <?php		
 				}
 			} else {
 				echo $button_ouput;
