@@ -113,13 +113,17 @@ class WPEC_PCF_Hook_Filter{
                     (function($){		
                         $(function(){
                             if($("#pcf_contact_button_<?php echo $product_id; ?>").length <= 0){
+								var add_cart_float = '';
                                 if($("input#product_<?php echo $product_id; ?>_submit_button").length > 0){
+									add_cart_float = $("input#product_<?php echo $product_id; ?>_submit_button").css("float");
                                     $("input#product_<?php echo $product_id; ?>_submit_button").before('<?php echo $button_ouput; ?><br />');
                                 }else if($(".product_view_<?php echo $product_id; ?>").length > 0){
                                     $(".product_view_<?php echo $product_id; ?>").find(".more_details").before('<?php echo $button_ouput; ?><br />');
                                 }else{
+									add_cart_float = $("input.wpsc_buy_button").css("float");
                                     $("input.wpsc_buy_button").before('<?php echo $button_ouput; ?><br />');
                                 }
+								$("#pcf_contact_button_<?php echo $product_id; ?>").parent(".pcf_button_container").css("float", add_cart_float);
                             }
                         });		  
                     })(jQuery);
@@ -131,13 +135,17 @@ class WPEC_PCF_Hook_Filter{
                     (function($){		
                         $(function(){
                             if($("#pcf_contact_button_<?php echo $product_id; ?>").length <= 0){
+								var add_cart_float = '';
                                 if($("input#product_<?php echo $product_id; ?>_submit_button").length > 0){
+									add_cart_float = $("input#product_<?php echo $product_id; ?>_submit_button").css("float");
                                     $("input#product_<?php echo $product_id; ?>_submit_button").after('<br /><?php echo $button_ouput; ?>');
                                 }else if($(".product_view_<?php echo $product_id; ?>").length > 0){
                                     $(".product_view_<?php echo $product_id; ?>").find(".more_details").after('<br /><?php echo $button_ouput; ?>');
                                 }else{
+									add_cart_float = $("input.wpsc_buy_button").css("float");
                                     $("input.wpsc_buy_button").after('<br /><?php echo $button_ouput; ?>');
                                 }
+								$("#pcf_contact_button_<?php echo $product_id; ?>").parent(".pcf_button_container").css("float", add_cart_float);
                             }
                         });		  
                     })(jQuery);
@@ -217,6 +225,14 @@ class WPEC_PCF_Hook_Filter{
 	}
 		
 	function add_style_header() {
+		wp_enqueue_style('a3_button_style', WPEC_PCF_CSS_URL . '/button.css');
+		wp_enqueue_style('pcf_form_style', WPEC_PCF_CSS_URL . '/pcf_form.css');
+	?>
+    	
+    <?php
+	}
+	
+	function footer_print_scripts() {
 		$wpec_pcf_button_padding = 10;
 		if ( trim(esc_attr(get_option('wpec_pcf_button_padding'))) != '') $wpec_pcf_button_padding = intval(esc_attr(get_option('wpec_pcf_button_padding')));
 		
@@ -231,9 +247,6 @@ class WPEC_PCF_Hook_Filter{
 		
 		$wpec_pcf_contact_button_border_colour = '';
 		if ( trim(esc_attr(get_option('wpec_pcf_contact_button_border_colour'))) != '') $wpec_pcf_contact_button_border_colour = esc_attr(get_option('wpec_pcf_contact_button_border_colour'));
-		
-		wp_enqueue_style('a3_button_style', WPEC_PCF_CSS_URL . '/button.css');
-		wp_enqueue_style('pcf_form_style', WPEC_PCF_CSS_URL . '/pcf_form.css');
 	?>
     	<style type="text/css">
 		h1.pcf_result_heading {
@@ -241,7 +254,7 @@ class WPEC_PCF_Hook_Filter{
 			color: <?php echo $wpec_pcf_contact_button_bg_colour; ?> !important;
 			<?php } ?>
 		}
-		.pcf_button_container { padding:<?php echo $wpec_pcf_button_padding ?>px !important; }
+		.pcf_button_container { padding-top:<?php echo $wpec_pcf_button_padding ?>px !important; padding-bottom:<?php echo $wpec_pcf_button_padding ?>px !important; }
 		body a.pcf_email_button, body a.pcf_email_button:hover, body a.pcf_email_button.hover, body a.pcf_email_button.active {
 			<?php if (trim(str_replace('#', '', $wpec_pcf_button_bg_colour)) != '') { ?>
 			background: <?php echo $wpec_pcf_button_bg_colour; ?>  !important;
@@ -270,9 +283,6 @@ class WPEC_PCF_Hook_Filter{
 		<?php } ?>
 		</style>
     <?php
-	}
-	
-	function footer_print_scripts() {
 		wp_enqueue_style( 'woocommerce_fancybox_styles', WPEC_PCF_JS_URL . '/fancybox/fancybox.css' );
 		wp_enqueue_script('jquery');
 		wp_enqueue_script( 'fancybox', WPEC_PCF_JS_URL . '/fancybox/fancybox.min.js');
@@ -352,8 +362,6 @@ class WPEC_PCF_Hook_Filter{
 		wp_enqueue_script('jquery');
 		wp_enqueue_script('farbtastic');
 		wp_enqueue_style('farbtastic');
-		wp_enqueue_script( 'thickbox' );
-		wp_enqueue_style( 'thickbox' );
 	?>
     <script type="text/javascript">
 		(function($){		

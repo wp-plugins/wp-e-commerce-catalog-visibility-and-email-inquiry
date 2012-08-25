@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP e-Commerce Catalog Visibility Email inquiry LITE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-22 11:38+0700\n"
-"PO-Revision-Date: 2012-08-22 11:38+0700\n"
+"POT-Creation-Date: 2012-08-25 11:44+0700\n"
+"PO-Revision-Date: 2012-08-25 11:44+0700\n"
 "Last-Translator: Nguyen Tuan <mr.nguyencongtuan@gmail.com>\n"
 "Language-Team: a3rev\n"
 "MIME-Version: 1.0\n"
@@ -45,12 +45,12 @@ msgstr ""
 #: admin/classes/class-pcf-settings.php:50
 #: admin/classes/class-pcf-settings.php:53
 #: classes/class-pcf-hook.php:83
-#: classes/class-pcf-hook.php:164
+#: classes/class-pcf-hook.php:172
 msgid "Product Enquiry"
 msgstr ""
 
 #: admin/classes/class-pcf-settings.php:56
-#: classes/class-pcf-hook.php:170
+#: classes/class-pcf-hook.php:178
 msgid "SEND"
 msgstr ""
 
@@ -140,7 +140,7 @@ msgid "Padding"
 msgstr ""
 
 #: admin/classes/class-pcf-settings.php:182
-msgid "&lt;empty&gt; for default 10px"
+msgid "&lt;empty&gt; for default 10px padding from the add to cart button or enter a px value."
 msgstr ""
 
 #: admin/classes/class-pcf-settings.php:186
@@ -362,22 +362,22 @@ msgid "Email inquiry for"
 msgstr ""
 
 #: classes/class-pcf-functions.php:55
-#: classes/class-pcf-hook.php:185
+#: classes/class-pcf-hook.php:193
 msgid "Name"
 msgstr ""
 
 #: classes/class-pcf-functions.php:61
-#: classes/class-pcf-hook.php:188
+#: classes/class-pcf-hook.php:196
 msgid "Email Address"
 msgstr ""
 
 #: classes/class-pcf-functions.php:67
-#: classes/class-pcf-hook.php:191
+#: classes/class-pcf-hook.php:199
 msgid "Phone"
 msgstr ""
 
 #: classes/class-pcf-functions.php:77
-#: classes/class-pcf-hook.php:197
+#: classes/class-pcf-hook.php:205
 msgid "Message"
 msgstr ""
 
@@ -389,15 +389,15 @@ msgstr ""
 msgid "Catalog Visibility"
 msgstr ""
 
-#: classes/class-pcf-hook.php:194
+#: classes/class-pcf-hook.php:202
 msgid "Subject"
 msgstr ""
 
-#: classes/class-pcf-hook.php:399
+#: classes/class-pcf-hook.php:407
 msgid "Documentation"
 msgstr ""
 
-#: classes/class-pcf-hook.php:400
+#: classes/class-pcf-hook.php:408
 msgid "Support"
 msgstr ""
 

@@ -3,7 +3,7 @@ Contributors: a3rev, A3 Revolution Software Development team
 Tags: WP e-Commerce Catalog Visibility, WP e-Commerce, WP e-Commerce Email Inquiry, e-commerce, wordpress ecommerce
 Requires at least: 3.3
 Tested up to: 3.4.1
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -93,7 +93,7 @@ In the search field type "WP e-Commerce Catalog Visibility and Email Inquiry" an
 
 = Manual installation =
 
-The manual installation method involves downloading our plugin and uploading it to your web server via your favourite FTP application.
+The manual installation method involves downloading our plugin and uploading it to your web server via your favorite FTP application.
 
 1. Download the plugin file to your computer and unzip it
 2. Using an FTP program, or your hosting control panel, upload the unzipped plugin folder to your WordPress installations wp-content/plugins/ directory.
@@ -130,6 +130,11 @@ You can use this plugin only when you have installed the WP e-Commerce plugin.
 Support and access to this plugin documents are available from the [HELP tab](http://a3rev.com/products-page/wp-e-commerce/catalog-visibilty-and-email-inquiry/#help) on the Pro Versions Home page.
 
 == Changelog ==
+
+= 1.0.1 - 2012/08/25 =
+
+*Fixed: Moved style from header to footer to resolve plugin breaking themes css in IE 7, 8 and 9
+*Tweak: Removed left and right 10px float and set so button left / right float is the same as the add to cart button.
 
 = 1.0.0 - 2012/08/23 =
 

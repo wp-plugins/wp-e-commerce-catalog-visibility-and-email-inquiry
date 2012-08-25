@@ -179,7 +179,7 @@ class WPSC_Settings_Tab_Catalog_Visibility {
                	</tr>
                 <tr valign="top">
                     <th class="titledesc" scope="rpw"><label for="wpec_pcf_button_padding"><?php _e('Padding','wpec_pcf'); ?></label></th>
-                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_button_padding]" id="wpec_pcf_button_padding" value="<?php esc_attr_e(get_option('wpec_pcf_button_padding') );?>" style="width:80px" /> px <span class="description"><?php _e('&lt;empty&gt; for default 10px', 'wpec_pcf'); ?></span>
+                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_button_padding]" id="wpec_pcf_button_padding" value="<?php esc_attr_e(get_option('wpec_pcf_button_padding') );?>" style="width:80px" /> px <span class="description"><?php _e('&lt;empty&gt; for default 10px padding from the add to cart button or enter a px value.', 'wpec_pcf'); ?></span>
                     </td>
                	</tr>
                 <tr valign="top">
