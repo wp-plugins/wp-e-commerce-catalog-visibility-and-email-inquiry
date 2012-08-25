@@ -133,8 +133,9 @@ Support and access to this plugin documents are available from the [HELP tab](ht
 
 = 1.0.1 - 2012/08/25 =
 
-*Fixed: Moved style from header to footer to resolve plugin breaking themes css in IE 7, 8 and 9
-*Tweak: Removed left and right 10px float and set so button left / right float is the same as the add to cart button.
+* Fixed: Moved style from header to footer to resolve plugin breaking themes css in IE 7, 8 and 9
+
+* Tweak: Removed left and right 10px float and set so button left / right float is the same as the add to cart button.
 
 = 1.0.0 - 2012/08/23 =
 
