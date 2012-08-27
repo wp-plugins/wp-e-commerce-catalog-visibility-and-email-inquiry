@@ -3,7 +3,7 @@ Contributors: a3rev, A3 Revolution Software Development team
 Tags: WP e-Commerce Catalog Visibility, WP e-Commerce, WP e-Commerce Email Inquiry, e-commerce, wordpress ecommerce
 Requires at least: 3.3
 Tested up to: 3.4.1
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -33,9 +33,7 @@ WP e-Commerce Catalog Visibility and Email Inquiry uses the WordPress email conf
 
 WP e-Commerce Catalog Visibility and Email Inquiry Lite is very simple to set up. Once you have installed and activated go to you wp_admin dashboard Settings > Store > Catalog Visibility Tab.
 
-= Compatibility =
-
-Please note that WP e-Commerce Catalog Visibility and Email Inquiry requires that you have <strong>WP e-Commerce version 3.8.8.5 and after</strong> to work. Older versions of WP e-Commerce do not support the functions to hook the email inquiry button to the add to cart button.
+= WP e-Commerce Version Compatibility =Please note that WP e-Commerce Catalog Visibility and Email Inquiry requires that you have <strong>WP e-Commerce version 3.8.8.5 and after</strong> to work. Older versions of WP e-Commerce do not support the functions to hook the email inquiry button to the add to cart button.= WP e-Commerce Theme Compatibility =Whilst you might have version 3.8.8.5 your theme may still use an earlier version of code. For the Email Inquiry button to show on the single product pages and products pages you must ensure that it has this code do_action('wpsc_product_form_fields_begin') and do_action('wpsc_product_form_fields_end') in these files:wpsc-grid_view.phpwpsc-list_view.phpwpsc-products_page.phpwpsc-single_product.php
 
 = Documentation =
 
@@ -130,6 +128,8 @@ You can use this plugin only when you have installed the WP e-Commerce plugin.
 Support and access to this plugin documents are available from the [HELP tab](http://a3rev.com/products-page/wp-e-commerce/catalog-visibilty-and-email-inquiry/#help) on the Pro Versions Home page.
 
 == Changelog ==
+
+= 1.0.2 - 2012/08/27 =* Fixed: Combined button and pop-up window style scripts in one script to overcome javascript conflict with some IE javascript styling scripts.* Tweak: Updated WordPress description text and readme to show the WP e-Commerce 3.8.8.5 do_action functions that must be included in themes for the Email Button to show. Some older themes don't have updated function and even though users have the 3.8.8.5 WP e-commerce version the button can't show.* Plugin documentation completed.
 
 = 1.0.1 - 2012/08/25 =
 

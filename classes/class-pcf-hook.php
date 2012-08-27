@@ -241,11 +241,7 @@ class WPEC_PCF_Hook_Filter{
 	}
 		
 	function add_style_header() {
-		wp_enqueue_style('a3_button_style', WPEC_PCF_CSS_URL . '/button.css');
-		wp_enqueue_style('pcf_form_style', WPEC_PCF_CSS_URL . '/pcf_form.css');
-	?>
-    	
-    <?php
+		wp_enqueue_style('a3_pcf_style', WPEC_PCF_CSS_URL . '/pcf_style.css');
 	}
 	
 	function footer_print_scripts() {
