@@ -45,7 +45,7 @@ class WPEC_PCF_MetaBox{
 		
 		?>
         <style type="text/css">
-	   	#wpec_pcf_meta_extensions { background: url("<?php echo WPEC_PCF_IMAGES_URL; ?>/logo_a3blue.png") no-repeat scroll 4px 6px #FFFBCC; -webkit-border-radius:4px;-moz-border-radius:4px;-o-border-radius:4px; border-radius: 4px 4px 4px 4px; color: #555555; float: right; margin: 0px; padding: 4px 8px 4px 38px; position: absolute; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8); width: 300px; right:15px; top:10px; border:1px solid #E6DB55}
+	   	#wpec_pcf_meta_extensions { background: #FFFBCC; -webkit-border-radius:4px;-moz-border-radius:4px;-o-border-radius:4px; border-radius: 4px 4px 4px 4px; color: #555555; float: right; margin: 0px; padding: 4px 8px 4px 8px; position: absolute; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8); width: 420px; right:15px; top:10px; border:1px solid #E6DB55}
         </style>
         <?php echo WPEC_PCF_MetaBox::wpec_pcf_meta_extensions(); ?>
         <table cellspacing="0" class="form-table">
@@ -137,7 +137,7 @@ class WPEC_PCF_MetaBox{
 	
 	function wpec_pcf_meta_extensions() {
 		$html = '';
-		$html .= '<div id="wpec_pcf_meta_extensions">'.__('Upgrade to the', 'wpec_pcf').' <a target="_blank" href="'.WPEC_PCF_AUTHOR_URI.'">'.__('Pro Version', 'wpec_pcf').'</a> '.__('of WP e-Commerce Catalog Visibility and Email Inquiry to unleash the awesome feature of being able to customize these setting to suite this product including who the email inquiry should go to.', 'wpec_pcf').'</div>';
+		$html .= '<div id="wpec_pcf_meta_extensions"><a href="http://a3rev.com/shop/" target="_blank" style="float:left; margin-right:10px;"><img src="'.WPEC_PCF_IMAGES_URL.'/logo_a3blue.png" /></a>'.__('Upgrade to the', 'wpec_pcf').' <a target="_blank" href="'.WPEC_PCF_AUTHOR_URI.'">'.__('Pro Version', 'wpec_pcf').'</a> '.__('of WP e-Commerce Catalog Visibility and Email Inquiry to unleash the awesome feature of being able to customize these setting to suite this product including who the email inquiry should go to.', 'wpec_pcf').'</div>';
 		return $html;	
 	}
 }

@@ -1,9 +1,10 @@
 <?php
 /*
 Plugin Name: WP e-Commerce Catalog Visibility Email inquiry LITE
+Plugin URI: http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/
 Description: Transform your entire WP e-Commerce product catalog into an online brochure by replacing the Add to Cart Button with an Email Enquiry Button and pop-up email form. Alternatively use the plugin to add a Product Email Inquiry button and pop-up to your entire e-commerce activated product pages.
-Version: 1.0.2
-Author: A3 Revolution Software Development team
+Version: 1.0.3
+Author: A3 Revolution
 Author URI: http://www.a3rev.com/
 License: This software is under commercial license and copyright to A3 Revolution Software Development team
 
@@ -28,7 +29,7 @@ define('WPEC_PCF_IMAGES_URL',  WPEC_PCF_URL . '/assets/images' );
 define('WPEC_PCF_JS_URL',  WPEC_PCF_URL . '/assets/js' );
 define('WPEC_PCF_CSS_URL',  WPEC_PCF_URL . '/assets/css' );
 if(!defined("WPEC_PCF_AUTHOR_URI"))
-    define("WPEC_PCF_AUTHOR_URI", "http://a3rev.com/products-page/wp-e-commerce/catalog-visibilty-and-email-inquiry/");
+    define("WPEC_PCF_AUTHOR_URI", "http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/");
 
 include('admin/classes/class-pcf-settings.php');
 include('classes/class-pcf-functions.php');

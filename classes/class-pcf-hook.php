@@ -331,15 +331,15 @@ class WPEC_PCF_Hook_Filter{
 			var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 			
 			if (your_name == "") {
-				pcf_contact_error += "Please enter your Name\n";
+				pcf_contact_error += "<?php _e('Please enter your Name', 'wpec_pcf'); ?>\n";
 				pcf_have_error = true;
 			}
 			if (your_email == "" || !filter.test(your_email)) {
-				pcf_contact_error += "Please enter valid Email address\n";
+				pcf_contact_error += "<?php _e('Please enter valid Email address', 'wpec_pcf'); ?>\n";
 				pcf_have_error = true;
 			}
 			if (your_phone == "") {
-				pcf_contact_error += "Please enter your Phone\n";
+				pcf_contact_error += "<?php _e('Please enter your Phone', 'wpec_pcf'); ?>\n";
 				pcf_have_error = true;
 			}
 			if (pcf_have_error) {
@@ -417,7 +417,7 @@ class WPEC_PCF_Hook_Filter{
 			return $links;
 		}
 		$links[] = '<a href="http://docs.a3rev.com/user-guides/wp-e-commerce/wpec-catalog-visibility-and-email-inquiry/" target="_blank">'.__('Documentation', 'wpec_pcf').'</a>';
-		$links[] = '<a href="http://a3rev.com/products-page/wp-e-commerce/catalog-visibilty-and-email-inquiry/#help" target="_blank">'.__('Support', 'wpec_pcf').'</a>';
+		$links[] = '<a href="http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/#tab-reviews" target="_blank">'.__('Support', 'wpec_pcf').'</a>';
 		return $links;
 	}
 }

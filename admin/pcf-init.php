@@ -3,7 +3,7 @@
  * Call this function when plugin is deactivated
  */
 function wpec_pcf_install(){
-	update_option('a3rev_wpec_pcf_version', '1.0.2');
+	update_option('a3rev_wpec_pcf_version', '1.0.3');
 	WPSC_Settings_Tab_Catalog_Visibility::set_settings_default(true);
 }
 
@@ -64,5 +64,5 @@ add_filter( 'plugin_row_meta', array('WPEC_PCF_Hook_Filter', 'plugin_extra_links
 		add_action('save_post', array('WPEC_PCF_MetaBox','save_meta_boxes' ) );
 	}
 
-	update_option('a3rev_wpec_pcf_version', '1.0.2');
+	update_option('a3rev_wpec_pcf_version', '1.0.3');
 ?>

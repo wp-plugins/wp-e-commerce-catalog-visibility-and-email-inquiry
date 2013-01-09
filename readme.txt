@@ -2,8 +2,8 @@
 Contributors: a3rev, A3 Revolution Software Development team
 Tags: WP e-Commerce Catalog Visibility, WP e-Commerce, WP e-Commerce Email Inquiry, e-commerce, wordpress ecommerce
 Requires at least: 3.3
-Tested up to: 3.4.1
-Stable tag: 1.0.2
+Tested up to: 3.5
+Stable tag: 1.0.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -69,9 +69,9 @@ And for ultimate control:
 
 = Plugin Resources =
 
-[PRO Version](http://a3rev.com/products-page/wp-e-commerce/catalog-visibilty-and-email-inquiry/) |
+[PRO Version](http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/) |
 [Documentation](http://docs.a3rev.com/user-guides/wp-e-commerce/wpec-catalog-visibility-and-email-inquiry/) |
-[Support](http://a3rev.com/products-page/wp-e-commerce/catalog-visibilty-and-email-inquiry/#help)
+[Support](http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/#tab-reviews)
 
 
 == Installation ==
@@ -125,9 +125,14 @@ You can use this plugin only when you have installed the WP e-Commerce plugin.
  
 == Support ==
 
-Support and access to this plugin documents are available from the [HELP tab](http://a3rev.com/products-page/wp-e-commerce/catalog-visibilty-and-email-inquiry/#help) on the Pro Versions Home page.
+Support and access to this plugin documents are available from the [HELP tab](http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/#tab-reviews) on the Pro Versions Home page.
 
 == Changelog ==
+
+= 1.0.3 - 2013/01/09 =
+
+* Tweak: Updated Support and Pro Version link URL's on wordpress.org description, plugins and plugins dashboard. Links were returning 404 errors since the launch of the all new a3rev.com mobile responsive site as the base e-commerce permalinks is changed.
+
 
 = 1.0.2 - 2012/08/27 =* Fixed: Combined button and pop-up window style scripts in one script to overcome javascript conflict with some IE javascript styling scripts.* Tweak: Updated WordPress description text and readme to show the WP e-Commerce 3.8.8.5 do_action functions that must be included in themes for the Email Button to show. Some older themes don't have updated function and even though users have the 3.8.8.5 WP e-commerce version the button can't show.* Plugin documentation completed.
 

@@ -131,10 +131,12 @@ class WPSC_Settings_Tab_Catalog_Visibility {
 	public function display() {
 		?>
         <style type="text/css">
+		.form-table { margin:0; }
 		input.colorpick{text-transform:uppercase;}
-		#wpec_pcf_upgrade_area { border:2px solid #FF0;-webkit-border-radius:10px;-moz-border-radius:10px;-o-border-radius:10px; border-radius: 10px; padding:0; position:relative}
-	  	#wpec_pcf_upgrade_area h3{ margin-left:10px;}
-	   	#wpec_pcf_extensions { background: url("<?php echo WPEC_PCF_IMAGES_URL; ?>/logo_a3blue.png") no-repeat scroll 4px 6px #FFFBCC; -webkit-border-radius:4px;-moz-border-radius:4px;-o-border-radius:4px; border-radius: 4px 4px 4px 4px; color: #555555; margin: 0px; padding: 4px 8px 4px 38px; position: absolute; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8); width: 400px; right:0px; top:-105px; border:1px solid #E6DB55}
+		#wpec_pcf_upgrade_area { border:2px solid #E6DB55;-webkit-border-radius:10px;-moz-border-radius:10px;-o-border-radius:10px; border-radius: 10px; padding:0 40% 0 0; position:relative; background:#FFFBCC;}
+		#wpec_pcf_upgrade_inner { background:#FFF; -webkit-border-radius:10px 0 0 10px;-moz-border-radius:10px 0 0 10px;-o-border-radius:10px 0 0 10px; border-radius: 10px 0 0 10px;}
+		#wpec_pcf_upgrade_inner h3{ margin-left:10px;}
+	   	#wpec_pcf_extensions { -webkit-border-radius:4px;-moz-border-radius:4px;-o-border-radius:4px; border-radius: 4px 4px 4px 4px; color: #555555; float: right; margin: 0px; padding: 5px; position: absolute; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8); width: 38%; right:0; top:0px; }
         </style>
 		<h3><?php _e('Catalog Page Settings', 'wpec_pcf'); ?></h3>
         <p><?php _e('Global settings apply to whole store. PRO version users can over-ride these on a per product basis.','wpec_pcf'); ?></p>
@@ -159,7 +161,7 @@ class WPSC_Settings_Tab_Catalog_Visibility {
                	</tr>
 			</tbody>
         </table>
-        <div id="wpec_pcf_upgrade_area"><?php echo WPSC_Settings_Tab_Catalog_Visibility::wpec_pcf_extensions(); ?>
+        <div id="wpec_pcf_upgrade_area"><?php echo WPSC_Settings_Tab_Catalog_Visibility::wpec_pcf_extensions(); ?><div id="wpec_pcf_upgrade_inner">
         <table cellspacing="0" class="form-table">
         	<tbody>            
                 <tr valign="top">
@@ -174,7 +176,7 @@ class WPSC_Settings_Tab_Catalog_Visibility {
                     <select disabled="disabled" name="wpec_pcf_setting[wpec_pcf_button_position]" id="wpec_pcf_button_position" style="min-width:300px">
                     	<option value="" selected="selected"><?php _e('Below (Default)','wpec_pcf'); ?></option>
                         <option value="above"><?php _e('Above','wpec_pcf'); ?></option>
-                    </select> <span class="description"><?php _e('Position relative to add to cart button location', 'wpec_pcf'); ?></span>
+                    </select> <p class="description"><?php _e('Position relative to add to cart button location', 'wpec_pcf'); ?></p>
                     </td>
                	</tr>
                 <tr valign="top">
@@ -194,12 +196,12 @@ class WPSC_Settings_Tab_Catalog_Visibility {
 			<tbody>
                 <tr valign="top">
                     <th class="titledesc" scope="rpw"><label for="wpec_pcf_email_to"><?php _e('Inquiry Email goes to','wpec_pcf'); ?></label></th>
-                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_email_to]" id="wpec_pcf_email_to" value="<?php esc_attr_e(get_option('wpec_pcf_email_to') );?>" style="min-width:300px" /> <span class="description"><?php _e('&lt;empty&gt; defaults to WPEC admin email address', 'wpec_pcf'); ?></span>
+                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_email_to]" id="wpec_pcf_email_to" value="<?php esc_attr_e(get_option('wpec_pcf_email_to') );?>" style="min-width:300px" /> <p class="description"><?php _e('&lt;empty&gt; defaults to WPEC admin email address', 'wpec_pcf'); ?></p>
                     </td>
                	</tr>
                 <tr valign="top">
                     <th class="titledesc" scope="rpw"><label for="wpec_pcf_email_cc"><?php _e('CC','wpec_pcf'); ?></label></th>
-                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_email_cc]" id="wpec_pcf_email_cc" value="" style="min-width:300px" /> <span class="description"><?php _e("&lt;empty&gt; defaults to 'no copy sent' or add an email address", 'wpec_pcf'); ?></span>
+                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_email_cc]" id="wpec_pcf_email_cc" value="" style="min-width:300px" /> <p class="description"><?php _e("&lt;empty&gt; defaults to 'no copy sent' or add an email address", 'wpec_pcf'); ?></p>
                     </td>
                	</tr>
 			</tbody>
@@ -209,17 +211,17 @@ class WPSC_Settings_Tab_Catalog_Visibility {
 			<tbody>
                 <tr valign="top">
                     <th class="titledesc" scope="rpw"><label for="wpec_pcf_text_before"><?php _e('Text before','wpec_pcf'); ?></label></th>
-                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_text_before]" id="wpec_pcf_text_before" value="" style="min-width:300px" /> <span class="description"><?php _e("&lt;empty&gt; for default 'no text' or add text to prepent link text", 'wpec_pcf'); ?></span>
+                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_text_before]" id="wpec_pcf_text_before" value="" style="min-width:300px" /> <p class="description"><?php _e("&lt;empty&gt; for default 'no text' or add text to prepent link text", 'wpec_pcf'); ?></p>
                     </td>
                	</tr>
                 <tr valign="top">
                     <th class="titledesc" scope="rpw"><label for="wpec_pcf_hyperlink_text"><?php _e('Hyperlink text','wpec_pcf'); ?></label></th>
-                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_hyperlink_text]" id="wpec_pcf_hyperlink_text" value="<?php esc_attr_e(get_option('wpec_pcf_hyperlink_text') );?>" style="min-width:300px" /> <span class="description"><?php _e("&lt;empty&gt; for default 'Click Here' or your own text", 'wpec_pcf'); ?></span>
+                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_hyperlink_text]" id="wpec_pcf_hyperlink_text" value="<?php esc_attr_e(get_option('wpec_pcf_hyperlink_text') );?>" style="min-width:300px" /> <p class="description"><?php _e("&lt;empty&gt; for default 'Click Here' or your own text", 'wpec_pcf'); ?></p>
                     </td>
                	</tr>
                 <tr valign="top">
                     <th class="titledesc" scope="rpw"><label for="wpec_pcf_trailing_text"><?php _e('Trailing text','wpec_pcf'); ?></label></th>
-                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_trailing_text]" id="wpec_pcf_trailing_text" value="" style="min-width:300px" /> <span class="description"><?php _e("&lt;empty&gt; for default 'no text' or add text to trail linked text", 'wpec_pcf'); ?></span>
+                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_trailing_text]" id="wpec_pcf_trailing_text" value="" style="min-width:300px" /> <p class="description"><?php _e("&lt;empty&gt; for default 'no text' or add text to trail linked text", 'wpec_pcf'); ?></p>
                     </td>
                	</tr>
 			</tbody>
@@ -229,7 +231,7 @@ class WPSC_Settings_Tab_Catalog_Visibility {
 			<tbody>
                 <tr valign="top">
                     <th class="titledesc" scope="rpw"><label for="wpec_pcf_button_title"><?php _e('Title','wpec_pcf'); ?></label></th>
-                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_button_title]" id="wpec_pcf_button_title" value="<?php esc_attr_e(get_option('wpec_pcf_button_title') );?>" style="min-width:300px" /> <span class="description"><?php _e("&lt;empty&gt; for default 'Product Enquiry' or enter text", 'wpec_pcf'); ?></span>
+                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_button_title]" id="wpec_pcf_button_title" value="<?php esc_attr_e(get_option('wpec_pcf_button_title') );?>" style="min-width:300px" /> <p class="description"><?php _e("&lt;empty&gt; for default 'Product Enquiry' or enter text", 'wpec_pcf'); ?></p>
                     </td>
                	</tr>
                 <tr valign="top">
@@ -263,12 +265,12 @@ class WPSC_Settings_Tab_Catalog_Visibility {
                     <select disabled="disabled" name="wpec_pcf_setting[wpec_pcf_button_dark_text]" id="wpec_pcf_button_dark_text" style="min-width:300px">
                     	<option value="" selected="selected"><?php _e('light (Default)','wpec_pcf'); ?></option>
                         <option value="dark" <?php if (esc_attr( get_option('wpec_pcf_button_dark_text') ) == 'dark') echo 'selected="selected"'; ?>><?php _e('dark','wpec_pcf'); ?></option>
-                    </select> <span class="description"><?php _e("Use 'dark' for light background colour buttons.", 'wpec_pcf'); ?></span>
+                    </select> <p class="description"><?php _e("Use 'dark' for light background colour buttons.", 'wpec_pcf'); ?></p>
                     </td>
                	</tr>
                 <tr valign="top">
                     <th class="titledesc" scope="rpw"><label for="wpec_pcf_button_class"><?php _e('CSS Class','wpec_pcf'); ?></label></th>
-                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_button_class]" id="wpec_pcf_button_class" value="" style="min-width:300px" /> <span class="description"><?php _e("Enter your own button CSS class", 'wpec_pcf'); ?></span>
+                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_button_class]" id="wpec_pcf_button_class" value="" style="min-width:300px" /> <p class="description"><?php _e("Enter your own button CSS class", 'wpec_pcf'); ?></p>
                     </td>
                	</tr>
 			</tbody>
@@ -278,12 +280,12 @@ class WPSC_Settings_Tab_Catalog_Visibility {
 			<tbody>
                 <tr valign="top">
                     <th class="titledesc" scope="rpw"><label for="wpec_pcf_contact_heading"><?php _e('Header title','wpec_pcf'); ?></label></th>
-                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_contact_heading]" id="wpec_pcf_contact_heading" value="<?php esc_attr_e(get_option('wpec_pcf_contact_heading') );?>" style="min-width:300px" /> <span class="description"><?php _e('&lt;empty&gt; and the form title will be the Button title', 'wpec_pcf'); ?></span>
+                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_contact_heading]" id="wpec_pcf_contact_heading" value="<?php esc_attr_e(get_option('wpec_pcf_contact_heading') );?>" style="min-width:300px" /> <p class="description"><?php _e('&lt;empty&gt; and the form title will be the Button title', 'wpec_pcf'); ?></p>
                     </td>
                	</tr>
                 <tr valign="top">
                     <th class="titledesc" scope="rpw"><label for="wpec_pcf_contact_text_button"><?php _e('Send Button Title','wpec_pcf'); ?></label></th>
-                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_contact_text_button]" id="wpec_pcf_contact_text_button" value="<?php esc_attr_e(get_option('wpec_pcf_contact_text_button') );?>" style="min-width:300px" /> <span class="description"><?php _e('&lt;empty&gt; for default SEND', 'wpec_pcf'); ?></span>
+                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_contact_text_button]" id="wpec_pcf_contact_text_button" value="<?php esc_attr_e(get_option('wpec_pcf_contact_text_button') );?>" style="min-width:300px" /> <p class="description"><?php _e('&lt;empty&gt; for default SEND', 'wpec_pcf'); ?></p>
                     </td>
                	</tr>
                 <tr valign="top">
@@ -317,17 +319,17 @@ class WPSC_Settings_Tab_Catalog_Visibility {
                     <select disabled="disabled" name="wpec_pcf_setting[wpec_pcf_contact_button_dark_text]" id="wpec_pcf_contact_button_dark_text" style="min-width:300px;">
                     	<option value="" selected="selected"><?php _e('light (Default)','wpec_pcf'); ?></option>
                         <option value="dark" <?php if (esc_attr( get_option('wpec_pcf_contact_button_dark_text') ) == 'dark') echo 'selected="selected"'; ?>><?php _e('dark','wpec_pcf'); ?></option>
-                    </select> <span class="description"><?php _e("Use 'dark' for light background colour buttons.", 'wpec_pcf'); ?></span>
+                    </select> <p class="description"><?php _e("Use 'dark' for light background colour buttons.", 'wpec_pcf'); ?></p>
                     </td>
                	</tr>
                 <tr valign="top">
                     <th class="titledesc" scope="rpw"><label for="wpec_pcf_contact_button_class"><?php _e('Button CSS Class','wpec_pcf'); ?></label></th>
-                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_contact_button_class]" id="wpec_pcf_contact_button_class" value="" style="min-width:300px" /> <span class="description"><?php _e("Enter your own button CSS class", 'wpec_pcf'); ?></span>
+                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_contact_button_class]" id="wpec_pcf_contact_button_class" value="" style="min-width:300px" /> <p class="description"><?php _e("Enter your own button CSS class", 'wpec_pcf'); ?></p>
                     </td>
                	</tr>
                 <tr valign="top">
                     <th class="titledesc" scope="rpw"><label for="wpec_pcf_contact_form_class"><?php _e('Form CSS Class','wpec_pcf'); ?></label></th>
-                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_contact_form_class]" id="wpec_pcf_contact_form_class" value="" style="min-width:300px" /> <span class="description"><?php _e("&lt;empty&gt; for default or enter custom form CSS", 'wpec_pcf'); ?></span>
+                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_contact_form_class]" id="wpec_pcf_contact_form_class" value="" style="min-width:300px" /> <p class="description"><?php _e("&lt;empty&gt; for default or enter custom form CSS", 'wpec_pcf'); ?></p>
                     </td>
                	</tr>
                 <tr valign="top">
@@ -341,13 +343,60 @@ class WPSC_Settings_Tab_Catalog_Visibility {
 			</tbody>
 		</table>
         </div>
+        </div>
 		<?php
 	}
 	
 	function wpec_pcf_extensions() {
 		$html = '';
-		$html .= '<div id="wpec_pcf_extensions">'.__('Unleash the full power of WP e-Commerce Catalog Visibility and Email Inquiry with a quick and easy upgrade to the', 'wpec_pcf').' <a target="_blank" href="'.WPEC_PCF_AUTHOR_URI.'">'.__('Pro Version', 'wpec_pcf').'</a>. '.__('Upgrading activates all of the features you see in the yellow box below plus the awesome power to individually customize these Catalog visibility and email inquiry settings on any product.', 'wpec_pcf').'</div>';
-		return $html;	
+		$html .= '<div id="wpec_pcf_extensions">';
+		$html .= '<a href="http://a3rev.com/shop/" target="_blank" style="float:right;margin-top:5px; margin-left:10px;" ><img src="'.WPEC_PCF_IMAGES_URL.'/a3logo.png" /></a>';
+		$html .= '<h3>'.__('Upgrade to Catalog Visibility Email inquiry Pro', 'wpec_pcf').'</h3>';
+		$html .= '<p>'.__("Visit the", 'wpec_pcf').' <a href="'.WPEC_PCF_AUTHOR_URI.'" target="_blank">'.__("a3rev website", 'wpec_pcf').'</a> '.__("to see all the extra features the Pro version of this plugin offers in the yellow box below plus the awesome power to individually customize these Catalog visibility and email inquiry settings on any product.", 'wpec_pcf').':</p>';
+		$html .= '<h3>'.__('Plugin Documentation', 'wpec_pcf').'</h3>';
+		$html .= '<p>'.__('All of our plugins have comprehensive online documentation. Please refer to the plugins docs before raising a support request', 'wpec_pcf').'. <a href="http://docs.a3rev.com/user-guides/wp-e-commerce/wpec-catalog-visibility-and-email-inquiry/" target="_blank">'.__('Visit the a3rev wiki.', 'wpec_pcf').'</a></p>';
+		$html .= '<h3>'.__('More a3rev Quality Plugins', 'wpec_pcf').'</h3>';
+		$html .= '<p>'.__('Below is a list of the a3rev plugins that are available for free download from wordpress.org', 'wpec_pcf').'</p>';
+		$html .= '<h3>'.__('WP e-Commerce Plugins', 'wpec_pcf').'</h3>';
+		$html .= '<p>';
+		$html .= '<ul style="padding-left:10px;">';
+		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/wp-e-commerce-dynamic-gallery/" target="_blank">'.__('WP e-Commerce Dynamic Gallery', 'wpec_pcf').'</a></li>';
+		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/wp-e-commerce-predictive-search/" target="_blank">'.__('WP e-Commerce Predictive Search', 'wpec_pcf').'</a></li>';
+		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/wp-ecommerce-compare-products/" target="_blank">'.__('WP e-Commerce Compare Products', 'wpec_pcf').'</a></li>';
+		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/wp-e-commerce-catalog-visibility-and-email-inquiry/" target="_blank">'.__('WP e-Commerce Catalog Visibility & Email Inquiry', 'wpec_pcf').'</a></li>';
+		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/wp-e-commerce-grid-view/" target="_blank">'.__('WP e-Commerce Grid View', 'wpec_pcf').'</a></li>';
+		$html .= '</ul>';
+		$html .= '</p>';
+		
+		$html .= '<h3>'.__('WordPress Plugins', 'wpec_pcf').'</h3>';
+		$html .= '<p>';
+		$html .= '<ul style="padding-left:10px;">';
+		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/wp-email-template/" target="_blank">'.__('WordPress Email Template', 'wpec_pcf').'</a></li>';
+		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/page-views-count/" target="_blank">'.__('Page View Count', 'wpec_pcf').'</a></li>';
+		$html .= '</ul>';
+		$html .= '</p>';
+		
+		$html .= '<h3>'.__('WooCommerce Plugins', 'wpec_pcf').'</h3>';
+		$html .= '<p>';
+		$html .= '<ul style="padding-left:10px;">';
+		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/woocommerce-dynamic-gallery/" target="_blank">'.__('WooCommerce Dynamic Products Gallery', 'wpec_pcf').'</a></li>';
+		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/woocommerce-predictive-search/" target="_blank">'.__('WooCommerce Predictive Search', 'wpec_pcf').'</a></li>';
+		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/woocommerce-compare-products/" target="_blank">'.__('WooCommerce Compare Products', 'wpec_pcf').'</a></li>';
+		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/woo-widget-product-slideshow/" target="_blank">'.__('WooCommerce Widget Product Slideshow', 'wpec_pcf').'</a></li>';
+		$html .= '<li>* <a href="http://a3rev.com/shop/woocommerce-email-inquiry-and-cart-options/" target="_blank">'.__('WooCommerce Email Inquiry & Cart Options', 'wpec_pcf').'</a>'.__(' - Pro Version only from a3rev', 'wpec_pcf').'</li>';
+		$html .= '</ul>';
+		$html .= '</p>';
+		
+		$html .= '<h3>'.__('Help spread the Word about this plugin', 'wpec_pcf').'</h3>';
+		$html .= '<p>'.__("Things you can do to help others find this plugin", 'wpec_pcf');
+		$html .= '<ul style="padding-left:10px;">';
+		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/wp-e-commerce-catalog-visibility-and-email-inquiry/" target="_blank">'.__('Rate this plugin 5', 'wpec_pcf').' <img src="'.WPEC_PCF_IMAGES_URL.'/stars.png" align="top" /> '.__('on WordPress.org', 'wpec_pcf').'</a></li>';
+		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/wp-e-commerce-catalog-visibility-and-email-inquiry/" target="_blank">'.__('Mark the plugin as a fourite', 'wpec_pcf').'</a></li>';
+		$html .= '</ul>';
+		$html .= '</p>';
+		$html .= '</div>';
+		return $html;
 	}
+	
 }
 ?>
