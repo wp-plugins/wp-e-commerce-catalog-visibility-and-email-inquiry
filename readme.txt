@@ -3,7 +3,7 @@ Contributors: a3rev, A3 Revolution Software Development team
 Tags: WP e-Commerce Catalog Visibility, WP e-Commerce, WP e-Commerce Email Inquiry, e-commerce, wordpress ecommerce
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -71,7 +71,7 @@ And for ultimate control:
 
 [PRO Version](http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/) |
 [Documentation](http://docs.a3rev.com/user-guides/wp-e-commerce/wpec-catalog-visibility-and-email-inquiry/) |
-[Support](http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/#tab-reviews)
+[Support](http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/#help_tab)
 
 
 == Installation ==
@@ -125,9 +125,14 @@ You can use this plugin only when you have installed the WP e-Commerce plugin.
  
 == Support ==
 
-Support and access to this plugin documents are available from the [HELP tab](http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/#tab-reviews) on the Pro Versions Home page.
+Support and access to this plugin documents are available from the [HELP tab](http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/#help_tab) on the Pro Versions Home page.
 
 == Changelog ==
+
+= 1.0.4 - 2013/01/19 =
+
+* Feature: Added auto support for custom button type for 'add to cart' button so that our plugin can find the add to cart button on themes that use custom button code.
+
 
 = 1.0.3 - 2013/01/09 =
 

@@ -37,6 +37,7 @@ class WPEC_PCF_Hook_Filter{
 		?>
         <style type="text/css">
 			body input#product_<?php echo $product_id; ?>_submit_button, input#product_<?php echo $product_id; ?>_submit_button { display:none !important; visibility:hidden !important; height:0 !important;}
+			body button#product_<?php echo $product_id; ?>_submit_button, button#product_<?php echo $product_id; ?>_submit_button { display:none !important; visibility:hidden !important; height:0 !important;}
 			body .product_<?php echo $product_id; ?> .wpsc_buy_button, .product_<?php echo $product_id; ?> .wpsc_buy_button { display:none !important; visibility:hidden !important; height:0 !important;}
 		</style>
         <?php
@@ -120,6 +121,9 @@ class WPEC_PCF_Hook_Filter{
                                 if($("input#product_<?php echo $product_id; ?>_submit_button").length > 0){
 									add_cart_float = $("input#product_<?php echo $product_id; ?>_submit_button").css("float");
                                     $("input#product_<?php echo $product_id; ?>_submit_button").before('<?php echo $button_ouput; ?><br />');
+                                }else if($("button#product_<?php echo $product_id; ?>_submit_button").length > 0){
+									add_cart_float = $("button#product_<?php echo $product_id; ?>_submit_button").css("float");
+                                    $("button#product_<?php echo $product_id; ?>_submit_button").before('<?php echo $button_ouput; ?><br />');
                                 }else if($(".product_view_<?php echo $product_id; ?>").length > 0){
                                     $(".product_view_<?php echo $product_id; ?>").find(".more_details").before('<?php echo $button_ouput; ?><br />');
                                 }else{
@@ -142,6 +146,9 @@ class WPEC_PCF_Hook_Filter{
                                 if($("input#product_<?php echo $product_id; ?>_submit_button").length > 0){
 									add_cart_float = $("input#product_<?php echo $product_id; ?>_submit_button").css("float");
                                     $("input#product_<?php echo $product_id; ?>_submit_button").after('<br /><?php echo $button_ouput; ?>');
+                                }else if($("button#product_<?php echo $product_id; ?>_submit_button").length > 0){
+									add_cart_float = $("button#product_<?php echo $product_id; ?>_submit_button").css("float");
+                                    $("button#product_<?php echo $product_id; ?>_submit_button").after('<br /><?php echo $button_ouput; ?>');
                                 }else if($(".product_view_<?php echo $product_id; ?>").length > 0){
                                     $(".product_view_<?php echo $product_id; ?>").find(".more_details").after('<br /><?php echo $button_ouput; ?>');
                                 }else{
@@ -162,6 +169,8 @@ class WPEC_PCF_Hook_Filter{
                         $(function(){
 							if($("input#product_<?php echo $product_id; ?>_submit_button").length > 0){
 								$("input#product_<?php echo $product_id; ?>_submit_button").remove();
+							} else if($("button#product_<?php echo $product_id; ?>_submit_button").length > 0){
+								$("button#product_<?php echo $product_id; ?>_submit_button").remove();
 							}
                         });		  
                     })(jQuery);
@@ -417,7 +426,7 @@ class WPEC_PCF_Hook_Filter{
 			return $links;
 		}
 		$links[] = '<a href="http://docs.a3rev.com/user-guides/wp-e-commerce/wpec-catalog-visibility-and-email-inquiry/" target="_blank">'.__('Documentation', 'wpec_pcf').'</a>';
-		$links[] = '<a href="http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/#tab-reviews" target="_blank">'.__('Support', 'wpec_pcf').'</a>';
+		$links[] = '<a href="http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/#help_tab" target="_blank">'.__('Support', 'wpec_pcf').'</a>';
 		return $links;
 	}
 }
