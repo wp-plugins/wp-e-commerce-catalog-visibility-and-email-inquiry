@@ -16,6 +16,7 @@
  * script_contact_popup()
  * admin_footer_scripts()
  * wp_admin_footer_scripts()
+ * admin_warning_noemail()
  * plugin_extra_links()
  */
 class WPEC_PCF_Hook_Filter{
@@ -419,6 +420,20 @@ class WPEC_PCF_Hook_Filter{
 		})(jQuery);
 	</script>
     <?php
+	}
+	
+	function admin_warning_noemail() {
+		$to_email = get_option('purch_log_email');
+		if (trim($to_email) == '') {
+			session_start();
+			if (isset($_GET['hide-wpec-pcf-notice'])) $_SESSION['hide-wpec-pcf-notice'] = 1 ;
+			if (!isset($_SESSION['hide-wpec-pcf-notice'])) {
+				$html = '<style>#wpec_pcf_notice {text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8); padding:8px 25px 8px 6px;position:relative;}#wpec_pcf_notice a.hide{color:#FF0808;float:right;text-decoration:none;position:absolute;top:0;right:0;line-height:24px;padding:2px 8px;font-size:20px;text-align:center}</style>';
+			
+				$html .= '<div class="updated"><div id="wpec_pcf_notice"><a href="http://a3rev.com/shop/" target="_blank" style="float:left; margin-right:10px;"><img src="'.WPEC_PCF_IMAGES_URL.'/logo_a3blue.png" /></a>'.__("<strong>ATTENTION:</strong> WP e-Commerce Catalog Visibility and Email Inquiry could not find a WP e-Commerce Store Admin Email address and is using your sites WordPress Admin email address as the send to address. You can change this by going to your Settings > Store > Admin and enter a 'Store Admin Email:' address and Save Changes", 'wpec_pcf').' <a class="hide" href="'.add_query_arg('hide-wpec-pcf-notice', 'true').'">&times;</a></div></div>';
+				echo $html;	
+			}
+		}
 	}
 	
 	function plugin_extra_links($links, $plugin_name) {

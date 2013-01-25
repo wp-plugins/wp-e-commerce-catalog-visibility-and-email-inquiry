@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP e-Commerce Catalog Visibility Email inquiry LITE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-09 15:28+0700\n"
-"PO-Revision-Date: 2013-01-09 15:28+0700\n"
+"POT-Creation-Date: 2013-01-25 11:01+0700\n"
+"PO-Revision-Date: 2013-01-25 11:01+0700\n"
 "Last-Translator: Nguyen Tuan <mr.nguyencongtuan@gmail.com>\n"
 "Language-Team: a3rev\n"
 "MIME-Version: 1.0\n"
@@ -44,13 +44,13 @@ msgstr ""
 
 #: admin/classes/class-pcf-settings.php:50
 #: admin/classes/class-pcf-settings.php:53
-#: classes/class-pcf-hook.php:86
-#: classes/class-pcf-hook.php:188
+#: classes/class-pcf-hook.php:88
+#: classes/class-pcf-hook.php:198
 msgid "Product Enquiry"
 msgstr ""
 
 #: admin/classes/class-pcf-settings.php:56
-#: classes/class-pcf-hook.php:194
+#: classes/class-pcf-hook.php:204
 msgid "SEND"
 msgstr ""
 
@@ -79,7 +79,7 @@ msgid "Global settings apply to whole store. PRO version users can over-ride the
 msgstr ""
 
 #: admin/classes/class-pcf-settings.php:146
-#: classes/class-pcf-metabox.php:57
+#: classes/class-pcf-metabox.php:58
 msgid "Hide 'Add to Cart'"
 msgstr ""
 
@@ -87,35 +87,35 @@ msgstr ""
 #: admin/classes/class-pcf-settings.php:153
 #: admin/classes/class-pcf-settings.php:159
 #: admin/classes/class-pcf-settings.php:189
-#: classes/class-pcf-metabox.php:58
-#: classes/class-pcf-metabox.php:64
-#: classes/class-pcf-metabox.php:70
-#: classes/class-pcf-metabox.php:111
+#: classes/class-pcf-metabox.php:59
+#: classes/class-pcf-metabox.php:65
+#: classes/class-pcf-metabox.php:71
+#: classes/class-pcf-metabox.php:112
 msgid "Yes"
 msgstr ""
 
 #: admin/classes/class-pcf-settings.php:151
-#: classes/class-pcf-metabox.php:62
+#: classes/class-pcf-metabox.php:63
 msgid "Show Email Inquiry Button"
 msgstr ""
 
 #: admin/classes/class-pcf-settings.php:157
-#: classes/class-pcf-metabox.php:68
+#: classes/class-pcf-metabox.php:69
 msgid "Apply to Logged in Users"
 msgstr ""
 
 #: admin/classes/class-pcf-settings.php:168
-#: classes/class-pcf-metabox.php:84
+#: classes/class-pcf-metabox.php:85
 msgid "Button or Hyperlink Text"
 msgstr ""
 
 #: admin/classes/class-pcf-settings.php:170
-#: classes/class-pcf-metabox.php:86
+#: classes/class-pcf-metabox.php:87
 msgid "Button"
 msgstr ""
 
 #: admin/classes/class-pcf-settings.php:170
-#: classes/class-pcf-metabox.php:86
+#: classes/class-pcf-metabox.php:87
 msgid "Link"
 msgstr ""
 
@@ -144,12 +144,12 @@ msgid "&lt;empty&gt; for default 10px padding from the add to cart button or ent
 msgstr ""
 
 #: admin/classes/class-pcf-settings.php:188
-#: classes/class-pcf-metabox.php:110
+#: classes/class-pcf-metabox.php:111
 msgid "Single Product Page only"
 msgstr ""
 
 #: admin/classes/class-pcf-settings.php:189
-#: classes/class-pcf-metabox.php:111
+#: classes/class-pcf-metabox.php:112
 msgid "No"
 msgstr ""
 
@@ -162,7 +162,7 @@ msgid "Email Delivery"
 msgstr ""
 
 #: admin/classes/class-pcf-settings.php:198
-#: classes/class-pcf-metabox.php:74
+#: classes/class-pcf-metabox.php:75
 msgid "Inquiry Email goes to"
 msgstr ""
 
@@ -183,7 +183,7 @@ msgid "Customize Hyperlink text"
 msgstr ""
 
 #: admin/classes/class-pcf-settings.php:213
-#: classes/class-pcf-metabox.php:90
+#: classes/class-pcf-metabox.php:91
 msgid "Text before"
 msgstr ""
 
@@ -192,7 +192,7 @@ msgid "&lt;empty&gt; for default 'no text' or add text to prepent link text"
 msgstr ""
 
 #: admin/classes/class-pcf-settings.php:218
-#: classes/class-pcf-metabox.php:95
+#: classes/class-pcf-metabox.php:96
 msgid "Hyperlink text"
 msgstr ""
 
@@ -201,7 +201,7 @@ msgid "&lt;empty&gt; for default 'Click Here' or your own text"
 msgstr ""
 
 #: admin/classes/class-pcf-settings.php:223
-#: classes/class-pcf-metabox.php:100
+#: classes/class-pcf-metabox.php:101
 msgid "Trailing text"
 msgstr ""
 
@@ -469,22 +469,22 @@ msgid "Email inquiry for"
 msgstr ""
 
 #: classes/class-pcf-functions.php:55
-#: classes/class-pcf-hook.php:209
+#: classes/class-pcf-hook.php:219
 msgid "Name"
 msgstr ""
 
 #: classes/class-pcf-functions.php:61
-#: classes/class-pcf-hook.php:212
+#: classes/class-pcf-hook.php:222
 msgid "Email Address"
 msgstr ""
 
 #: classes/class-pcf-functions.php:67
-#: classes/class-pcf-hook.php:215
+#: classes/class-pcf-hook.php:225
 msgid "Phone"
 msgstr ""
 
 #: classes/class-pcf-functions.php:77
-#: classes/class-pcf-hook.php:221
+#: classes/class-pcf-hook.php:231
 msgid "Message"
 msgstr ""
 
@@ -492,31 +492,35 @@ msgstr ""
 msgid "Sorry, this product don't enable email inquiry."
 msgstr ""
 
-#: classes/class-pcf-hook.php:24
+#: classes/class-pcf-hook.php:25
 msgid "Catalog Visibility"
 msgstr ""
 
-#: classes/class-pcf-hook.php:218
+#: classes/class-pcf-hook.php:228
 msgid "Subject"
 msgstr ""
 
-#: classes/class-pcf-hook.php:334
+#: classes/class-pcf-hook.php:344
 msgid "Please enter your Name"
 msgstr ""
 
-#: classes/class-pcf-hook.php:338
+#: classes/class-pcf-hook.php:348
 msgid "Please enter valid Email address"
 msgstr ""
 
-#: classes/class-pcf-hook.php:342
+#: classes/class-pcf-hook.php:352
 msgid "Please enter your Phone"
 msgstr ""
 
-#: classes/class-pcf-hook.php:419
+#: classes/class-pcf-hook.php:433
+msgid "<strong>ATTENTION:</strong> WP e-Commerce Catalog Visibility and Email Inquiry could not find a WP e-Commerce Store Admin Email address and is using your sites WordPress Admin email address as the send to address. You can change this by going to your Settings > Store > Admin and enter a 'Store Admin Email:' address and Save Changes"
+msgstr ""
+
+#: classes/class-pcf-hook.php:443
 msgid "Documentation"
 msgstr ""
 
-#: classes/class-pcf-hook.php:420
+#: classes/class-pcf-hook.php:444
 msgid "Support"
 msgstr ""
 
@@ -524,27 +528,27 @@ msgstr ""
 msgid "Catalog Visibility and Email Inquiry"
 msgstr ""
 
-#: classes/class-pcf-metabox.php:54
+#: classes/class-pcf-metabox.php:55
 msgid "Customize setting for this product"
 msgstr ""
 
-#: classes/class-pcf-metabox.php:79
+#: classes/class-pcf-metabox.php:80
 msgid "Copy to"
 msgstr ""
 
-#: classes/class-pcf-metabox.php:105
+#: classes/class-pcf-metabox.php:106
 msgid "Button Title"
 msgstr ""
 
-#: classes/class-pcf-metabox.php:140
+#: classes/class-pcf-metabox.php:141
 msgid "Upgrade to the"
 msgstr ""
 
-#: classes/class-pcf-metabox.php:140
+#: classes/class-pcf-metabox.php:141
 msgid "Pro Version"
 msgstr ""
 
-#: classes/class-pcf-metabox.php:140
+#: classes/class-pcf-metabox.php:141
 msgid "of WP e-Commerce Catalog Visibility and Email Inquiry to unleash the awesome feature of being able to customize these setting to suite this product including who the email inquiry should go to."
 msgstr ""
 

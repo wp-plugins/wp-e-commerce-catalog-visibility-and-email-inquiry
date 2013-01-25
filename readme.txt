@@ -3,7 +3,7 @@ Contributors: a3rev, A3 Revolution Software Development team
 Tags: WP e-Commerce Catalog Visibility, WP e-Commerce, WP e-Commerce Email Inquiry, e-commerce, wordpress ecommerce
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -128,6 +128,13 @@ You can use this plugin only when you have installed the WP e-Commerce plugin.
 Support and access to this plugin documents are available from the [HELP tab](http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/#help_tab) on the Pro Versions Home page.
 
 == Changelog ==
+
+= 1.0.5 - 2013/01/25 =
+
+* Fixed: Email Delivery address - when the plugin is installed it now checks for WP e-Commerce Store Admin Email address and uses that if one has been entered. If it does not find a Store Admin Email Address, then it checks for and uses the WordPress admin email address. The WP e-Commerce Store Admin Email address always takes priority the WordPress Admin email address. This means that if the Store admin address is entered after the WP e-Commerce Catalog Visibility an Email Inquiry is installed it auto becomes the plugins delivery address.
+
+* Tweak: Added an on screen Attention message if the plugin does not find a WP e-Commerce store admin email address. Notifies the user that the WordPress admin email address is being used by the plugin as the 'send to' address and asks the user to add a WP e-commerce Store email address.
+
 
 = 1.0.4 - 2013/01/19 =
 

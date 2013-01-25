@@ -3,7 +3,7 @@
  * Call this function when plugin is deactivated
  */
 function wpec_pcf_install(){
-	update_option('a3rev_wpec_pcf_version', '1.0.4');
+	update_option('a3rev_wpec_pcf_version', '1.0.5');
 	WPSC_Settings_Tab_Catalog_Visibility::set_settings_default(true);
 }
 
@@ -17,6 +17,9 @@ function wpec_pcf_init() {
 }
 // Add language
 add_action('init', 'wpec_pcf_init');
+
+// Add warning message when does not find an email address enter in either - WPEC Store admin or WordPress admin
+add_action( 'admin_notices', array('WPEC_PCF_Hook_Filter', 'admin_warning_noemail'), 1 );
 
 // Add text on right of Visit the plugin on Plugin manager page
 add_filter( 'plugin_row_meta', array('WPEC_PCF_Hook_Filter', 'plugin_extra_links'), 10, 2 );
@@ -64,5 +67,5 @@ add_filter( 'plugin_row_meta', array('WPEC_PCF_Hook_Filter', 'plugin_extra_links
 		add_action('save_post', array('WPEC_PCF_MetaBox','save_meta_boxes' ) );
 	}
 
-	update_option('a3rev_wpec_pcf_version', '1.0.4');
+	update_option('a3rev_wpec_pcf_version', '1.0.5');
 ?>

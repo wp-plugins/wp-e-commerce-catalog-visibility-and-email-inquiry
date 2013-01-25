@@ -26,7 +26,8 @@ class WPEC_PCF_MetaBox{
 		
 		$wpec_pcf_user = esc_attr(get_option('wpec_pcf_user'));
 		
-		$wpec_pcf_email_to = esc_attr(get_option('wpec_pcf_email_to'));
+		$wpec_pcf_email_to = get_option('purch_log_email');
+		if (trim($wpec_pcf_email_to) == '') $wpec_pcf_email_to = get_option('admin_email');
 		
 		$wpec_pcf_email_cc = esc_attr(get_option('wpec_pcf_email_cc'));
 		
@@ -77,7 +78,7 @@ class WPEC_PCF_MetaBox{
                	</tr>
                 <tr valign="top">
                     <th class="titledesc" scope="rpw"><label for="wpec_pcf_email_cc"><?php _e('Copy to','wpec_pcf'); ?></label></th>
-                    <td class="forminp"><input type="text" disabled="disabled" name="_wpsc_pcf_custom[wpec_pcf_email_cc]" id="wpec_pcf_email_cc" value="<?php echo $wpec_pcf_email_cc;?>" style="min-width:300px" /> 
+                    <td class="forminp"><input type="text" disabled="disabled" name="_wpsc_pcf_custom[wpec_pcf_email_cc]" id="wpec_pcf_email_cc" value="" style="min-width:300px" /> 
                     </td>
                	</tr>
                 <tr valign="top">

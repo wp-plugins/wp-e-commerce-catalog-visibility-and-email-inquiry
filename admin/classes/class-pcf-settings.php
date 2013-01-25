@@ -41,7 +41,7 @@ class WPSC_Settings_Tab_Catalog_Visibility {
 			update_option('wpec_pcf_button_padding', 10);
 		}
 		if ( esc_attr(get_option('wpec_pcf_email_to')) == '' || $reset ) {
-			update_option('wpec_pcf_email_to', get_bloginfo('admin_email') );
+			update_option('wpec_pcf_email_to', '' );
 		}
 		if ( esc_attr(get_option('wpec_pcf_hyperlink_text')) == '' || $reset ) {
 			update_option('wpec_pcf_hyperlink_text', __('Click Here', 'wpec_pcf') );
@@ -196,7 +196,7 @@ class WPSC_Settings_Tab_Catalog_Visibility {
 			<tbody>
                 <tr valign="top">
                     <th class="titledesc" scope="rpw"><label for="wpec_pcf_email_to"><?php _e('Inquiry Email goes to','wpec_pcf'); ?></label></th>
-                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_email_to]" id="wpec_pcf_email_to" value="<?php esc_attr_e(get_option('wpec_pcf_email_to') );?>" style="min-width:300px" /> <p class="description"><?php _e('&lt;empty&gt; defaults to WPEC admin email address', 'wpec_pcf'); ?></p>
+                    <td class="forminp"><input type="text" disabled="disabled" name="wpec_pcf_setting[wpec_pcf_email_to]" id="wpec_pcf_email_to" value="<?php if (esc_attr(get_option('purch_log_email') ) != '' ) esc_attr_e(get_option('purch_log_email')); else esc_attr_e(get_option('admin_email'));?>" style="min-width:300px" /> <p class="description"><?php _e('&lt;empty&gt; defaults to WPEC admin email address', 'wpec_pcf'); ?></p>
                     </td>
                	</tr>
                 <tr valign="top">

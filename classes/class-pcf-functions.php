@@ -19,13 +19,13 @@ class WPEC_PCF_Functions{
 			if ( trim(esc_attr(get_option('wpec_pcf_contact_success'))) != '') $wpec_pcf_contact_success = esc_attr(get_option('wpec_pcf_contact_success'));
 			else $wpec_pcf_contact_success = __("Thanks for your inquiry - we'll be in touch with you as soon as possible!", 'wpec_pcf');
 		
-			$to_email = esc_attr(get_option('wpec_pcf_email_to'));
+			$to_email = get_option('purch_log_email');
 			if (trim($to_email) == '') $to_email = get_option('admin_email');
 			
-			$from_email = get_option('admin_email');
+			$from_email = get_option('purch_log_email');
+			if (trim($from_email) == '') $from_email = get_option('admin_email');
 			
-			$cc_emails = esc_attr(get_option('wpec_pcf_email_cc'));
-			if (trim($cc_emails) == '') $cc_emails = '';
+			$cc_emails = '';
 			
 			$headers = array();
 			$headers[] = 'MIME-Version: 1.0';
