@@ -90,7 +90,7 @@ class WPSC_Settings_Tab_Catalog_Visibility {
 	}
 	
 	public function is_update_message_displayed() {
-		if (isset($_REQUEST['updateoption'])) {
+		if (isset($_REQUEST['wpsc-update-options'])) {
 			$this->update_settings($_POST);
 			$this->set_settings_default(true, true);
 		}
@@ -120,9 +120,11 @@ class WPSC_Settings_Tab_Catalog_Visibility {
 				update_option('wpec_pcf_single_only', '');
 			}
 			
-			foreach ( $request['wpec_pcf_setting'] as $key => $value ) {
-				if ( stripslashes($value) != get_option( $key ) ) {
-					update_option( $key, stripslashes($value) );
+			if (is_array($request) && isset($request['wpec_pcf_setting']) && count($request['wpec_pcf_setting']) > 0) {
+				foreach ( $request['wpec_pcf_setting'] as $key => $value ) {
+					if ( stripslashes($value) != get_option( $key ) ) {
+						update_option( $key, stripslashes($value) );
+					}
 				}
 			}
 			

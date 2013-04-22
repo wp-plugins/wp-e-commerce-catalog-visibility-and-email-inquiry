@@ -2,8 +2,8 @@
 Contributors: a3rev, A3 Revolution Software Development team
 Tags: WP e-Commerce Catalog Visibility, WP e-Commerce, WP e-Commerce Email Inquiry, e-commerce, wordpress ecommerce
 Requires at least: 3.3
-Tested up to: 3.5
-Stable tag: 1.0.5
+Tested up to: 3.5.1
+Stable tag: 1.0.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -129,33 +129,30 @@ Support and access to this plugin documents are available from the [HELP tab](ht
 
 == Changelog ==
 
+= 1.0.6 - 2013/04/22 =
+* Feature: Updated all plugin code to be 100% compatible with the new WP e-Commerce version 3.8.10. The plugin is backward compatible with older version to 3.8.5
+
 = 1.0.5 - 2013/01/25 =
-
 * Fixed: Email Delivery address - when the plugin is installed it now checks for WP e-Commerce Store Admin Email address and uses that if one has been entered. If it does not find a Store Admin Email Address, then it checks for and uses the WordPress admin email address. The WP e-Commerce Store Admin Email address always takes priority the WordPress Admin email address. This means that if the Store admin address is entered after the WP e-Commerce Catalog Visibility an Email Inquiry is installed it auto becomes the plugins delivery address.
-
 * Tweak: Added an on screen Attention message if the plugin does not find a WP e-Commerce store admin email address. Notifies the user that the WordPress admin email address is being used by the plugin as the 'send to' address and asks the user to add a WP e-commerce Store email address.
 
-
 = 1.0.4 - 2013/01/19 =
-
 * Feature: Added auto support for custom button type for 'add to cart' button so that our plugin can find the add to cart button on themes that use custom button code.
 
-
 = 1.0.3 - 2013/01/09 =
-
 * Tweak: Updated Support and Pro Version link URL's on wordpress.org description, plugins and plugins dashboard. Links were returning 404 errors since the launch of the all new a3rev.com mobile responsive site as the base e-commerce permalinks is changed.
 
-
-= 1.0.2 - 2012/08/27 =* Fixed: Combined button and pop-up window style scripts in one script to overcome javascript conflict with some IE javascript styling scripts.* Tweak: Updated WordPress description text and readme to show the WP e-Commerce 3.8.8.5 do_action functions that must be included in themes for the Email Button to show. Some older themes don't have updated function and even though users have the 3.8.8.5 WP e-commerce version the button can't show.* Plugin documentation completed.
+= 1.0.2 - 2012/08/27 =* Fixed: Combined button and pop-up window style scripts in one script to overcome javascript conflict with some IE javascript styling scripts.* Tweak: Updated WordPress description text and readme to show the WP e-Commerce 3.8.8.5 do_action functions that must be included in themes for the Email Button to show. Some older themes don't have updated function and even though users have the 3.8.8.5 WP e-commerce version the button can't show.* Plugin documentation completed.
 
 = 1.0.1 - 2012/08/25 =
-
 * Fixed: Moved style from header to footer to resolve plugin breaking themes css in IE 7, 8 and 9
-
 * Tweak: Removed left and right 10px float and set so button left / right float is the same as the add to cart button.
 
 = 1.0.0 - 2012/08/23 =
-
 * First Release.
 
-  
+
+== Upgrade Notice ==
+
+= 1.0.6 =
+Important upgrade! Install now to ensure this plugin continues to work when you upgrade WP e-Commerce to new version 3.8.10.  
