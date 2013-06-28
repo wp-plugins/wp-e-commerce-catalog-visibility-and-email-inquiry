@@ -29,7 +29,7 @@ class WPEC_PCF_Functions{
 			
 			$headers = array();
 			$headers[] = 'MIME-Version: 1.0';
-			$headers[] = 'Content-type: text/html; charset=iso-8859-1';
+			$headers[] = 'Content-type: text/html; charset='. get_option('blog_charset');
 			$headers[] = 'From: '.$from_email;
 			if (trim($cc_emails) != '') {
 				$cc_emails_a = explode("," , $cc_emails);

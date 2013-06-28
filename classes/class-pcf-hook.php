@@ -317,20 +317,23 @@ class WPEC_PCF_Hook_Filter{
 <script type="text/javascript">
 (function($){
 	$(function(){
-		var ajax_url = "<?php echo admin_url('admin-ajax.php'); ?>";
-		$(".pcf_contact_buton").live("click", function(){
+		var ajax_url = "<?php echo admin_url('admin-ajax.php', 'relative'); ?>";
+		$(document).on("click", ".pcf_contact_buton", function(){
 			var product_id = $(this).attr("product_id");
 			var product_name = $(this).attr("product_name");
 			$.fancybox({
 				href: ajax_url+"?action=pcf_contact_popup&product_id="+product_id+"&security=<?php echo $pcf_contact_popup; ?>",
+				padding: 20,
 				maxWidth: 600,
 				maxHeight: 400,
+				width : '60%',
+				height: '60%',
 				openEffect	: "none",
 				closeEffect	: "none"
 			});
 		});
 		
-		$(".pcf_form_button").live("click", function(){
+		$(document).on("click", ".pcf_form_button", function(){
 			var product_id = $(this).attr("product_id");
 			var your_name = $("#your_name_"+product_id).val();
 			var your_email = $("#your_email_"+product_id).val();
@@ -391,8 +394,8 @@ class WPEC_PCF_Hook_Filter{
 				// Color picker
 				$('.colorpick').each(function(){
 					$('.colorpickdiv', $(this).parent()).farbtastic(this);
-					$(this).live('click',function() {
-						if ( $(this).val() == "" ) $(this).val('#ee2b2b');
+					$(this).click(function() {
+						if ( $(this).val() == "" ) $(this).val('#000000');
 						$('.colorpickdiv', $(this).parent() ).show();
 					});	
 				});
@@ -425,7 +428,7 @@ class WPEC_PCF_Hook_Filter{
 	function admin_warning_noemail() {
 		$to_email = get_option('purch_log_email');
 		if (trim($to_email) == '') {
-			session_start();
+			@session_start();
 			if (isset($_GET['hide-wpec-pcf-notice'])) $_SESSION['hide-wpec-pcf-notice'] = 1 ;
 			if (!isset($_SESSION['hide-wpec-pcf-notice'])) {
 				$html = '<style>#wpec_pcf_notice {text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8); padding:8px 25px 8px 6px;position:relative;}#wpec_pcf_notice a.hide{color:#FF0808;float:right;text-decoration:none;position:absolute;top:0;right:0;line-height:24px;padding:2px 8px;font-size:20px;text-align:center}</style>';
@@ -441,7 +444,7 @@ class WPEC_PCF_Hook_Filter{
 			return $links;
 		}
 		$links[] = '<a href="http://docs.a3rev.com/user-guides/wp-e-commerce/wpec-catalog-visibility-and-email-inquiry/" target="_blank">'.__('Documentation', 'wpec_pcf').'</a>';
-		$links[] = '<a href="http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/#help_tab" target="_blank">'.__('Support', 'wpec_pcf').'</a>';
+		$links[] = '<a href="http://wordpress.org/support/plugin/wp-e-commerce-catalog-visibility-and-email-inquiry/" target="_blank">'.__('Support', 'wpec_pcf').'</a>';
 		return $links;
 	}
 }

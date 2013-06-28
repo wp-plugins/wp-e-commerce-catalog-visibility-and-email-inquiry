@@ -2,8 +2,8 @@
 Contributors: a3rev, A3 Revolution Software Development team
 Tags: WP e-Commerce Catalog Visibility, WP e-Commerce, WP e-Commerce Email Inquiry, e-commerce, wordpress ecommerce
 Requires at least: 3.3
-Tested up to: 3.5.1
-Stable tag: 1.0.6
+Tested up to: 3.5.2
+Stable tag: 1.0.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -71,7 +71,7 @@ And for ultimate control:
 
 [PRO Version](http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/) |
 [Documentation](http://docs.a3rev.com/user-guides/wp-e-commerce/wpec-catalog-visibility-and-email-inquiry/) |
-[Support](http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/#help_tab)
+[Support](http://wordpress.org/support/plugin/wp-e-commerce-catalog-visibility-and-email-inquiry/)
 
 
 == Installation ==
@@ -125,9 +125,18 @@ You can use this plugin only when you have installed the WP e-Commerce plugin.
  
 == Support ==
 
-Support and access to this plugin documents are available from the [HELP tab](http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/#help_tab) on the Pro Versions Home page.
+Support and access to this plugin documents are available from the [Support Link](http://wordpress.org/support/plugin/wp-e-commerce-catalog-visibility-and-email-inquiry/) on the Pro Versions Home page.
 
 == Changelog ==
+
+= 1.0.7 - 2013/06/28 =
+* Fixes:
+	* Replaced hardcode iso-8859-1 charset to dynamic get_option('blog_charset')
+	* Updated all JavaScript functions so that the plugin is compatible with jQuery Version1.9 and backwards to version 1.6. WordPress still uses jQuery version 1.8.3. In themes that use Google js Library instead of the WordPress jQuery then there was trouble because Google uses the latest jQuery version 1.9. There are a number of functions in jQuery Version 1.9 that have been depreciated and hence this was causing errors with the jQuery function in the plugin.
+	* Removed Email form po-up pre-set 500px width. Replaced by auto wide from fancybox script.
+	* Added when install and activate plugin link redirects to the plugins dashboard instead of the wp-plugins dashboard.
+* Tweaks:
+	* Updated plugins support forum link to the wordpress support forum.
 
 = 1.0.6 - 2013/04/22 =
 * Feature: Updated all plugin code to be 100% compatible with the new WP e-Commerce version 3.8.10. The plugin is backward compatible with older version to 3.8.5
@@ -153,6 +162,9 @@ Support and access to this plugin documents are available from the [HELP tab](ht
 
 
 == Upgrade Notice ==
+
+= 1.0.7 =
+Update you plugin now for 3 important bug fixes.
 
 = 1.0.6 =
 Important upgrade! Install now to ensure this plugin continues to work when you upgrade WP e-Commerce to new version 3.8.10.  

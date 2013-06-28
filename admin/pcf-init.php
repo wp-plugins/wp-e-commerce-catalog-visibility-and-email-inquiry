@@ -3,8 +3,9 @@
  * Call this function when plugin is deactivated
  */
 function wpec_pcf_install(){
-	update_option('a3rev_wpec_pcf_version', '1.0.6');
+	update_option('a3rev_wpec_pcf_version', '1.0.7');
 	WPSC_Settings_Tab_Catalog_Visibility::set_settings_default(true);
+	update_option('a3rev_wpec_pcf_just_installed', true);
 }
 
 update_option('a3rev_wpec_pcf_plugin', 'wpec_pcf');
@@ -13,6 +14,11 @@ update_option('a3rev_wpec_pcf_plugin', 'wpec_pcf');
  * Load languages file
  */
 function wpec_pcf_init() {
+	if ( get_option('a3rev_wpec_pcf_just_installed') ) {
+		delete_option('a3rev_wpec_pcf_just_installed');
+		wp_redirect( ( ( is_ssl() || force_ssl_admin() || force_ssl_login() ) ? str_replace( 'http:', 'https:', admin_url( 'options-general.php?page=wpsc-settings&tab=catalog_visibility' ) ) : str_replace( 'https:', 'http:', admin_url( 'options-general.php?page=wpsc-settings&tab=catalog_visibility' ) ) ) );
+		exit;
+	}
 	load_plugin_textdomain( 'wpec_pcf', false, WPEC_PCF_FOLDER.'/languages' );
 }
 // Add language
@@ -67,5 +73,5 @@ add_filter( 'plugin_row_meta', array('WPEC_PCF_Hook_Filter', 'plugin_extra_links
 		add_action('save_post', array('WPEC_PCF_MetaBox','save_meta_boxes' ) );
 	}
 
-	update_option('a3rev_wpec_pcf_version', '1.0.6');
+	update_option('a3rev_wpec_pcf_version', '1.0.7');
 ?>
