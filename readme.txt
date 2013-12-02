@@ -146,7 +146,7 @@ You can use this plugin only when you have installed the WP e-Commerce plugin.
  
 == Changelog ==
 
-= 2.1.0 - 2013/11/30 =
+= 1.0.8 - 2013/12/02 =
 * Feature - Major plugin upgrade. Full code rework. 
 * Feature - Upgraded the plugin to the newly developed a3rev admin Framework with app style interface.
 * Feature - Moved admin from wp dashboard > Settings > Store > Tab to own dashboard menu item called WPEC Catalog & Email.
