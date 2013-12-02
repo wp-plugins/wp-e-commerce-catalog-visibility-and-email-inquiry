@@ -3,8 +3,12 @@
  * Call this function when plugin is deactivated
  */
 function wpec_pcf_install(){
-	update_option('a3rev_wpec_pcf_version', '1.0.7');
-	WPSC_Settings_Tab_Catalog_Visibility::set_settings_default(true);
+	update_option('a3rev_wpec_pcf_lite_version', '1.0.8');
+	
+	// Set Settings Default from Admin Init
+	global $wpec_ei_admin_init;
+	$wpec_ei_admin_init->set_default_settings();
+	
 	update_option('a3rev_wpec_pcf_just_installed', true);
 }
 
@@ -16,7 +20,7 @@ update_option('a3rev_wpec_pcf_plugin', 'wpec_pcf');
 function wpec_pcf_init() {
 	if ( get_option('a3rev_wpec_pcf_just_installed') ) {
 		delete_option('a3rev_wpec_pcf_just_installed');
-		wp_redirect( ( ( is_ssl() || force_ssl_admin() || force_ssl_login() ) ? str_replace( 'http:', 'https:', admin_url( 'options-general.php?page=wpsc-settings&tab=catalog_visibility' ) ) : str_replace( 'https:', 'http:', admin_url( 'options-general.php?page=wpsc-settings&tab=catalog_visibility' ) ) ) );
+		wp_redirect( admin_url( 'admin.php?page=wpec-cart-email', 'relative' ) );
 		exit;
 	}
 	load_plugin_textdomain( 'wpec_pcf', false, WPEC_PCF_FOLDER.'/languages' );
@@ -24,21 +28,33 @@ function wpec_pcf_init() {
 // Add language
 add_action('init', 'wpec_pcf_init');
 
-// Add warning message when does not find an email address enter in either - WPEC Store admin or WordPress admin
-add_action( 'admin_notices', array('WPEC_PCF_Hook_Filter', 'admin_warning_noemail'), 1 );
-
 // Add text on right of Visit the plugin on Plugin manager page
 add_filter( 'plugin_row_meta', array('WPEC_PCF_Hook_Filter', 'plugin_extra_links'), 10, 2 );
 	
 		
-	// Add Catalog Visibility tab into Store settings 	
-	add_filter( 'wpsc_settings_tabs', array('WPEC_PCF_Hook_Filter', 'add_wpsc_settings_tabs') );
+	// Need to call Admin Init to show Admin UI
+	global $wpec_ei_admin_init;
+	$wpec_ei_admin_init->init();
+	
+	// Add upgrade notice to Dashboard pages
+	add_filter( $wpec_ei_admin_init->plugin_name . '_plugin_extension', array( 'WPEC_PCF_Functions', 'plugin_extension' ) );
 	
 	// Include style into header
 	add_action('get_header', array('WPEC_PCF_Hook_Filter', 'add_style_header'), 1);
 	
+	// Add Custom style on frontend
+	add_action( 'wp_head', array( 'WPEC_PCF_Hook_Filter', 'include_customized_style'), 11);
+	
 	// Include script into footer
 	add_action('get_footer', array('WPEC_PCF_Hook_Filter', 'script_contact_popup'), 1);
+	
+	// AJAX hide yellow message dontshow
+	add_action('wp_ajax_wpec_ei_yellow_message_dontshow', array('WPEC_PCF_Functions', 'wpec_ei_yellow_message_dontshow') );
+	add_action('wp_ajax_nopriv_wpec_ei_yellow_message_dontshow', array('WPEC_PCF_Functions', 'wpec_ei_yellow_message_dontshow') );
+	
+	// AJAX hide yellow message dismiss
+	add_action('wp_ajax_wpec_ei_yellow_message_dismiss', array('WPEC_PCF_Functions', 'wpec_ei_yellow_message_dismiss') );
+	add_action('wp_ajax_nopriv_wpec_ei_yellow_message_dismiss', array('WPEC_PCF_Functions', 'wpec_ei_yellow_message_dismiss') );
 	
 	// AJAX pcf contact popup
 	add_action('wp_ajax_pcf_contact_popup', array('WPEC_PCF_Hook_Filter', 'pcf_contact_popup') );
@@ -49,8 +65,9 @@ add_filter( 'plugin_row_meta', array('WPEC_PCF_Hook_Filter', 'plugin_extra_links
 	add_action('wp_ajax_nopriv_pcf_contact_action', array('WPEC_PCF_Hook_Filter', 'pcf_contact_action') );
 	
 	// Include script admin plugin
-	add_action('admin_head', array('WPEC_PCF_Hook_Filter', 'admin_footer_scripts') );
-	add_action('admin_footer', array('WPEC_PCF_Hook_Filter', 'wp_admin_footer_scripts') );
+	if (in_array(basename($_SERVER['PHP_SELF']), array('post.php', 'page.php', 'page-new.php', 'post-new.php'))){
+		add_action('admin_footer', array('WPEC_PCF_Hook_Filter', 'admin_footer_scripts'));
+	}
 	
 	// Add email button for each product
 	if((get_option('hide_addtocart_button') == 0) &&  (get_option('addtocart_or_buynow') !='1')){
@@ -72,6 +89,17 @@ add_filter( 'plugin_row_meta', array('WPEC_PCF_Hook_Filter', 'plugin_extra_links
 	if(in_array(basename($_SERVER['PHP_SELF']), array('post.php', 'page.php', 'page-new.php', 'post-new.php'))){
 		add_action('save_post', array('WPEC_PCF_MetaBox','save_meta_boxes' ) );
 	}
+	
+	// Check upgrade functions
+	add_action('plugins_loaded', 'wpec_pcf_upgrade_plugin');
+	function wpec_pcf_upgrade_plugin () {
+		
+		if(version_compare(get_option('a3rev_wpec_pcf_lite_version'), '1.0.8') === -1){
+			update_option('a3rev_wpec_pcf_lite_version', '1.0.8');
+			WPEC_PCF_Functions::lite_upgrade_version_1_0_8();
+		}
+		
+		update_option('a3rev_wpec_pcf_lite_version', '1.0.8');
+	}
 
-	update_option('a3rev_wpec_pcf_version', '1.0.7');
 ?>

@@ -4,33 +4,96 @@
  *
  * Table Of Contents
  *
+ * check_hide_add_cart_button()
+ * check_add_email_inquiry_button()
+ * check_add_email_inquiry_button_on_shoppage()
  * email_inquiry()
+ * get_from_address()
+ * get_from_name()
+ * get_content_type()
+ * plugin_extension()
+ * wpec_ei_yellow_message_dontshow()
+ * wpec_ei_yellow_message_dismiss()
+ * lite_upgrade_version_1_0_8()
  */
-class WPEC_PCF_Functions{	
-	
-	function email_inquiry($product_id, $your_name, $your_email, $your_phone, $your_message) {
-		
-		$wpec_pcf_show_button = esc_attr(get_option('wpec_pcf_show_button'));
-		
-		$wpec_pcf_user = esc_attr(get_option('wpec_pcf_user'));
-		
-		if ($wpec_pcf_show_button == 1 && ( !is_user_logged_in() || $wpec_pcf_user == 1 ) ) {
+class WPEC_PCF_Functions
+{	
+
+	public static function check_hide_add_cart_button ($product_id) {
+		global $wpec_email_inquiry_rules_roles_settings;
 			
-			if ( trim(esc_attr(get_option('wpec_pcf_contact_success'))) != '') $wpec_pcf_contact_success = esc_attr(get_option('wpec_pcf_contact_success'));
-			else $wpec_pcf_contact_success = __("Thanks for your inquiry - we'll be in touch with you as soon as possible!", 'wpec_pcf');
+		$hide_addcartbt_before_login = $wpec_email_inquiry_rules_roles_settings['hide_addcartbt_before_login'] ;
 		
-			$to_email = get_option('purch_log_email');
+		// dont hide add to cart button if setting is not checked and not logged in users
+		if ($hide_addcartbt_before_login == 'no' && !is_user_logged_in() ) return false;
+		
+		// hide add to cart button if setting is checked and not logged in users
+		if ($hide_addcartbt_before_login != 'no' &&  !is_user_logged_in()) return true;
+		
+		$hide_addcartbt_after_login = $wpec_email_inquiry_rules_roles_settings['hide_addcartbt_after_login'] ;
+
+		// don't hide add to cart if for logged in users is deacticated
+		if ( $hide_addcartbt_after_login != 'yes' ) return false;
+		
+		return true;
+		
+	}
+	
+	public static function check_add_email_inquiry_button ($product_id) {
+		global $wpec_email_inquiry_global_settings;
+			
+		$show_email_inquiry_button_before_login = $wpec_email_inquiry_global_settings['show_email_inquiry_button_before_login'];
+		
+		// dont show email inquiry button if setting is not checked and not logged in users
+		if ($show_email_inquiry_button_before_login == 'no' && !is_user_logged_in() ) return false;
+		
+		// alway show email inquiry button if setting is checked and not logged in users
+		if ($show_email_inquiry_button_before_login != 'no' && !is_user_logged_in()) return true;
+		
+		$show_email_inquiry_button_after_login = $wpec_email_inquiry_global_settings['show_email_inquiry_button_after_login'] ;
+
+		// don't show email inquiry button if for logged in users is deacticated
+		if ( $show_email_inquiry_button_after_login != 'yes' ) return false;
+		
+		return true;
+		
+	}
+	
+	public static function check_add_email_inquiry_button_on_shoppage ($product_id=0) {
+		global $wpec_email_inquiry_global_settings;
+			
+		$inquiry_single_only = $wpec_email_inquiry_global_settings['inquiry_single_only'];
+		
+		if ($inquiry_single_only == 'yes') return false;
+		
+		return WPEC_PCF_Functions::check_add_email_inquiry_button($product_id);
+		
+	}
+	
+	public static function email_inquiry($product_id, $your_name, $your_email, $your_phone, $your_message, $send_copy_yourself = 1) {
+		global $wpec_email_inquiry_contact_form_settings;
+		
+		if ( WPEC_PCF_Functions::check_add_email_inquiry_button( $product_id ) ) {
+			
+			$wpec_pcf_contact_success = stripslashes( get_option( 'wpec_pcf_contact_success', '' ) );
+			if ( trim( $wpec_pcf_contact_success ) != '') $wpec_pcf_contact_success = wpautop(wptexturize(   $wpec_pcf_contact_success ));
+			else $wpec_pcf_contact_success = __("Thanks for your inquiry - we'll be in touch with you as soon as possible!", 'wpec_pcf');
+			
+			$to_email = $wpec_email_inquiry_contact_form_settings['inquiry_email_to'];
 			if (trim($to_email) == '') $to_email = get_option('admin_email');
 			
-			$from_email = get_option('purch_log_email');
-			if (trim($from_email) == '') $from_email = get_option('admin_email');
+			$from_email = get_option('admin_email');
+				
+			$from_name = ( function_exists('icl_t') ? icl_t( 'WP',__('Blog Title','wpml-string-translation'), get_option('blogname') ) : get_option('blogname') );
 			
-			$cc_emails = '';
+			$cc_emails = $wpec_email_inquiry_contact_form_settings['inquiry_email_cc'];
+			if (trim($cc_emails) == '') $cc_emails = '';
 			
 			$headers = array();
 			$headers[] = 'MIME-Version: 1.0';
 			$headers[] = 'Content-type: text/html; charset='. get_option('blog_charset');
-			$headers[] = 'From: '.$from_email;
+			$headers[] = 'From: '.$from_name.' <'.$from_email.'>';
+			
 			if (trim($cc_emails) != '') {
 				$cc_emails_a = explode("," , $cc_emails);
 				if (is_array($cc_emails_a) && count($cc_emails_a) > 0) {
@@ -89,12 +152,113 @@ class WPEC_PCF_Functions{
 			
 			$content = apply_filters('pcf_inquiry_content', $content);
 			
+			// Filters for the email
+			add_filter( 'wp_mail_from', array( 'WPEC_PCF_Functions', 'get_from_address' ) );
+			add_filter( 'wp_mail_from_name', array( 'WPEC_PCF_Functions', 'get_from_name' ) );
+			add_filter( 'wp_mail_content_type', array( 'WPEC_PCF_Functions', 'get_content_type' ) );
+			
 			wp_mail( $to_email, $subject, $content, $headers, '' );
+			
+			// Unhook filters
+			remove_filter( 'wp_mail_from', array( 'WPEC_PCF_Functions', 'get_from_address' ) );
+			remove_filter( 'wp_mail_from_name', array( 'WPEC_PCF_Functions', 'get_from_name' ) );
+			remove_filter( 'wp_mail_content_type', array( 'WPEC_PCF_Functions', 'get_content_type' ) );
 			
 			return $wpec_pcf_contact_success;
 		} else {
 			return __("Sorry, this product don't enable email inquiry.", 'wpec_pcf');
 		}
-	}				
+	}
+	
+	public static function get_from_address() {
+		$from_email = get_option('admin_email');
+			
+		return $from_email;
+	}
+	
+	public static function get_from_name() {
+		$from_name = ( function_exists('icl_t') ? icl_t( 'WP',__('Blog Title','wpml-string-translation'), get_option('blogname') ) : get_option('blogname') );
+			
+		return $from_name;
+	}
+	
+	public static function get_content_type() {
+		return 'text/html';
+	}
+	
+	public static function plugin_extension() {
+		$html = '';
+		$html .= '<a href="http://a3rev.com/shop/" target="_blank" style="float:right;margin-top:5px; margin-left:10px;" ><img src="'.WPEC_PCF_IMAGES_URL.'/a3logo.png" /></a>';
+		$html .= '<h3>'.__('Upgrade to Catalog Visibility Email inquiry Pro', 'wpec_pcf').'</h3>';
+		$html .= '<p>'.__("Visit the", 'wpec_pcf').' <a href="'.WPEC_PCF_AUTHOR_URI.'" target="_blank">'.__("a3rev website", 'wpec_pcf').'</a> '.__("to see all the extra features the Pro version of this plugin offers in the yellow box below plus the awesome power to individually customize these Catalog visibility and email inquiry settings on any product.", 'wpec_pcf').':</p>';
+		$html .= '<h3>'.__('Plugin Documentation', 'wpec_pcf').'</h3>';
+		$html .= '<p>'.__('All of our plugins have comprehensive online documentation. Please refer to the plugins docs before raising a support request', 'wpec_pcf').'. <a href="http://docs.a3rev.com/user-guides/wp-e-commerce/wpec-catalog-visibility-and-email-inquiry/" target="_blank">'.__('Visit the a3rev wiki.', 'wpec_pcf').'</a></p>';
+		$html .= '<h3>'.__('More a3rev Quality Plugins', 'wpec_pcf').'</h3>';
+		$html .= '<p>'.__('Below is a list of the a3rev plugins that are available for free download from wordpress.org', 'wpec_pcf').'</p>';
+		$html .= '<h3>'.__('WP e-Commerce Plugins', 'wpec_pcf').'</h3>';
+		$html .= '<p>';
+		$html .= '<ul style="padding-left:10px;">';
+		$html .= '<li>* <a href="http://wordpress.org/plugins/wp-e-commerce-products-quick-view/" target="_blank">'.__('WP e-Commerce Products Quick View', 'wpec_pcf').'</a></li>';
+		$html .= '<li>* <a href="http://wordpress.org/plugins/wp-e-commerce-dynamic-gallery/" target="_blank">'.__('WP e-Commerce Dynamic Gallery', 'wpec_pcf').'</a></li>';
+		$html .= '<li>* <a href="http://wordpress.org/plugins/wp-e-commerce-predictive-search/" target="_blank">'.__('WP e-Commerce Predictive Search', 'wpec_pcf').'</a></li>';
+		$html .= '<li>* <a href="http://wordpress.org/plugins/wp-ecommerce-compare-products/" target="_blank">'.__('WP e-Commerce Compare Products', 'wpec_pcf').'</a></li>';
+		$html .= '<li>* <a href="http://wordpress.org/plugins/wp-e-commerce-catalog-visibility-and-email-inquiry/" target="_blank">'.__('WP e-Commerce Catalog Visibility & Email Inquiry', 'wpec_pcf').'</a></li>';
+		$html .= '<li>* <a href="http://wordpress.org/plugins/wp-e-commerce-grid-view/" target="_blank">'.__('WP e-Commerce Grid View', 'wpec_pcf').'</a></li>';
+		$html .= '</ul>';
+		$html .= '</p>';
+		
+		$html .= '<h3>'.__('WordPress Plugins', 'wpec_pcf').'</h3>';
+		$html .= '<p>';
+		$html .= '<ul style="padding-left:10px;">';
+		$html .= '<li>* <a href="http://wordpress.org/plugins/contact-us-page-contact-people/" target="_blank">'.__('Contact Us Page - Contact People', 'wpec_pcf').'</a></li>';
+		$html .= '<li>* <a href="http://wordpress.org/plugins/wp-email-template/" target="_blank">'.__('WordPress Email Template', 'wpec_pcf').'</a></li>';
+		$html .= '<li>* <a href="http://wordpress.org/plugins/page-views-count/" target="_blank">'.__('Page View Count', 'wpec_pcf').'</a></li>';
+		$html .= '</ul>';
+		$html .= '</p>';
+		
+		$html .= '<h3>'.__('Help spread the Word about this plugin', 'wpec_pcf').'</h3>';
+		$html .= '<p>'.__("Things you can do to help others find this plugin", 'wpec_pcf');
+		$html .= '<ul style="padding-left:10px;">';
+		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/wp-e-commerce-catalog-visibility-and-email-inquiry/" target="_blank">'.__('Rate this plugin 5', 'wpec_pcf').' <img src="'.WPEC_PCF_IMAGES_URL.'/stars.png" align="top" style="width:auto; height:auto;" /> '.__('on WordPress.org', 'wpec_pcf').'</a></li>';
+		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/wp-e-commerce-catalog-visibility-and-email-inquiry/" target="_blank">'.__('Mark the plugin as a fourite', 'wpec_pcf').'</a></li>';
+		$html .= '</ul>';
+		$html .= '</p>';
+		return $html;
+	}
+	
+	public static function wpec_ei_yellow_message_dontshow() {
+		check_ajax_referer( 'wpec_ei_yellow_message_dontshow', 'security' );
+		$option_name   = $_REQUEST['option_name'];
+		update_option( $option_name, 1 );
+		die();
+	}
+	
+	public static function wpec_ei_yellow_message_dismiss() {
+		check_ajax_referer( 'wpec_ei_yellow_message_dismiss', 'security' );
+		$session_name   = $_REQUEST['session_name'];
+		if ( !isset($_SESSION) ) { session_start(); } 
+		$_SESSION[$session_name] = 1 ;
+		die();
+	}
+	
+	public static function lite_upgrade_version_1_0_8() {
+		$wpec_pcf_hide_addcartbt = get_option( 'wpec_pcf_hide_addcartbt', 1 );
+		$wpec_email_inquiry_rules_roles_settings = array(
+			'hide_addcartbt_before_login'	=> ( $wpec_pcf_hide_addcartbt == 1 ) ? 'yes' : 'no',
+			'hide_addcartbt_after_login'	=> 'yes',
+		);	
+		update_option( 'wpec_email_inquiry_rules_roles_settings', $wpec_email_inquiry_rules_roles_settings );
+		
+		$wpec_pcf_show_button = get_option( 'wpec_pcf_show_button', 1 );
+		$wpec_pcf_user = get_option( 'wpec_pcf_user', 0 );
+		$wpec_email_inquiry_global_settings = array(
+			'show_email_inquiry_button_before_login'	=> ( $wpec_pcf_show_button == 1 ) ? 'yes' : 'no',
+			'show_email_inquiry_button_after_login'		=> ( $wpec_pcf_user == 1 ) ? 'yes' : 'no',
+			'inquiry_single_only'						=> 'no',
+		);	
+		update_option( 'wpec_email_inquiry_global_settings', $wpec_email_inquiry_global_settings );
+		
+	}
+	
 }
 ?>

@@ -3,7 +3,7 @@
 Plugin Name: WP e-Commerce Catalog Visibility Email inquiry LITE
 Plugin URI: http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/
 Description: Transform your entire WP e-Commerce product catalog into an online brochure by replacing the Add to Cart Button with an Email Enquiry Button and pop-up email form. Alternatively use the plugin to add a Product Email Inquiry button and pop-up to your entire e-commerce activated product pages.
-Version: 1.0.7
+Version: 1.0.8
 Author: A3 Revolution
 Author URI: http://www.a3rev.com/
 License: This software is under commercial license and copyright to A3 Revolution Software Development team
@@ -22,7 +22,7 @@ License: This software is under commercial license and copyright to A3 Revolutio
 define('WPEC_PCF_FILE_PATH', dirname(__FILE__));
 define('WPEC_PCF_DIR_NAME', basename(WPEC_PCF_FILE_PATH));
 define('WPEC_PCF_FOLDER', dirname(plugin_basename(__FILE__)));
-define('WPEC_PCF_URL', WP_CONTENT_URL.'/plugins/'.WPEC_PCF_FOLDER);
+define('WPEC_PCF_URL', untrailingslashit( plugins_url( '/', __FILE__ ) ) );
 define('WPEC_PCF_DIR', WP_CONTENT_DIR.'/plugins/'.WPEC_PCF_FOLDER);
 define('WPEC_PCF_NAME', plugin_basename(__FILE__) );
 define('WPEC_PCF_IMAGES_URL',  WPEC_PCF_URL . '/assets/images' );
@@ -31,14 +31,39 @@ define('WPEC_PCF_CSS_URL',  WPEC_PCF_URL . '/assets/css' );
 if(!defined("WPEC_PCF_AUTHOR_URI"))
     define("WPEC_PCF_AUTHOR_URI", "http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/");
 
-include('admin/classes/class-pcf-settings.php');
+include('admin/admin-ui.php');
+include('admin/admin-interface.php');
+
+include('admin/admin-pages/admin-rules-roles-page.php');
+include('admin/admin-pages/admin-email-inquiry-page.php');
+
+include('admin/admin-init.php');
+
 include('classes/class-pcf-functions.php');
 include('classes/class-pcf-hook.php');
 include('classes/class-pcf-metabox.php');
+
 include('admin/pcf-init.php');
 
 /**
 * Call when the plugin is activated and deactivated
 */
 register_activation_hook(__FILE__,'wpec_pcf_install');
+
+function wpec_email_inquiry_lite_uninstall(){
+	if ( get_option('wpec_email_inquiry_lite_clean_on_deletion') == 1 ) {
+		
+		delete_option( 'wpec_email_inquiry_rules_roles_settings' );
+		delete_option( 'wpec_email_inquiry_global_settings' );
+		delete_option( 'wpec_email_inquiry_contact_form_settings' );
+		delete_option( 'wpec_email_inquiry_customize_email_popup' );
+		delete_option( 'wpec_pcf_contact_success' );
+		delete_option( 'wpec_email_inquiry_customize_email_button' );
+						
+		delete_option( 'wpec_email_inquiry_lite_clean_on_deletion' );
+	}
+}
+if ( get_option('wpec_email_inquiry_lite_clean_on_deletion') == 1 ) {
+	register_uninstall_hook( __FILE__, 'wpec_email_inquiry_lite_uninstall' );
+}
 ?>

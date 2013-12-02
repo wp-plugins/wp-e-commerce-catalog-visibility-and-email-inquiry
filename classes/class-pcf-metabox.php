@@ -7,123 +7,227 @@
  * add_meta_boxes()
  * the_meta_forms()
  * save_meta_boxes()
- * wpec_pcf_meta_extensions()
  */
-class WPEC_PCF_MetaBox{
+class WPEC_PCF_MetaBox
+{
 	
-	function add_meta_boxes(){
+	public static function add_meta_boxes(){
 		global $post;
 		$pagename = 'wpsc-product';
-		add_meta_box( 'wpsc_product_find_seller_forms', __('Catalog Visibility and Email Inquiry', 'wpec_pcf'), array('WPEC_PCF_MetaBox', 'the_meta_forms'), $pagename, 'normal', 'high' );
+		add_meta_box( 'wpec_email_inquiry_meta', __('Email & Cart', 'wpec_pcf'), array('WPEC_PCF_MetaBox', 'the_meta_forms'), $pagename, 'normal', 'high' );
 	}
 	
-	function the_meta_forms() {
+	public static function the_meta_forms() {
 		global $post;
+		global $wpec_email_inquiry_rules_roles_settings;
+		global $wpec_email_inquiry_global_settings;
+		global $wpec_email_inquiry_contact_form_settings;
+		global $wpec_email_inquiry_customize_email_button;
 		
-		$wpec_pcf_hide_addcartbt = esc_attr(get_option('wpec_pcf_hide_addcartbt'));
+		$hide_addcartbt_before_login = $wpec_email_inquiry_rules_roles_settings['hide_addcartbt_before_login'];
 		
-		$wpec_pcf_show_button = esc_attr(get_option('wpec_pcf_show_button'));
+		$hide_addcartbt_after_login = $wpec_email_inquiry_rules_roles_settings['hide_addcartbt_after_login'];
 		
-		$wpec_pcf_user = esc_attr(get_option('wpec_pcf_user'));
+		$show_email_inquiry_button_before_login = $wpec_email_inquiry_global_settings['show_email_inquiry_button_before_login'];
 		
-		$wpec_pcf_email_to = get_option('purch_log_email');
-		if (trim($wpec_pcf_email_to) == '') $wpec_pcf_email_to = get_option('admin_email');
+		$show_email_inquiry_button_after_login = $wpec_email_inquiry_global_settings['show_email_inquiry_button_after_login'];
 		
-		$wpec_pcf_email_cc = esc_attr(get_option('wpec_pcf_email_cc'));
+		$inquiry_email_to = $wpec_email_inquiry_contact_form_settings['inquiry_email_to'];
 		
-		$wpec_pcf_button_type = esc_attr(get_option('wpec_pcf_button_type'));
+		$inquiry_email_cc = $wpec_email_inquiry_contact_form_settings['inquiry_email_cc'];
 		
-		$wpec_pcf_text_before = esc_attr(get_option('wpec_pcf_text_before'));
+		$inquiry_button_type = $wpec_email_inquiry_customize_email_button['inquiry_button_type'];
 		
-		$wpec_pcf_hyperlink_text = esc_attr(get_option('wpec_pcf_hyperlink_text'));
+		$inquiry_text_before = $wpec_email_inquiry_customize_email_button['inquiry_text_before'];
 		
-		$wpec_pcf_trailing_text = esc_attr(get_option('wpec_pcf_trailing_text'));
+		$inquiry_hyperlink_text = $wpec_email_inquiry_customize_email_button['inquiry_hyperlink_text'];
 		
-		$wpec_pcf_button_title = esc_attr(get_option('wpec_pcf_button_title'));
+		$inquiry_trailing_text = $wpec_email_inquiry_customize_email_button['inquiry_trailing_text'];
 		
+		$inquiry_button_title = $wpec_email_inquiry_customize_email_button['inquiry_button_title'];
 		
-		$wpec_pcf_single_only = esc_attr(get_option('wpec_pcf_single_only'));
+		$inquiry_single_only = $wpec_email_inquiry_global_settings['inquiry_single_only'];
 		
 		?>
-        <style type="text/css">
-	   	#wpec_pcf_meta_extensions { background: #FFFBCC; -webkit-border-radius:4px;-moz-border-radius:4px;-o-border-radius:4px; border-radius: 4px 4px 4px 4px; color: #555555; float: right; margin: 0px; padding: 4px 8px 4px 8px; position: absolute; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8); width: 420px; right:15px; top:10px; border:1px solid #E6DB55}
-        </style>
-        <?php echo WPEC_PCF_MetaBox::wpec_pcf_meta_extensions(); ?>
+        <style>
+		#wpec_email_inquiry_upgrade_area_box { border:2px solid #E6DB55;-webkit-border-radius:10px;-moz-border-radius:10px;-o-border-radius:10px; border-radius: 10px; padding:10px; position:relative; margin:10px auto;}
+		#wpec_email_inquiry_upgrade_area_box legend {margin-left:4px; font-weight:bold;}
+		.wpec_ei_rule_after_login_container {
+			margin-top:10px;
+		}
+		.wpec_ei_tab_bar .wp-tab-bar li {
+			padding:5px 8px !important;	
+		}
+		.wpec_ei_tab_bar .wp-tab-bar li.wp-tab-active {
+		}
+		.wpec_ei_tab_bar .wp-tab-panel {
+			border-radius: 0 3px 3px 3px !important;
+			-moz-border-radius: 0 3px 3px 3px !important;
+			-webkit-border-radius: 0 3px 3px 3px !important;
+			max-height: inherit !important;
+			overflow:visible !important;
+		}
+		</style>
+        <script>
+		(function($) {
+		$(document).ready(function() {
+			
+			/* Apply Sub tab selected script */
+			$('div.wpec_ei_tab_bar ul.wp-tab-bar li a').click(function(){
+				var clicked = $(this);
+				var section = clicked.closest('.wpec_ei_tab_bar');
+				var target  = clicked.attr('href');
+			
+				section.find('li').removeClass('wp-tab-active');
+			
+				if ( section.find('.wp-tab-panel:visible').size() > 0 ) {
+					section.find('.wp-tab-panel:visible').fadeOut( 100, function() {
+						section.find( target ).fadeIn('fast');
+					});
+				} else {
+					section.find( target ).fadeIn('fast');
+				}
+			
+				clicked.parent('li').addClass('wp-tab-active');
+			
+				return false;
+			});
+		});
+		})(jQuery);
+		</script>
         <table cellspacing="0" class="form-table">
 			<tbody>
             	<tr valign="top">
-                    <th class="titledesc" scope="rpw" colspan="2"><?php _e('Customize setting for this product', 'wpec_pcf'); ?></th>
-               	</tr>
-                <tr valign="top">
-                    <th class="titledesc" scope="rpw"><label for="wpec_pcf_hide_addcartbt"><?php _e("Hide 'Add to Cart'",'wpec_pcf'); ?></label></th>
-                    <td class="forminp"><input type="checkbox" disabled="disabled" name="_wpsc_pcf_custom[wpec_pcf_hide_addcartbt]" id="wpec_pcf_hide_addcartbt" value="1" <?php if ($wpec_pcf_hide_addcartbt == 1) echo 'checked="checked"'; ?> /> <?php _e('Yes', 'wpec_pcf'); ?>
-                    </td>
-               	</tr>
-                <tr valign="top">
-                    <th class="titledesc" scope="rpw"><label for="wpec_pcf_show_button"><?php _e('Show Email Inquiry Button','wpec_pcf'); ?></label></th>
+                    <th class="titledesc" scope="rpw"><label for="wpec_email_inquiry_reset_product_options"><?php _e('Reset Product Options','wpec_pcf'); ?></label></th>
                     <td class="forminp">
-                    <input type="checkbox" disabled="disabled" name="_wpsc_pcf_custom[wpec_pcf_show_button]" id="wpec_pcf_show_button" value="1" <?php if ($wpec_pcf_show_button == 1) echo 'checked="checked"'; ?> /> <?php _e('Yes', 'wpec_pcf'); ?>
+                        <fieldset><label><input type="checkbox" value="1" disabled="disabled" id="wpec_email_inquiry_reset_product_options" name="wpec_email_inquiry_reset_product_options" /> <?php _e('Check to reset this product setting to the Global Settings', 'wpec_pcf'); ?></label></fieldset>
+                    </td>
+                </tr>
+			</tbody>
+        </table>
+        <div class="wpec_ei_tab_bar">
+        <ul class="wp-tab-bar">
+			<li class="wp-tab-active"><a href="#wpec_ei_cart_price"><?php echo __( 'Cart', 'wpec_pcf' ); ?></a></li>
+			<li class="hide-if-no-js"><a href="#wpec_ei_email_inquiry"><?php echo __( 'Email Inquiry', 'wpec_pcf' ); ?></a></li>
+		</ul>
+        <div id="wpec_ei_cart_price" class="wp-tab-panel">
+        <fieldset id="wpec_email_inquiry_upgrade_area_box"><legend><?php _e('Upgrade to','wpec_pcf'); ?> <a href="<?php echo WPEC_PCF_AUTHOR_URI; ?>" target="_blank"><?php _e('Pro Version', 'wpec_pcf'); ?></a> <?php _e('to activate', 'wpec_pcf'); ?></legend>
+        <table cellspacing="0" class="form-table">
+			<tbody>
+            	<tr valign="top">
+                    <th class="titledesc" scope="rpw" colspan="2"><strong><?php _e( "Product Page Rule: Hide 'Add to Cart'", 'wpec_pcf' ); ?></strong></th>
+               	</tr>
+                <tr valign="top">
+                    <th class="titledesc" scope="rpw"><label for="hide_addcartbt_before_login"><?php _e("Apply for all users before log in",'wpec_pcf'); ?></label></th>
+                    <td class="forminp"><label><input type="checkbox" name="_wpsc_pcf_custom[hide_addcartbt_before_login]" id="hide_addcartbt_before_login" value="yes" <?php checked( $hide_addcartbt_before_login, 'yes' ); ?> /> <?php _e('ON', 'wpec_pcf'); ?></label>
                     </td>
                	</tr>
-				<tr valign="top">
-                    <th class="titledesc" scope="rpw"><label for="wpec_pcf_user"><?php _e('Apply to Logged in Users','wpec_pcf'); ?></label></th>
+                <tr valign="top">
+                    <th class="titledesc" scope="rpw"><label for="hide_addcartbt_after_login"><?php _e('Apply for all roles after log in','wpec_pcf'); ?></label></th>
                     <td class="forminp">
-                    <input type="checkbox" disabled="disabled" name="_wpsc_pcf_custom[wpec_pcf_user]" id="wpec_pcf_user" value="1" <?php if ($wpec_pcf_user == 1) echo 'checked="checked"'; ?> /> <?php _e('Yes', 'wpec_pcf'); ?>
+                    	<label><input class="wpec_ei_rule_after_login" type="checkbox" name="_wpsc_pcf_custom[hide_addcartbt_after_login]" id="hide_addcartbt_after_login" value="yes" <?php checked( $hide_addcartbt_after_login, 'yes' ); ?> /> <?php _e('ON', 'wpec_pcf'); ?></label>
                     </td>
                	</tr>
+        	</tbody>
+		</table>
+        </fieldset>
+        </div>
+        <div id="wpec_ei_email_inquiry" class="wp-tab-panel" style="display:none;">
+        <fieldset id="wpec_email_inquiry_upgrade_area_box"><legend><?php _e('Upgrade to','wpec_pcf'); ?> <a href="<?php echo WPEC_PCF_AUTHOR_URI; ?>" target="_blank"><?php _e('Pro Version', 'wpec_pcf'); ?></a> <?php _e('to activate', 'wpec_pcf'); ?></legend>
+        <table cellspacing="0" class="form-table">
+			<tbody>
                 <tr valign="top">
-                    <th class="titledesc" scope="rpw"><label for="wpec_pcf_email_to"><?php _e('Inquiry Email goes to','wpec_pcf'); ?></label></th>
-                    <td class="forminp"><input type="text" disabled="disabled" name="_wpsc_pcf_custom[wpec_pcf_email_to]" id="wpec_pcf_email_to" value="<?php echo $wpec_pcf_email_to;?>" style="min-width:300px" /> 
-                    </td>
+                    <th class="titledesc" scope="rpw" colspan="2"><strong><?php _e( "Product Page Rule: Show Email Inquiry Button", 'wpec_pcf' ); ?></strong></th>
                	</tr>
                 <tr valign="top">
-                    <th class="titledesc" scope="rpw"><label for="wpec_pcf_email_cc"><?php _e('Copy to','wpec_pcf'); ?></label></th>
-                    <td class="forminp"><input type="text" disabled="disabled" name="_wpsc_pcf_custom[wpec_pcf_email_cc]" id="wpec_pcf_email_cc" value="" style="min-width:300px" /> 
-                    </td>
-               	</tr>
-                <tr valign="top">
-                    <th class="titledesc" scope="rpw"><label for=""><?php _e('Button or Hyperlink Text','wpec_pcf'); ?></label></th>
+                    <th class="titledesc" scope="rpw"><label for="show_email_inquiry_button_before_login"><?php _e('Apply for all users before log in','wpec_pcf'); ?></label></th>
                     <td class="forminp">
-                    <input type="radio" disabled="disabled" name="_wpsc_pcf_custom[wpec_pcf_button_type]" id="wpec_pcf_button" class="wpec_pcf_button_type" value="" checked="checked" /> <label for="wpec_pcf_button"><?php _e('Button', 'wpec_pcf'); ?></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" disabled="disabled" name="_wpsc_pcf_custom[wpec_pcf_button_type]" id="wpec_pcf_link" class="wpec_pcf_button_type" value="link" <?php if ($wpec_pcf_button_type == 'link') echo 'checked="checked"'; ?> /> <label for="wpec_pcf_link"><?php _e('Link', 'wpec_pcf'); ?></label>
-                    </td>
-               	</tr>
-                <tr valign="top" class="button_type_link" style=" <?php if($wpec_pcf_button_type != 'link') { echo 'display:none'; } ?>">
-                    <th class="titledesc" scope="rpw"><label for="wpec_pcf_text_before"><?php _e('Text before','wpec_pcf'); ?></label></th>
-                    <td class="forminp"><input type="text" disabled="disabled" name="_wpsc_pcf_custom[wpec_pcf_text_before]" id="wpec_pcf_text_before" value="<?php echo $wpec_pcf_text_before;?>" style="min-width:300px" /> 
-                    </td>
-               	</tr>
-                <tr valign="top" class="button_type_link" style=" <?php if($wpec_pcf_button_type != 'link') { echo 'display:none'; } ?>">
-                    <th class="titledesc" scope="rpw"><label for="wpec_pcf_hyperlink_text"><?php _e('Hyperlink text','wpec_pcf'); ?></label></th>
-                    <td class="forminp"><input type="text" disabled="disabled" name="_wpsc_pcf_custom[wpec_pcf_hyperlink_text]" id="wpec_pcf_hyperlink_text" value="<?php echo $wpec_pcf_hyperlink_text;?>" style="min-width:300px" /> 
-                    </td>
-               	</tr>
-                <tr valign="top" class="button_type_link" style=" <?php if($wpec_pcf_button_type != 'link') { echo 'display:none'; } ?>">
-                    <th class="titledesc" scope="rpw"><label for="wpec_pcf_trailing_text"><?php _e('Trailing text','wpec_pcf'); ?></label></th>
-                    <td class="forminp"><input type="text" disabled="disabled" name="_wpsc_pcf_custom[wpec_pcf_trailing_text]" id="wpec_pcf_trailing_text" value="<?php echo $wpec_pcf_trailing_text;?>" style="min-width:300px" /> 
-                    </td>
-               	</tr>
-                <tr valign="top" class="button_type_button" style=" <?php if($wpec_pcf_button_type == 'link') { echo 'display:none'; } ?>">
-                    <th class="titledesc" scope="rpw"><label for="wpec_pcf_button_title"><?php _e('Button Title','wpec_pcf'); ?></label></th>
-                    <td class="forminp"><input type="text" disabled="disabled" name="_wpsc_pcf_custom[wpec_pcf_button_title]" id="wpec_pcf_button_title" value="<?php echo $wpec_pcf_button_title;?>" style="min-width:300px" /> 
+                    <label><input type="checkbox" name="_wpsc_pcf_custom[show_email_inquiry_button_before_login]" id="show_email_inquiry_button_before_login" value="yes" <?php checked( $show_email_inquiry_button_before_login, 'yes' ); ?> /> <?php _e('ON', 'wpec_pcf'); ?></label>
                     </td>
                	</tr>
                 <tr valign="top">
-                    <th class="titledesc" scope="rpw"><label for=""><?php _e('Single Product Page only','wpec_pcf'); ?></label></th>
-                    <td class="forminp"><input type="radio" disabled="disabled" name="_wpsc_pcf_custom[wpec_pcf_single_only]" id="wpec_pcf_single_only_yes" value="yes" <?php if ($wpec_pcf_single_only == 'yes') echo 'checked="checked"'; ?> /> <label for="wpec_pcf_single_only_yes"><?php _e('Yes', 'wpec_pcf'); ?></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" disabled="disabled" name="_wpsc_pcf_custom[wpec_pcf_single_only]" id="wpec_pcf_single_only_no" value="" <?php if ($wpec_pcf_single_only != 'yes' ) echo 'checked="checked"'; ?> /> <label for="wpec_pcf_single_only_no"><?php _e('No', 'wpec_pcf'); ?></label>
+                    <th class="titledesc" scope="rpw"><label for="show_email_inquiry_button_after_login"><?php _e('Apply for all roles after log in','wpec_pcf'); ?></label></th>
+                    <td class="forminp">
+                    	<label><input class="wpec_ei_rule_after_login" type="checkbox" name="_wpsc_pcf_custom[show_email_inquiry_button_after_login]" id="show_email_inquiry_button_after_login" value="yes" <?php checked( $show_email_inquiry_button_after_login, 'yes' ); ?> /> <?php _e('ON', 'wpec_pcf'); ?></label>
+                    </td>
+               	</tr>
+                <tr valign="top">
+                    <th class="titledesc" scope="rpw" colspan="2"><strong><?php _e('Product Card', 'wpec_pcf'); ?></strong></th>
+               	</tr>
+            	<tr valign="top">
+                    <th class="titledesc" scope="rpw"><label><?php _e('Email Inquiry Feature','wpec_pcf'); ?></label></th>
+                    <td class="forminp"><label><input type="radio" name="_wpsc_pcf_custom[inquiry_single_only]" id="inquiry_single_only_no" value="no" <?php checked( $inquiry_single_only, 'no' ); ?> /> <?php _e('ON', 'wpec_pcf'); ?></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label><input type="radio" name="_wpsc_pcf_custom[inquiry_single_only]" id="inquiry_single_only_yes" value="yes" <?php if ($inquiry_single_only != 'no' ) echo 'checked="checked"'; ?> /> <?php _e('OFF', 'wpec_pcf'); ?></label> <div><?php _e( "ON to show Button / Link Text on this Product's Card.", 'wpec_pcf' ); ?></div>
+                    </td>
+               	</tr>
+                <tr valign="top">
+                    <th class="titledesc" scope="rpw" colspan="2"><strong><?php _e('Email Delivery Options', 'wpec_pcf'); ?></strong></th>
+               	</tr>      
+                <tr valign="top">
+                    <th class="titledesc" scope="rpw"><label for="inquiry_email_to"><?php _e('Inquiry Email goes to','wpec_pcf'); ?></label></th>
+                    <td class="forminp"><input type="text" name="_wpsc_pcf_custom[inquiry_email_to]" id="inquiry_email_to" value="<?php echo $inquiry_email_to;?>" style="min-width:300px" /> 
+                    </td>
+               	</tr>
+                <tr valign="top">
+                    <th class="titledesc" scope="rpw"><label for="inquiry_email_cc"><?php _e('Copy to','wpec_pcf'); ?></label></th>
+                    <td class="forminp"><input type="text" name="_wpsc_pcf_custom[inquiry_email_cc]" id="inquiry_email_cc" value="<?php echo $inquiry_email_cc;?>" style="min-width:300px" /> 
+                    </td>
+               	</tr>
+                <tr valign="top">
+                    <th class="titledesc" scope="rpw" colspan="2"><strong><?php _e('Inquiry Button / Hyperlink Options', 'wpec_pcf'); ?></strong></th>
+               	</tr>
+                <tr valign="top">
+                    <th class="titledesc" scope="rpw"><label><?php _e('Button or Hyperlink Text','wpec_pcf'); ?></label></th>
+                    <td class="forminp">
+                    <label><input type="radio" name="_wpsc_pcf_custom[inquiry_button_type]" id="wpec_inquiry_button_type" class="inquiry_button_type" value="" checked="checked" /> <?php _e('Button', 'wpec_pcf'); ?></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label><input type="radio" name="_wpsc_pcf_custom[inquiry_button_type]" id="pec_email_inquiry_link" class="inquiry_button_type" value="link" <?php checked( $inquiry_button_type, 'link' ); ?> /> <?php _e('Link', 'wpec_pcf'); ?></label>
+                    </td>
+               	</tr>
+			</tbody>
+        </table>
+        <div class="button_type_link" style=" <?php if($inquiry_button_type != 'link') { echo 'display:none'; } ?>">
+        <table cellspacing="0" class="form-table " >
+			<tbody>                
+                <tr valign="top">
+                    <th class="titledesc" scope="rpw"><label for="inquiry_text_before"><?php _e('Text before','wpec_pcf'); ?></label></th>
+                    <td class="forminp"><input type="text" name="_wpsc_pcf_custom[inquiry_text_before]" id="inquiry_text_before" value="<?php echo $inquiry_text_before;?>" style="min-width:300px" /> 
+                    </td>
+               	</tr>
+                <tr valign="top">
+                    <th class="titledesc" scope="rpw"><label for="inquiry_hyperlink_text"><?php _e('Hyperlink text','wpec_pcf'); ?></label></th>
+                    <td class="forminp"><input type="text" name="_wpsc_pcf_custom[inquiry_hyperlink_text]" id="inquiry_hyperlink_text" value="<?php echo $inquiry_hyperlink_text;?>" style="min-width:300px" /> 
+                    </td>
+               	</tr>
+                <tr valign="top">
+                    <th class="titledesc" scope="rpw"><label for="inquiry_trailing_text"><?php _e('Trailing text','wpec_pcf'); ?></label></th>
+                    <td class="forminp"><input type="text" name="_wpsc_pcf_custom[inquiry_trailing_text]" id="inquiry_trailing_text" value="<?php echo $inquiry_trailing_text;?>" style="min-width:300px" /> 
+                    </td>
+               	</tr>
+			</tbody>
+        </table>
+        </div>
+        <div class="button_type_button" style=" <?php if($inquiry_button_type == 'link') { echo 'display:none'; } ?>">
+        <table cellspacing="0" class="form-table " >
+			<tbody>
+                <tr valign="top">
+                    <th class="titledesc" scope="rpw"><label for="inquiry_button_title"><?php _e('Button Title','wpec_pcf'); ?></label></th>
+                    <td class="forminp"><input type="text" name="_wpsc_pcf_custom[inquiry_button_title]" id="inquiry_button_title" value="<?php echo $inquiry_button_title;?>" style="min-width:300px" /> 
                     </td>
                	</tr>
 			</tbody>
 		</table>
-        <script type="text/javascript">
+        </div>
+        </fieldset>        
+        </div>
+        </div>
+		<script type="text/javascript">
 			(function($){		
 				$(function(){	
-					$('.wpec_pcf_button_type').click(function(){
-						if ($("input[name='_wpsc_pcf_custom[wpec_pcf_button_type]']:checked").val() == '') {
-							$(".button_type_button").show();
-							$(".button_type_link").hide();
+					$('.inquiry_button_type').click(function(){
+						if ($("input[name='_wpsc_pcf_custom[inquiry_button_type]']:checked").val() == '') {
+							$(".button_type_button").slideDown();
+							$(".button_type_link").slideUp();
 						} else {
-							$(".button_type_link").show();
-							$(".button_type_button").hide();
+							$(".button_type_link").slideDown();
+							$(".button_type_button").slideUp();
 						}
 					});
 				});		  
@@ -132,14 +236,8 @@ class WPEC_PCF_MetaBox{
 		<?php
 	}
 	
-	function save_meta_boxes($post_id){
+	public static function save_meta_boxes($post_id){
 		
-	}
-	
-	function wpec_pcf_meta_extensions() {
-		$html = '';
-		$html .= '<div id="wpec_pcf_meta_extensions"><a href="http://a3rev.com/shop/" target="_blank" style="float:left; margin-right:10px;"><img src="'.WPEC_PCF_IMAGES_URL.'/logo_a3blue.png" /></a>'.__('Upgrade to the', 'wpec_pcf').' <a target="_blank" href="'.WPEC_PCF_AUTHOR_URI.'">'.__('Pro Version', 'wpec_pcf').'</a> '.__('of WP e-Commerce Catalog Visibility and Email Inquiry to unleash the awesome feature of being able to customize these setting to suite this product including who the email inquiry should go to.', 'wpec_pcf').'</div>';
-		return $html;	
 	}
 }
 ?>
