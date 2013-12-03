@@ -69,11 +69,21 @@ class WPEC_EI_Global_Settings extends WPEC_Email_Inquiry_Admin_UI
 	 */
 	public $form_messages = array();
 	
+	public function custom_types() {
+		$custom_type = array( 'hide_inquiry_button_yellow_message' );
+		
+		return $custom_type;
+	}
+	
 	/*-----------------------------------------------------------------------------------*/
 	/* __construct() */
 	/* Settings Constructor */
 	/*-----------------------------------------------------------------------------------*/
 	public function __construct() {
+		// add custom type
+		foreach ( $this->custom_types() as $custom_type ) {
+			add_action( $this->plugin_name . '_admin_field_' . $custom_type, array( $this, $custom_type ) );
+		}
 		
 		$this->init_form_fields();
 		//$this->subtab_init();
@@ -212,6 +222,29 @@ class WPEC_EI_Global_Settings extends WPEC_Email_Inquiry_Admin_UI
      	$this->form_fields = apply_filters( $this->option_name . '_settings_fields', array(
 		
 			array(
+            	'name' 		=> __( 'Trouble Shooting', 'wpec_pcf' ),
+                'type' 		=> 'heading',
+				'class'		=> 'trouble_shooting_container',
+           	),
+			array(  
+				'name' 		=> __( "WPEC Theme Compatibility", 'wpec_pcf' ),
+				'class'		=> 'rules_roles_explanation',
+				'id' 		=> 'rules_roles_explanation',
+				'type' 		=> 'onoff_checkbox',
+				'default'	=> 'show',
+				'free_version'		=> true,
+				'checked_value'		=> 'show',
+				'unchecked_value' 	=> 'hide',
+				'checked_label'		=> __( 'SHOW', 'wpec_pcf' ),
+				'unchecked_label' 	=> __( 'HIDE', 'wpec_pcf' ),
+			),
+			array(
+				'desc'		=> '<table class="form-table"><tbody><tr valign="top"><td class="titledesc" scope="row" colspan="2" ><div>'.__( "The Email Inquiry Button / Hyperlink text will not work if the bespoke theme you are using removes or replaces (with a custom function) 2 core WP e-Commerce functions and does not use the WP e-Commerce template structure and hierarchy. The 2 core functions required are:", 'wpec_pcf' ).'</div><div>'.esc_attr("do_action('wpsc_product_form_fields_begin')").'</div><div>'.esc_attr("do_action('wpsc_product_form_fields_end')").'</div></td></tr><tr valign="top"><td class="titledesc" scope="row" colspan="2" ><div>'.__( "<strong>Note:</strong> The Email Inquiry Button shows just fine in the Default WordPress theme. You will only have an issue where a theme dev has made customized WP e-Commerce templates and functions and not followed the WP e-Commerce Codex. If this is the case you should change themes.", 'wpec_pcf' ).'</div></td></tr></tbody></table>',
+                'type' 		=> 'heading',
+				'class'		=> 'rules_roles_explanation_container',
+           	),
+		
+			array(
             	'name' 		=> __( "Product Page Rule: Show Email Inquiry Button", 'wpec_pcf' ),
                 'type' 		=> 'heading',
            	),
@@ -228,7 +261,7 @@ class WPEC_EI_Global_Settings extends WPEC_Email_Inquiry_Admin_UI
 				'unchecked_label' 	=> __( 'OFF', 'wpec_pcf' ),
 			),
 			array(  
-				'name' 		=> __( "Apply for all roles after log in", 'wpec_pcf' ),
+				'name' 		=> __( "Apply by user role after log in", 'wpec_pcf' ),
 				'class'		=> 'show_email_inquiry_button_after_login',
 				'id' 		=> 'show_email_inquiry_button_after_login',
 				'type' 		=> 'onoff_checkbox',
@@ -239,6 +272,27 @@ class WPEC_EI_Global_Settings extends WPEC_Email_Inquiry_Admin_UI
 				'checked_label'		=> __( 'ON', 'wpec_pcf' ),
 				'unchecked_label' 	=> __( 'OFF', 'wpec_pcf' ),
 			),
+			
+			array(
+				'class'		=> 'show_email_inquiry_button_after_login_container',
+                'type' 		=> 'heading',
+           	),
+			array(  
+				'desc' 		=> '',
+				'id' 		=> 'role_apply_show_inquiry_button',
+				'type' 		=> 'multiselect',
+				'placeholder' => __( 'Choose Roles', 'wpec_pcf' ),
+				'css'		=> 'width:450px; min-height:80px; max-width:100%;',
+				'options'	=> $roles,
+				'free_version'		=> true,
+			),
+			array(
+                'type' 		=> 'heading',
+				'class'		=> 'yellow_message_container hide_inquiry_button_yellow_message_container',
+           	),
+			array(
+                'type' 		=> 'hide_inquiry_button_yellow_message',
+           	),
 			
 			array(
 				'name'		=> __( 'Product Cards', 'wpec_pcf' ),
@@ -296,7 +350,128 @@ class WPEC_EI_Global_Settings extends WPEC_Email_Inquiry_Admin_UI
         ));
 	}
 		
-	public function include_script() {}
+	public function hide_inquiry_button_yellow_message( $value ) {
+		$customized_settings = get_option( $this->option_name, array() );
+	?>
+    	<tr valign="top" class="hide_inquiry_button_yellow_message_tr" style=" ">
+			<th scope="row" class="titledesc">&nbsp;</th>
+			<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
+            <div style="width:450px;">
+            <?php 
+				$hide_inquiry_button_blue_message = '<div><strong>'.__( 'Note', 'wpec_pcf' ).':</strong> '.__( "If you do not apply the Show Email Inquiry Button Rule to your role i.e. 'administrator' you will need to either log out or open the site in another browser where you are not logged in to see the Email Inquiry Button feature is activated.", 'wpec_pcf' ).'</div>
+                <div style="clear:both"></div>
+                <a class="hide_inquiry_button_yellow_message_dontshow" style="float:left;" href="javascript:void(0);">'.__( "Don't show again", 'wpec_pcf' ).'</a>
+                <a class="hide_inquiry_button_yellow_message_dismiss" style="float:right;" href="javascript:void(0);">'.__( "Dismiss", 'wpec_pcf' ).'</a>
+                <div style="clear:both"></div>';
+            	echo $this->blue_message_box( $hide_inquiry_button_blue_message ); 
+			?>
+            </div>
+<style>
+.a3rev_panel_container .hide_inquiry_button_yellow_message_container {
+<?php if ( $customized_settings['show_email_inquiry_button_before_login'] == 'no' && $customized_settings['show_email_inquiry_button_after_login'] == 'no' ) echo 'display: none;'; ?>
+<?php if ( get_option( 'wpec_ei_hide_inquiry_button_message_dontshow', 0 ) == 1 ) echo 'display: none !important;'; ?>
+<?php if ( !isset($_SESSION) ) { session_start(); } if ( isset( $_SESSION['wpec_ei_hide_inquiry_button_message_dismiss'] ) ) echo 'display: none !important;'; ?>
+}
+</style>
+<script>
+(function($) {
+$(document).ready(function() {
+	$(document).on( "a3rev-ui-onoff_checkbox-switch", '.show_email_inquiry_button_after_login', function( event, value, status ) {
+		if ( status == 'true' ) {
+			$(".hide_inquiry_button_yellow_message_container").slideDown();
+		} else if( $("input.show_email_inquiry_button_before_login").prop( "checked" ) == false ) {
+			$(".hide_inquiry_button_yellow_message_container").slideUp();
+		}
+	});
+	$(document).on( "a3rev-ui-onoff_checkbox-switch", '.show_email_inquiry_button_before_login', function( event, value, status ) {
+		if ( status == 'true' ) {
+			$(".hide_inquiry_button_yellow_message_container").slideDown();
+		} else if( $("input.show_email_inquiry_button_after_login").prop( "checked" ) == false ) {
+			$(".hide_inquiry_button_yellow_message_container").slideUp();
+		}
+	});
+	
+	$(document).on( "click", ".hide_inquiry_button_yellow_message_dontshow", function(){
+		$(".hide_inquiry_button_yellow_message_tr").slideUp();
+		$(".hide_inquiry_button_yellow_message_container").slideUp();
+		var data = {
+				action: 		"wpec_ei_yellow_message_dontshow",
+				option_name: 	"wpec_ei_hide_inquiry_button_message_dontshow",
+				security: 		"<?php echo wp_create_nonce("wpec_ei_yellow_message_dontshow"); ?>"
+			};
+		$.post( "<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>", data);
+	});
+	
+	$(document).on( "click", ".hide_inquiry_button_yellow_message_dismiss", function(){
+		$(".hide_inquiry_button_yellow_message_tr").slideUp();
+		$(".hide_inquiry_button_yellow_message_container").slideUp();
+		var data = {
+				action: 		"wpec_ei_yellow_message_dismiss",
+				session_name: 	"wpec_ei_hide_inquiry_button_message_dismiss",
+				security: 		"<?php echo wp_create_nonce("wpec_ei_yellow_message_dismiss"); ?>"
+			};
+		$.post( "<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>", data);
+	});
+});
+})(jQuery);
+</script>
+			</td>
+		</tr>
+    <?php
+	
+	}
+		
+	public function include_script() {
+	?>
+<style>
+.yellow_message_container {
+	margin-top: -15px;	
+}
+.yellow_message_container a {
+	text-decoration:none;	
+}
+.yellow_message_container th, .yellow_message_container td, .show_email_inquiry_button_after_login_container th, .show_email_inquiry_button_after_login_container td {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+}
+</style>
+<script>
+(function($) {
+	
+	$(document).ready(function() {
+		if ( $("input.rules_roles_explanation").is(':checked') == false ) {
+			$(".rules_roles_explanation_container").hide();
+		}
+		
+		if ( $("input.show_email_inquiry_button_after_login:checked").val() == 'yes') {
+			$(".show_email_inquiry_button_after_login_container").show();
+		} else {
+			$(".show_email_inquiry_button_after_login_container").hide();
+		}
+		
+		
+		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.rules_roles_explanation', function( event, value, status ) {
+			if ( status == 'true' ) {
+				$(".rules_roles_explanation_container").slideDown();
+			} else {
+				$(".rules_roles_explanation_container").slideUp();
+			}
+		});
+			
+		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.show_email_inquiry_button_after_login', function( event, value, status ) {
+			if ( status == 'true' ) {
+				$(".show_email_inquiry_button_after_login_container").slideDown();
+			} else {
+				$(".show_email_inquiry_button_after_login_container").slideUp();
+			}
+		});
+		
+	});
+	
+})(jQuery);
+</script>
+    <?php	
+	}
 }
 
 global $wpec_ei_global_settings;

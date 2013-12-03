@@ -145,9 +145,9 @@ class WPEC_PCF_Hook_Filter
                     (function($){		
                         $(function(){
 							if($("input#product_<?php echo $product_id; ?>_submit_button").length > 0){
-								$("input#product_<?php echo $product_id; ?>_submit_button").remove();
+								$("input#product_<?php echo $product_id; ?>_submit_button").hide();
 							} else if($("button#product_<?php echo $product_id; ?>_submit_button").length > 0){
-								$("button#product_<?php echo $product_id; ?>_submit_button").remove();
+								$("button#product_<?php echo $product_id; ?>_submit_button").hide();
 							}
                         });		  
                     })(jQuery);
@@ -362,9 +362,19 @@ function ei_getWidth() {
 	}
 	
 	public static function admin_footer_scripts() {
+		global $wpec_ei_admin_interface;
 		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 		
 		wp_enqueue_script('jquery');
+		wp_enqueue_style( 'a3rev-chosen-style', $wpec_ei_admin_interface->admin_plugin_url() . '/assets/js/chosen/chosen.css' );
+		wp_enqueue_script( 'chosen', $wpec_ei_admin_interface->admin_plugin_url() . '/assets/js/chosen/chosen.jquery' . $suffix . '.js', array( 'jquery' ), true, false );
+	?>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+	jQuery(".chzn-select").chosen(); jQuery(".chzn-select-deselect").chosen({allow_single_deselect:true});
+});	
+</script>
+	<?php
 	}
 			
 	public static function plugin_extra_links($links, $plugin_name) {

@@ -3,7 +3,7 @@
  * Call this function when plugin is deactivated
  */
 function wpec_pcf_install(){
-	update_option('a3rev_wpec_pcf_lite_version', '1.0.8');
+	update_option('a3rev_wpec_pcf_lite_version', '1.0.9');
 	
 	// Set Settings Default from Admin Init
 	global $wpec_ei_admin_init;
@@ -74,13 +74,20 @@ add_filter( 'plugin_row_meta', array('WPEC_PCF_Hook_Filter', 'plugin_extra_links
 		require_once(ABSPATH.'wp-admin/includes/plugin.php');
 		$wpec_version = get_plugin_data(WP_PLUGIN_DIR.'/wp-e-commerce/wp-shopping-cart.php');
 		if(version_compare($wpec_version['Version'], '3.8.7', '<')){ 
+			// Hide Add To Cart button
 			add_action('the_post', array('WPEC_PCF_Hook_Filter', 'hide_addcartbt'));
+			
+			// Show Email Inquiry button
 			add_action('the_post', array('WPEC_PCF_Hook_Filter', 'script_show_contact_button'));
 		}else{
+			// Hide Add To Cart button
 			add_action('wpsc_product_form_fields_begin', array('WPEC_PCF_Hook_Filter', 'hide_addcartbt'));
+			
+			// Show Email Inquiry button
 			add_action('wpsc_product_form_fields_begin', array('WPEC_PCF_Hook_Filter', 'script_show_contact_button'));
 		}
 	} else {
+		// Show Email Inquiry button
 		add_action('wpsc_product_form_fields_end', array('WPEC_PCF_Hook_Filter', 'add_contact_button'), 100);
 	}
 	
@@ -99,7 +106,7 @@ add_filter( 'plugin_row_meta', array('WPEC_PCF_Hook_Filter', 'plugin_extra_links
 			WPEC_PCF_Functions::lite_upgrade_version_1_0_8();
 		}
 		
-		update_option('a3rev_wpec_pcf_lite_version', '1.0.8');
+		update_option('a3rev_wpec_pcf_lite_version', '1.0.9');
 	}
 
 ?>

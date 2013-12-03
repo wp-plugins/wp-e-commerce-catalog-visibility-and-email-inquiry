@@ -35,7 +35,19 @@ class WPEC_PCF_Functions
 		// don't hide add to cart if for logged in users is deacticated
 		if ( $hide_addcartbt_after_login != 'yes' ) return false;
 		
-		return true;
+		$role_apply_hide_cart = (array) $wpec_email_inquiry_rules_roles_settings['role_apply_hide_cart'];
+		
+		$user_login = wp_get_current_user();
+		if (is_array($user_login->roles) && count($user_login->roles) > 0) {
+			$user_role = '';
+			foreach ($user_login->roles as $role_name) {
+				$user_role = $role_name;
+				break;
+			}
+			// hide add to cart button if current user role in list apply role
+			if ( in_array($user_role, $role_apply_hide_cart) ) return true;
+		}
+		return false;
 		
 	}
 	
@@ -55,7 +67,20 @@ class WPEC_PCF_Functions
 		// don't show email inquiry button if for logged in users is deacticated
 		if ( $show_email_inquiry_button_after_login != 'yes' ) return false;
 		
-		return true;
+		$role_apply_show_inquiry_button = (array) $wpec_email_inquiry_global_settings['role_apply_show_inquiry_button'];		
+		
+		$user_login = wp_get_current_user();		
+		if (is_array($user_login->roles) && count($user_login->roles) > 0) {
+			$user_role = '';
+			foreach ($user_login->roles as $role_name) {
+				$user_role = $role_name;
+				break;
+			}
+			// show email inquiry button if current user role in list apply role
+			if ( in_array($user_role, $role_apply_show_inquiry_button) ) return true;
+		}
+		
+		return false;
 		
 	}
 	

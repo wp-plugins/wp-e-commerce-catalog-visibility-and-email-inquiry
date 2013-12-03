@@ -69,11 +69,21 @@ class WPEC_EI_Rules_Roles_Settings extends WPEC_Email_Inquiry_Admin_UI
 	 */
 	public $form_messages = array();
 	
+	public function custom_types() {
+		$custom_type = array( 'hide_addtocart_yellow_message', 'hide_price_yellow_message' );
+		
+		return $custom_type;
+	}
+	
 	/*-----------------------------------------------------------------------------------*/
 	/* __construct() */
 	/* Settings Constructor */
 	/*-----------------------------------------------------------------------------------*/
 	public function __construct() {
+		// add custom type
+		foreach ( $this->custom_types() as $custom_type ) {
+			add_action( $this->plugin_name . '_admin_field_' . $custom_type, array( $this, $custom_type ) );
+		}
 		
 		$this->init_form_fields();
 		//$this->subtab_init();
@@ -91,6 +101,10 @@ class WPEC_EI_Rules_Roles_Settings extends WPEC_Email_Inquiry_Admin_UI
 		add_action( $this->plugin_name . '-' . $this->form_key . '_settings_init' , array( $this, 'reset_default_settings' ) );
 				
 		add_action( $this->plugin_name . '_get_all_settings' , array( $this, 'get_settings' ) );
+		
+		// Add yellow border for pro fields
+		add_action( $this->plugin_name . '_settings_pro_hide_price_before', array( $this, 'pro_fields_before' ) );
+		add_action( $this->plugin_name . '_settings_pro_product_reset_after', array( $this, 'pro_fields_after' ) );
 		
 	}
 	
@@ -188,9 +202,39 @@ class WPEC_EI_Rules_Roles_Settings extends WPEC_Email_Inquiry_Admin_UI
 	/* Init all fields of this form */
 	/*-----------------------------------------------------------------------------------*/
 	public function init_form_fields() {
+		global $wp_roles;
+		if ( ! isset( $wp_roles ) ) {
+			$wp_roles = new WP_Roles();
+		}
+		$roles = $wp_roles->get_names();
+		$roles_hide_cart = $roles;
+		$roles_hide_price = $roles_hide_cart;
 		
   		// Define settings			
      	$this->form_fields = apply_filters( $this->option_name . '_settings_fields', array(
+			
+			array(
+            	'name' 		=> __( 'Trouble Shooting', 'wpec_pcf' ),
+                'type' 		=> 'heading',
+				'class'		=> 'trouble_shooting_container',
+           	),
+			array(  
+				'name' 		=> __( "WPEC Theme Compatibility", 'wpec_pcf' ),
+				'class'		=> 'rules_roles_explanation',
+				'id' 		=> 'rules_roles_explanation',
+				'type' 		=> 'onoff_checkbox',
+				'default'	=> 'show',
+				'free_version'		=> true,
+				'checked_value'		=> 'show',
+				'unchecked_value' 	=> 'hide',
+				'checked_label'		=> __( 'SHOW', 'wpec_pcf' ),
+				'unchecked_label' 	=> __( 'HIDE', 'wpec_pcf' ),
+			),
+			array(
+				'desc'		=> '<table class="form-table"><tbody><tr valign="top"><td class="titledesc" scope="row" colspan="2" ><div>'.__( "Product Page Rules 'Hide Cart' , 'Hide Price' cannot work if the bespoke theme you are using removes or replaces (with a custom function) 2 core WP e-Commerce functions and does not use the WP e-Commerce template structure and hierarchy. The 2 core functions required are:", 'wpec_pcf' ).'</div><div>'.esc_attr("do_action('wpsc_product_form_fields_begin')").'</div><div>'.esc_attr("do_action('wpsc_product_form_fields_end')").'</div></td></tr><tr valign="top"><td class="titledesc" scope="row" colspan="2" ><div>'.__( "<strong>Note:</strong> All Product Page Rules work just fine in the Default WordPress theme. You will only have an issue where a theme dev has made customized WP e-Commerce templates and functions and not followed the WP e-Commerce Codex. If this is the case you should consider using another theme.", 'wpec_pcf' ).'</div></td></tr></tbody></table>',
+                'type' 		=> 'heading',
+				'class'		=> 'rules_roles_explanation_container',
+           	),
 			
 			array(
             	'name' 		=> __( 'Product Page Rules:', 'wpec_pcf' ),
@@ -215,7 +259,7 @@ class WPEC_EI_Rules_Roles_Settings extends WPEC_Email_Inquiry_Admin_UI
 				'unchecked_label' 	=> __( 'OFF', 'wpec_pcf' ),
 			),
 			array(  
-				'name' 		=> __( "Apply for all roles after log in", 'wpec_pcf' ),
+				'name' 		=> __( "Apply by user role after log in", 'wpec_pcf' ),
 				'class'		=> 'hide_addcartbt_after_login',
 				'id' 		=> 'hide_addcartbt_after_login',
 				'type' 		=> 'onoff_checkbox',
@@ -226,10 +270,79 @@ class WPEC_EI_Rules_Roles_Settings extends WPEC_Email_Inquiry_Admin_UI
 				'checked_label'		=> __( 'ON', 'wpec_pcf' ),
 				'unchecked_label' 	=> __( 'OFF', 'wpec_pcf' ),
 			),
+			
+			array(
+				'class'		=> 'hide_addcartbt_after_login_container',
+                'type' 		=> 'heading',
+           	),
+			array(  
+				'class' 	=> 'chzn-select role_apply_hide_cart',
+				'id' 		=> 'role_apply_hide_cart',
+				'type' 		=> 'multiselect',
+				'placeholder' => __( 'Choose Roles', 'wpec_pcf' ),
+				'css'		=> 'width:450px; min-height:80px; max-width:100%;',
+				'options'	=> $roles_hide_cart,
+				'free_version'		=> true,
+			),
+			array(
+                'type' 		=> 'heading',
+				'class'		=> 'yellow_message_container hide_addtocart_yellow_message_container',
+           	),
+			array(
+                'type' 		=> 'hide_addtocart_yellow_message',
+           	),
+			
+			array(
+				'name' 		=> __( "Product Page Rule: Hide Price", 'wpec_pcf' ),
+                'type' 		=> 'heading',
+				'id'		=> 'pro_hide_price',
+           	),
+			array(  
+				'name' 		=> __( "Apply for all users before log in", 'wpec_pcf' ),
+				'class'		=> 'hide_price_before_login',
+				'id' 		=> 'hide_price_before_login',
+				'type' 		=> 'onoff_checkbox',
+				'default'	=> 'no',
+				'checked_value'		=> 'yes',
+				'unchecked_value' 	=> 'no',
+				'checked_label'		=> __( 'ON', 'wpec_pcf' ),
+				'unchecked_label' 	=> __( 'OFF', 'wpec_pcf' ),
+			),
+			array(  
+				'name' 		=> __( "Apply by user role after log in", 'wpec_pcf' ),
+				'class'		=> 'hide_price_after_login',
+				'id' 		=> 'hide_price_after_login',
+				'type' 		=> 'onoff_checkbox',
+				'default'	=> 'no',
+				'checked_value'		=> 'yes',
+				'unchecked_value' 	=> 'no',
+				'checked_label'		=> __( 'ON', 'wpec_pcf' ),
+				'unchecked_label' 	=> __( 'OFF', 'wpec_pcf' ),
+			),
+			array(
+				'class'		=> 'hide_price_after_login_container',
+                'type' 		=> 'heading',
+           	),
+			array(  
+				'class' 	=> 'chzn-select role_apply_hide_price',
+				'id' 		=> 'role_apply_hide_price',
+				'type' 		=> 'multiselect',
+				'placeholder' => __( 'Choose Roles', 'wpec_pcf' ),
+				'css'		=> 'width:450px; min-height:80px; max-width:100%;',
+				'options'	=> $roles_hide_price,
+			),
+			array(
+                'type' 		=> 'heading',
+				'class'		=> 'yellow_message_container hide_price_yellow_message_container',
+           	),
+			array(
+                'type' 		=> 'hide_price_yellow_message',
+           	),
+			
 			array(
 				'name'		=> __( 'Product Page Rules Reset:', 'wpec_pcf' ),
                 'type' 		=> 'heading',
-				'class'		=> 'pro_feature_fields',
+				'id'		=> 'pro_product_reset',
            	),
 			array(  
 				'name' 		=> __( "Reset All Products", 'wpec_pcf' ),
@@ -247,7 +360,247 @@ class WPEC_EI_Rules_Roles_Settings extends WPEC_Email_Inquiry_Admin_UI
         ));
 	}
 	
-	public function include_script() {}
+	public function hide_addtocart_yellow_message( $value ) {
+		$customized_settings = get_option( $this->option_name, array() );
+	?>
+    	<tr valign="top" class="hide_addtocart_yellow_message_tr" style=" ">
+			<th scope="row" class="titledesc">&nbsp;</th>
+			<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
+            <div style="width:450px;">
+            <?php 
+				$hide_addtocart_blue_message = '<div><strong>'.__( 'Note', 'wpec_pcf' ).':</strong> '.__( "If you do not apply Rules to your role i.e. 'administrator' you will need to either log out or open the site in another browser where you are not logged in to see the Rule feature is activated.", 'wpec_pcf' ).'</div>
+                <div style="clear:both"></div>
+                <a class="hide_addtocart_yellow_message_dontshow" style="float:left;" href="javascript:void(0);">'.__( "Don't show again", 'wpec_pcf' ).'</a>
+                <a class="hide_addtocart_yellow_message_dismiss" style="float:right;" href="javascript:void(0);">'.__( "Dismiss", 'wpec_pcf' ).'</a>
+                <div style="clear:both"></div>';
+            	echo $this->blue_message_box( $hide_addtocart_blue_message ); 
+			?>
+            </div>
+<style>
+.a3rev_panel_container .hide_addtocart_yellow_message_container {
+<?php if ( $customized_settings['hide_addcartbt_before_login'] == 'no' && $customized_settings['hide_addcartbt_after_login'] == 'no' ) echo 'display: none;'; ?>
+<?php if ( get_option( 'wpec_ei_hide_addtocart_message_dontshow', 0 ) == 1 ) echo 'display: none !important;'; ?>
+<?php if ( !isset($_SESSION) ) { session_start(); } if ( isset( $_SESSION['wpec_ei_hide_addtocart_message_dismiss'] ) ) echo 'display: none !important;'; ?>
+}
+</style>
+<script>
+(function($) {
+$(document).ready(function() {
+	$(document).on( "a3rev-ui-onoff_checkbox-switch", '.hide_addcartbt_after_login', function( event, value, status ) {
+		if ( status == 'true' ) {
+			$(".hide_addtocart_yellow_message_container").slideDown();
+		} else if( $("input.hide_addcartbt_before_login").prop( "checked" ) == false ) {
+			$(".hide_addtocart_yellow_message_container").slideUp();
+		}
+	});
+	$(document).on( "a3rev-ui-onoff_checkbox-switch", '.hide_addcartbt_before_login', function( event, value, status ) {
+		if ( status == 'true' ) {
+			$(".hide_addtocart_yellow_message_container").slideDown();
+		} else if( $("input.hide_addcartbt_after_login").prop( "checked" ) == false ) {
+			$(".hide_addtocart_yellow_message_container").slideUp();
+		}
+	});
+	
+	$(document).on( "click", ".hide_addtocart_yellow_message_dontshow", function(){
+		$(".hide_addtocart_yellow_message_tr").slideUp();
+		$(".hide_addtocart_yellow_message_container").slideUp();
+		var data = {
+				action: 		"wpec_ei_yellow_message_dontshow",
+				option_name: 	"wpec_ei_hide_addtocart_message_dontshow",
+				security: 		"<?php echo wp_create_nonce("wpec_ei_yellow_message_dontshow"); ?>"
+			};
+		$.post( "<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>", data);
+	});
+	
+	$(document).on( "click", ".hide_addtocart_yellow_message_dismiss", function(){
+		$(".hide_addtocart_yellow_message_tr").slideUp();
+		$(".hide_addtocart_yellow_message_container").slideUp();
+		var data = {
+				action: 		"wpec_ei_yellow_message_dismiss",
+				session_name: 	"wpec_ei_hide_addtocart_message_dismiss",
+				security: 		"<?php echo wp_create_nonce("wpec_ei_yellow_message_dismiss"); ?>"
+			};
+		$.post( "<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>", data);
+	});
+});
+})(jQuery);
+</script>
+			</td>
+		</tr>
+    <?php
+	
+	}
+	
+	public function hide_price_yellow_message( $value ) {
+		$customized_settings = get_option( $this->option_name, array() );
+	?>
+    	<tr valign="top" class="hide_price_yellow_message_tr" style=" ">
+			<th scope="row" class="titledesc">&nbsp;</th>
+			<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
+            <div style="width:450px;">
+            <?php 
+				$hide_inquiry_button_blue_message = '<div><strong>'.__( 'Note', 'wpec_pcf' ).':</strong> '.__( "If you do not apply Rules to your role i.e. 'administrator' you will need to either log out or open the site in another browser where you are not logged in to see the Rule feature is activated.", 'wpec_pcf' ).'</div>
+                <div style="clear:both"></div>
+                <a class="hide_price_yellow_message_dontshow" style="float:left;" href="javascript:void(0);">'.__( "Don't show again", 'wpec_pcf' ).'</a>
+                <a class="hide_price_yellow_message_dismiss" style="float:right;" href="javascript:void(0);">'.__( "Dismiss", 'wpec_pcf' ).'</a>
+                <div style="clear:both"></div>';
+            	echo $this->blue_message_box( $hide_inquiry_button_blue_message ); 
+			?>
+            </div>
+<style>
+.a3rev_panel_container .hide_price_yellow_message_container {
+<?php if ( $customized_settings['hide_price_before_login'] == 'no' && $customized_settings['hide_price_after_login'] == 'no' ) echo 'display: none;'; ?>
+<?php if ( get_option( 'wpec_ei_hide_price_message_dontshow', 0 ) == 1 ) echo 'display: none !important;'; ?>
+<?php if ( !isset($_SESSION) ) { session_start(); } if ( isset( $_SESSION['wpec_ei_hide_price_message_dontshow'] ) ) echo 'display: none !important;'; ?>
+}
+</style>
+<script>
+(function($) {
+$(document).ready(function() {
+	$(document).on( "a3rev-ui-onoff_checkbox-switch", '.hide_price_after_login', function( event, value, status ) {
+		if ( status == 'true' ) {
+			$(".hide_price_yellow_message_container").slideDown();
+		} else if( $("input.hide_price_before_login").prop( "checked" ) == false ) {
+			$(".hide_price_yellow_message_container").slideUp();
+		}
+	});
+	$(document).on( "a3rev-ui-onoff_checkbox-switch", '.hide_price_before_login', function( event, value, status ) {
+		if ( status == 'true' ) {
+			$(".hide_price_yellow_message_container").slideDown();
+		} else if( $("input.hide_price_after_login").prop( "checked" ) == false ) {
+			$(".hide_price_yellow_message_container").slideUp();
+		}
+	});
+	
+	$(document).on( "click", ".hide_price_yellow_message_dontshow", function(){
+		$(".hide_price_yellow_message_tr").slideUp();
+		$(".hide_price_yellow_message_container").slideUp();
+		var data = {
+				action: 		"wpec_ei_yellow_message_dontshow",
+				option_name: 	"wpec_ei_hide_price_message_dontshow",
+				security: 		"<?php echo wp_create_nonce("wpec_ei_yellow_message_dontshow"); ?>"
+			};
+		$.post( "<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>", data);
+	});
+	
+	$(document).on( "click", ".hide_price_yellow_message_dismiss", function(){
+		$(".hide_price_yellow_message_tr").slideUp();
+		$(".hide_price_yellow_message_container").slideUp();
+		var data = {
+				action: 		"wpec_ei_yellow_message_dismiss",
+				session_name: 	"wpec_ei_hide_price_message_dontshow",
+				security: 		"<?php echo wp_create_nonce("wpec_ei_yellow_message_dismiss"); ?>"
+			};
+		$.post( "<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>", data);
+	});
+});
+})(jQuery);
+</script>
+			</td>
+		</tr>
+    <?php
+	
+	}
+	
+	public function include_script() {
+	?>
+<style>
+#a3_plugin_panel_extensions {
+	position:absolute;
+	bottom:50px;	
+}
+.conditional_logic_container table th {
+	padding-left:0px;
+	padding-right:20px;	
+}
+.conditional_logic_container label {
+	font-weight:bold;
+	font-size: 1.17em;
+}
+.yellow_message_container {
+	margin-top: -15px;	
+}
+.yellow_message_container a {
+	text-decoration:none;	
+}
+.yellow_message_container th, .yellow_message_container td, .hide_addcartbt_after_login_container th, .hide_addcartbt_after_login_container td, .hide_price_after_login_container th, .hide_price_after_login_container td, .role_apply_activate_order_logged_in_container th, .role_apply_activate_order_logged_in_container td {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+}
+</style>
+<script>
+(function($) {
+	
+	a3revEIRulesRoles = {
+		
+		initRulesRoles: function () {
+			
+			if ( $("input.rules_roles_explanation").is(':checked') == false ) {
+				$(".rules_roles_explanation_container").hide();
+			}
+			
+			/* 
+			 * Condition logic for activate apply rule to logged in users
+			 * Show Roles dropdown for : Hide Add to Cart, Hide Price
+			 * Apply when page is loaded
+			 */
+			if ( $("input.hide_addcartbt_after_login:checked").val() == 'yes' ) {
+				$(".hide_addcartbt_after_login_container").show();
+			} else {
+				$(".hide_addcartbt_after_login_container").hide();
+			}
+			if ( $("input.hide_price_after_login:checked").val() == 'yes') {
+				$(".hide_price_after_login_container").show();
+			} else {
+				$(".hide_price_after_login_container").hide();
+			}
+
+		},
+		
+		conditionLogicEvent: function () {
+			
+			$(document).on( "a3rev-ui-onoff_checkbox-switch", '.rules_roles_explanation', function( event, value, status ) {
+				if ( status == 'true' ) {
+					$(".rules_roles_explanation_container").slideDown();
+				} else {
+					$(".rules_roles_explanation_container").slideUp();
+				}
+			});
+			
+			/* 
+			 * Condition logic for activate apply rule to logged in users
+			 * Show Roles dropdown for : Hide Add to Cart Hide Price
+			 */
+			$(document).on( "a3rev-ui-onoff_checkbox-switch", '.hide_addcartbt_after_login', function( event, value, status ) {
+				if ( status == 'true' ) {
+					$(".hide_addcartbt_after_login_container").slideDown();
+				} else {
+					$(".hide_addcartbt_after_login_container").slideUp();
+				}
+			});
+			$(document).on( "a3rev-ui-onoff_checkbox-switch", '.hide_price_after_login', function( event, value, status ) {
+				if ( status == 'true' ) {
+					$(".hide_price_after_login_container").slideDown();
+				} else {
+					$(".hide_price_after_login_container").slideUp();
+				}
+			});
+			
+		}
+		
+	}
+	
+	$(document).ready(function() {
+		
+		a3revEIRulesRoles.initRulesRoles();
+		a3revEIRulesRoles.conditionLogicEvent();
+		
+	});
+	
+})(jQuery);
+</script>
+    <?php	
+	}
 }
 
 global $wpec_ei_rules_roles_settings;

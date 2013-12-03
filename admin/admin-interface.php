@@ -799,9 +799,10 @@ class WPEC_Email_Inquiry_Admin_Interface extends WPEC_Email_Inquiry_Admin_UI
 	 *						   array( 'width' => '125', 'height' => '125', 'crop' => 1 ) : apply image_size only
 	 *						   array( 'size' => '9px', 'face' => 'Arial', 'style' => 'normal', 'color' => '#515151' ) : apply for typography only 
 	 *						   array( 'width' => '1px', 'style' => 'normal', 'color' => '#515151', 'corner' => 'rounded' | 'square' , 'top_left_corner' => 3, 
-	 *									'top_right_corner' => 3, 'bottom_left_corner' => 3, 'bottom_right_corner' => 3 ) : apply for border, border_styles only
+	 *									'top_right_corner' => 3, 'bottom_left_corner' => 3, 'bottom_right_corner' => 3 ) : apply for border only
+	  *						   array( 'width' => '1px', 'style' => 'normal', 'color' => '#515151' ) : apply for border_styles only
 	 *						   array( 'corner' => 'rounded' | 'square' , 'top_left_corner' => 3, 'top_right_corner' => 3, 'bottom_left_corner' => 3, 
-	 *									'bottom_right_corner' => 3 ) : apply for border, border_corner only
+	 *									'bottom_right_corner' => 3 ) : apply for border_corner only
 	 *						   array( 'enable' => 1|0, 'h_shadow' => '5px' , 'v_shadow' => '5px', 'blur' => '2px' , 'spread' => '2px', 'color' => '#515151', 
 	 *									'inset' => '' | 'insert' ) : apply for box_shadow only
 	 *

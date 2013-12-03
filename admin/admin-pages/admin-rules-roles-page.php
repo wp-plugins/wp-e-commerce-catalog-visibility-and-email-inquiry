@@ -60,8 +60,8 @@ class WPEC_EI_Rules_Roles_Page extends WPEC_Email_Inquiry_Admin_UI
 		$page_data = array( 
 			array(
 				'type'				=> 'menu',
-				'page_title'		=> __( 'WPEC Cat & Email', 'wpec_pcf' ),
-				'menu_title'		=> __( 'WPEC Cat & Email', 'wpec_pcf' ),
+				'page_title'		=> __( 'WPEC Catalog & Email Lite', 'wpec_pcf' ),
+				'menu_title'		=> __( 'WPEC Catalog & Email Lite', 'wpec_pcf' ),
 				'capability'		=> 'manage_options',
 				'menu_slug'			=> $this->menu_slug,
 				'function'			=> 'wpec_ei_rules_roles_page_show',

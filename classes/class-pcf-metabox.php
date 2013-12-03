@@ -23,6 +23,12 @@ class WPEC_PCF_MetaBox
 		global $wpec_email_inquiry_global_settings;
 		global $wpec_email_inquiry_contact_form_settings;
 		global $wpec_email_inquiry_customize_email_button;
+		add_action('admin_footer', array('WPEC_PCF_Hook_Filter', 'admin_footer_scripts'), 10);
+		global $wp_roles;
+		if ( ! isset( $wp_roles ) ) {
+			$wp_roles = new WP_Roles();
+		}
+		$roles = $wp_roles->get_names();
 		
 		$hide_addcartbt_before_login = $wpec_email_inquiry_rules_roles_settings['hide_addcartbt_before_login'];
 		
@@ -31,6 +37,14 @@ class WPEC_PCF_MetaBox
 		$show_email_inquiry_button_before_login = $wpec_email_inquiry_global_settings['show_email_inquiry_button_before_login'];
 		
 		$show_email_inquiry_button_after_login = $wpec_email_inquiry_global_settings['show_email_inquiry_button_after_login'];
+		
+		$hide_price_before_login = $wpec_email_inquiry_rules_roles_settings['hide_price_before_login'];
+		
+		$hide_price_after_login = $wpec_email_inquiry_rules_roles_settings['hide_price_after_login'];
+		
+		$role_apply_hide_cart = (array) $wpec_email_inquiry_rules_roles_settings['role_apply_hide_cart'];
+		$role_apply_hide_price = (array) $wpec_email_inquiry_rules_roles_settings['role_apply_hide_price'];
+		$role_apply_show_inquiry_button = (array) $wpec_email_inquiry_global_settings['role_apply_show_inquiry_button'];
 		
 		$inquiry_email_to = $wpec_email_inquiry_contact_form_settings['inquiry_email_to'];
 		
@@ -71,6 +85,13 @@ class WPEC_PCF_MetaBox
         <script>
 		(function($) {
 		$(document).ready(function() {
+			$(document).on( "change", "input.wpec_ei_rule_after_login", function() {
+				if ( $(this).prop("checked") ) {
+					$(this).parent('label').siblings(".wpec_ei_rule_after_login_container").slideDown();
+				} else {
+					$(this).parent('label').siblings(".wpec_ei_rule_after_login_container").slideUp();
+				}
+			});
 			
 			/* Apply Sub tab selected script */
 			$('div.wpec_ei_tab_bar ul.wp-tab-bar li a').click(function(){
@@ -107,7 +128,7 @@ class WPEC_PCF_MetaBox
         </table>
         <div class="wpec_ei_tab_bar">
         <ul class="wp-tab-bar">
-			<li class="wp-tab-active"><a href="#wpec_ei_cart_price"><?php echo __( 'Cart', 'wpec_pcf' ); ?></a></li>
+			<li class="wp-tab-active"><a href="#wpec_ei_cart_price"><?php echo __( 'Cart & Price', 'wpec_pcf' ); ?></a></li>
 			<li class="hide-if-no-js"><a href="#wpec_ei_email_inquiry"><?php echo __( 'Email Inquiry', 'wpec_pcf' ); ?></a></li>
 		</ul>
         <div id="wpec_ei_cart_price" class="wp-tab-panel">
@@ -123,9 +144,37 @@ class WPEC_PCF_MetaBox
                     </td>
                	</tr>
                 <tr valign="top">
-                    <th class="titledesc" scope="rpw"><label for="hide_addcartbt_after_login"><?php _e('Apply for all roles after log in','wpec_pcf'); ?></label></th>
+                    <th class="titledesc" scope="rpw"><label for="hide_addcartbt_after_login"><?php _e('Apply by user role after log in','wpec_pcf'); ?></label></th>
                     <td class="forminp">
                     	<label><input class="wpec_ei_rule_after_login" type="checkbox" name="_wpsc_pcf_custom[hide_addcartbt_after_login]" id="hide_addcartbt_after_login" value="yes" <?php checked( $hide_addcartbt_after_login, 'yes' ); ?> /> <?php _e('ON', 'wpec_pcf'); ?></label>
+                        <div class="wpec_ei_rule_after_login_container" style=" <?php if ( $hide_addcartbt_after_login != 'yes' ) echo 'display: none;'; ?>">
+                    	<select multiple="multiple" id="role_apply_hide_cart" name="_wpsc_pcf_custom[role_apply_hide_cart][]" data-placeholder="<?php _e( 'Choose Roles', 'wpec_pcf' ); ?>" style="display:none; width:300px;" class="chzn-select">
+						<?php foreach ( $roles as $key => $val ) { ?>
+                            <option value="<?php echo esc_attr( $key ); ?>" <?php selected( in_array($key, (array) $role_apply_hide_cart), true ); ?>><?php echo $val ?></option>
+                        <?php } ?>
+                        </select>
+                        </div>
+                    </td>
+               	</tr>
+                <tr valign="top">
+                    <th class="titledesc" scope="rpw" colspan="2"><strong><?php _e( "Product Page Rule: Hide Price", 'wpec_pcf' ); ?></strong></th>
+               	</tr>
+                <tr valign="top">
+                    <th class="titledesc" scope="rpw"><label for="hide_price_before_login"><?php _e("Apply for all users before log in",'wpec_pcf'); ?></label></th>
+                    <td class="forminp"><label><input type="checkbox" name="_wpsc_pcf_custom[hide_price_before_login]" id="hide_price_before_login" value="yes"  <?php checked( $hide_price_before_login, 'yes' ); ?> /> <?php _e('ON', 'wpec_pcf'); ?></label>
+                    </td>
+               	</tr>
+                <tr valign="top">
+                    <th class="titledesc" scope="rpw"><label for="hide_price_after_login"><?php _e('Apply by user role after log in','wpec_pcf'); ?></label></th>
+                    <td class="forminp">
+                    	<label><input class="wpec_ei_rule_after_login" type="checkbox" name="_wpsc_pcf_custom[hide_price_after_login]" id="hide_price_after_login" value="yes" <?php checked( $hide_price_after_login, 'yes' ); ?> /> <?php _e('ON', 'wpec_pcf'); ?></label>
+                        <div class="wpec_ei_rule_after_login_container" style=" <?php if ( $hide_price_after_login != 'yes' ) echo 'display: none;'; ?>">
+                    	<select multiple="multiple" id="role_apply_hide_price" name="_wpsc_pcf_custom[role_apply_hide_price][]" data-placeholder="<?php _e( 'Choose Roles', 'wpec_pcf' ); ?>" style="display:none; width:300px;" class="chzn-select">
+						<?php foreach ($roles as $key => $val) { ?>
+                            <option value="<?php echo esc_attr( $key ); ?>" <?php selected( in_array($key, (array) $role_apply_hide_price), true ); ?>><?php echo $val ?></option>
+                        <?php } ?>
+                        </select>
+                        </div>
                     </td>
                	</tr>
         	</tbody>
@@ -146,9 +195,16 @@ class WPEC_PCF_MetaBox
                     </td>
                	</tr>
                 <tr valign="top">
-                    <th class="titledesc" scope="rpw"><label for="show_email_inquiry_button_after_login"><?php _e('Apply for all roles after log in','wpec_pcf'); ?></label></th>
+                    <th class="titledesc" scope="rpw"><label for="show_email_inquiry_button_after_login"><?php _e('Apply by user role after log in','wpec_pcf'); ?></label></th>
                     <td class="forminp">
                     	<label><input class="wpec_ei_rule_after_login" type="checkbox" name="_wpsc_pcf_custom[show_email_inquiry_button_after_login]" id="show_email_inquiry_button_after_login" value="yes" <?php checked( $show_email_inquiry_button_after_login, 'yes' ); ?> /> <?php _e('ON', 'wpec_pcf'); ?></label>
+                        <div class="wpec_ei_rule_after_login_container" style=" <?php if ( $show_email_inquiry_button_after_login != 'yes' ) echo 'display: none;'; ?>">
+                    	<select multiple="multiple" id="role_apply_show_inquiry_button" name="_wpsc_pcf_custom[role_apply_show_inquiry_button][]" data-placeholder="<?php _e( 'Choose Roles', 'wpec_pcf' ); ?>" style="display:none; width:300px;" class="chzn-select">
+						<?php foreach ($roles as $key => $val) { ?>
+                            <option value="<?php echo esc_attr( $key ); ?>" <?php selected( in_array($key, (array) $role_apply_show_inquiry_button), true ); ?>><?php echo $val ?></option>
+                        <?php } ?>
+                        </select>
+                        </div>
                     </td>
                	</tr>
                 <tr valign="top">

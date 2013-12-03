@@ -3,7 +3,7 @@ Contributors: a3rev, A3 Revolution Software Development team
 Tags: WP e-Commerce Catalog Visibility, WP e-Commerce, WP e-Commerce Email Inquiry, e-commerce, wordpress ecommerce
 Requires at least: 3.5
 Tested up to: 3.7.1
-Stable tag: 1.0.8
+Stable tag: 1.0.9
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -11,27 +11,43 @@ WP e-Commerce Catalog Visibility and Email Inquiry transform WP e-Commerce into 
   
 == Description ==
 
-WP e-Commerce Catalog Visibility and Email Inquiry Lite Version allows you to configure Add to Cart and Email Inquiry functionality globally across your WP e-Commerce store on your single product pages, shop pages - list view, grid view, category and tags pages. 
+WP e-Commerce Catalog Visibility and Email Inquiry Lite Version allows you to fine tune the e-commerce accessibility on your WP e-Commerce store by setting 'Rules' that apply to all site visitors. Fine tune access to the e-commerce function for logged in users by assigning the Rules to WordPress user roles.
 
-= Configure =
+Add a space saving and impressive pop-up email inquiry form to your product offering. Pop-up Email Inquiry form is 100% mobile responsive and displays the form beautifully in any mobile in portrait or landscape.
 
-1. Add to Cart Button to show with an Email Inquiry button with a stylish pop-up product email inquiry form
-OR
-2. Hide the add to cart Button and just show the Email Inquiry Button turning your site into a brochure site.
-OR
-3. Hide the Add to Cart Button and don't show Email Button.
-PLUS
-4. Choose to apply the above setting to not logged in users and / or logged in users.
+= Catalog Visibility Rules =
 
-WP e-Commerce Catalog Visibility and Email Inquiry uses the WordPress email config and requires no external email plugin. The email sent to the WP e-Commerce email admin address from each product inquiry contains:
+* Product Page Rule: Hide 'Add to Cart'
+    * Turn ON | OFF for not logged in users
+    * Apply Rule by user role to logged in users.
 
-* Senders Name
-* Senders Email address
-* Senders Phone
-* Product name the inquiry is sent from as the email subject plus a link to the product page they sent the inquiry from.
-* Senders Message.
+* Product Page Rule: Show Email Inquiry Button
+    * Turn ON | OFF for not logged in users
+    * Apply Rule by user role to logged in users
 
-WP e-Commerce Catalog Visibility and Email Inquiry Lite is very simple to set up. Once you have installed and activated go to you wp_admin dashboard Settings > Store > Catalog Visibility Tab.
+= Apply Rules to Roles =
+
+Fine tune your entire Catalog visibility by * 'Apply Rules to Roles' - Configure which user roles each Rule is to Apply too. Fine grained control over what your account holders can see and access once they are logged into your site.
+
+= Product Page Rule - Hide 'Add to Cart' =
+
+* Turn the Rule ON and Hide the add to cart feature from all not logged in users.
+* Use Roles to give selected users grouped by Roles access to full store functionality.
+
+= Product Page Rule - Show Email Inquiry Button = 
+
+WP e-Commerce Catalog Visibility and Email Inquiry Lite Version uses the WordPress email config and requires no external email plugin. Features
+
+* Instantly add a Product Email Inquiry button to every product page.
+* Option to use hyperlinked text instead of a Button.
+* Email Inquiry form is a pop up form. It is a beautifully elegant Email Product Inquiry solution that takes up no room on your product page.
+* Mobile responsive Pop-up auto resizes to any phone screen size - portrait or landscape.
+* Email Contact form breaks down to show beautifully in any mobile device.
+* Use 'Rules and Roles' setting to customize who can see the Email Inquiry button once they are logged in.
+* Set the receiver email address.
+* Set a receiver cc email address
+* Fully customizable Sent success message shows as a pop-up on screen after inquiry is submitted.
+* Use the WordPress text editor (WYSIWYG and HTML) to style the success message (see image under the Screenshots tab on this page). 
 
 = WP e-Commerce Version Compatibility =
 
@@ -39,9 +55,12 @@ Please note that WP e-Commerce Catalog Visibility and Email Inquiry requires tha
 
 = WP e-Commerce Theme Compatibility =
 
-Whilst you might have version 3.8.8.5 your theme may still use an earlier version of code. For the Email Inquiry button to show on the single product pages and products pages you must ensure that it has this 
+Whilst you might have version 3.8.8.5 your theme may still use an earlier version of code. For the Product Page Rules Hide Add to Cart and Show Email Inquiry button to work on the single product pages and product cards the theme must have these 2 core WP e-Commerce functions: 
 
-code do_action('wpsc_product_form_fields_begin') and do_action('wpsc_product_form_fields_end') in these files:
+* code do_action('wpsc_product_form_fields_begin') 
+* do_action('wpsc_product_form_fields_end') 
+
+in these files:
 
 * wpsc-grid_view.php
 * wpsc-list_view.php
@@ -52,22 +71,20 @@ code do_action('wpsc_product_form_fields_begin') and do_action('wpsc_product_for
 
 As a Lite Version user please post all support requests to the plugins WordPress Support forum. We do not watch that forum and posting there you will be relying on another user for support not an a3rev team member. Pro Version Licence holders have 'write' access to the a3rev support forum and Lifetime priority support, not from support staff but from the developers.
 
-= Documentation =
-
-Find detailed step-by-step set up and configuration instructions in the [plugins documents](http://docs.a3rev.com/user-guides/wp-e-commerce/wpec-catalog-visibility-and-email-inquiry/) on the a3rev wiki.
-
 = Pro Version =
 
-For those who want more control there is a PRO Version upgrade. The PRO version advanced features include:
+For those who want more control there is a [PRO Version upgrade](http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/). 
 
-= Global Settings: =
-* Set custom email recipient (different to the default WPEC admin email)
-* Set a cc recipient
-* Set your own custom Email Button title and set custom style for email button.
-* Use text on page with hyperlink pop-up email form instead of the Email Button 
-* Customize Hyperlink text
-* Style pop-up window email form and submit button.
-* Customize the successfully submitted message that shows in the pop up when a message has been sent.
+The PRO version advanced features include:
+
+* The Pro Version includes the additional Product Page Rule: Hide Product Prices.
+* Per Product Page Customization. Customize Product Page Rules for every individual product from the Product page Email and Cart meta.
+* Gives you tremendous flexibility in setting up a mixed 'add to cart' and product brochure store.
+* Point and click Email Inquiry button creator - allows you to style the button anyway you like without writing a line of code.
+* Point and click pop-up form creator allows you to style your email pop-up form without writing a line of code.
+* Option to show the Email Inquiry Button or Hyperlink text on product card (Grid View)
+* Option to allow the sender to send a copy of the Email Inquiry form they are submitting to themselves.
+* Set Email Sender Options - Set the email 'From Name' and 'From Email Address'
 
 And for ultimate control:
 
@@ -91,7 +108,6 @@ Please note that we do not provide support for our Lite Version plugins. Hundred
 = Plugin Resources =
 
 [PRO Version](http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/) |
-[Documentation](http://docs.a3rev.com/user-guides/wp-e-commerce/wpec-catalog-visibility-and-email-inquiry/) |
 [Support](http://wordpress.org/support/plugin/wp-e-commerce-catalog-visibility-and-email-inquiry/)
 
 
@@ -106,7 +122,7 @@ Please note that we do not provide support for our Lite Version plugins. Hundred
  
 = Automatic installation =
 
-Automatic installation is the easiest option as WordPress handles the file transfers itself and you don't even need to leave your web browser. To do an automatic install of WP e-Commerce Catalog Visibility and Email Inquiry, log in to your WordPress admin panel, navigate to the Plugins menu and click Add New. 
+Automatic installation is the easiest option as WordPress handles the file transfers itself and you don't even need to leave your web browser. To do an automatic install of WP e-Commerce Catalog Visibility and Email Inquiry Lite, log in to your WordPress admin panel, navigate to the Plugins menu and click Add New. 
 
 In the search field type "WP e-Commerce Catalog Visibility and Email Inquiry" and click Search Plugins. Once you have found our plugin you can install it by simply clicking Install Now. After clicking that link you will be asked if you are sure you want to install the plugin. Click yes and WordPress will automatically complete the installation. 
 
@@ -130,7 +146,7 @@ The manual installation method involves downloading our plugin and uploading it 
 
 1. Install and activate the plugin
 
-2. Go to wp-admin dashboard > WPEC Cat & Email menu
+2. Go to wp-admin dashboard > WPEC Catalog & Email Inquiry Lite menu
 
 3. Rules & Roles menu to set product page rule > Hid Add to Cart.
 
@@ -146,6 +162,14 @@ You can use this plugin only when you have installed the WP e-Commerce plugin.
  
 == Changelog ==
 
+= 1.0.9 - 2013/12/03 =
+* Feature - Added Roles based Rules - Apply Rules after users log in on a per role basis for Hide the Cart, Hide the Price (new  Pro Version Feature) Rules and show Email Inquiry button Rules.
+* Tweak - Added Rules & Roles Trouble Shooting text under Show | Hide switch on Rules and Roles menu and Email Inquiry settings menu.
+* Tweak - Changed Main menu item name to from WPEC Cat & Email to WPEC Catalog & Email Lite. 
+* Tweak - Updated the WordPress plugins.php listing description text to reflect the new upgraded functionality of the plugin.
+* Fix - Replaced 'Hide Add to Cart' function .remove(); with .hide(); so that any other plugin that requires the add to cart function to hook to can still work e.g. WP e-Commerce Compare Products.
+* Fix - Upgraded array_textareas type for Padding, Margin settings on the a3rev plugin framework 
+
 = 1.0.8 - 2013/12/02 =
 * Feature - Major plugin upgrade. Full code rework. 
 * Feature - Upgraded the plugin to the newly developed a3rev admin Framework with app style interface.
@@ -154,15 +178,15 @@ You can use this plugin only when you have installed the WP e-Commerce plugin.
 * Feature - Rules & Roles menu - Product Page Rule 'Hide add to Cart' - Added setting to ON or OFF for logged in users independent of not logged in users. 
 * Feature - Email Inquiry menu broken up into tabs - Settings | Default Form | Button Style
 * Feature - Email Inquiry > Settings menu. Product Page Rule - Show Email Inquiry Button - Added setting to ON or OFF for logged in users independent of not logged in users.
-* Feature - Email Inquiry > Settings menu. Product Cards feature – Option to turn email inquiry ON | Off on product cards independent of the product page.
+* Feature - Email Inquiry > Settings menu. Product Cards feature â€“ Option to turn email inquiry ON | Off on product cards independent of the product page.
 * Feature - Added House Keeping function to settings. Clean up on Deletion. Option - If ever deleted (not deactivated) this plugin it will completely remove all tables and data it has created.
 * Feature - Email Inquiry > Default Form > Setting menu - Inquiry Email goes to feature. Option to set an alternative email address to the  WPEC admin email address.
 * Feature - Email Inquiry > Default Form > Setting menu - cc email address feature. Option to add a cc email address for inquiries submitted.
-* Feature - Email Inquiry > Default Form >  Default Form Style menu - Default Form Header Title – allows to set the pop-up form title to something other than the button title which is the default setting.
-* Feature - Email Inquiry > Default Form >  Default Form Style menu – Form Send submit button – allows to set the pop-up form send button text.
-* Feature - Email Inquiry > Default Form >  Default Form Style menu  - Activated Success Message – allows to create a custom email successfully sent pop-up message.
+* Feature - Email Inquiry > Default Form >  Default Form Style menu - Default Form Header Title â€“ allows to set the pop-up form title to something other than the button title which is the default setting.
+* Feature - Email Inquiry > Default Form >  Default Form Style menu â€“ Form Send submit button â€“ allows to set the pop-up form send button text.
+* Feature - Email Inquiry > Default Form >  Default Form Style menu  - Activated Success Message â€“ allows to create a custom email successfully sent pop-up message.
 * Feature - Email Inquiry > Button Style - Added option to select between Button | Hyperlinked Text for the inquiry display.
-* Feature - Email Inquiry > Button Style – Added option to position the Email Inquiry Button | Hyperlinked text above or below the relative position of the add to cart button.
+* Feature - Email Inquiry > Button Style â€“ Added option to position the Email Inquiry Button | Hyperlinked text above or below the relative position of the add to cart button.
 * Feature - Email Inquiry > Button Style. Added option to set padding in px above, below, left & right for the Email Inquiry button / Hyperlink.
 * Feature - New admin UI features check boxes replaced by switches, some dropdowns replaced by sliders.
 * Feature - Added intuitive triggers for admin panel settings. When selected corresponding feature settings appear.
@@ -218,6 +242,9 @@ You can use this plugin only when you have installed the WP e-Commerce plugin.
 
 
 == Upgrade Notice ==
+
+= 1.0.9 =
+Upgrade now for a great new features - Apply Rules to logged in user Roles. Also 3 new Tweaks and 2 bug fixes.
 
 = 1.0.8 =
 Major upgrade version release. 19 new Features, 10 Tweaks, 7 bug fixes. 100% compatibility with WordPress 3.7.1 and WPEC 3.8.12.1 and backwards.
