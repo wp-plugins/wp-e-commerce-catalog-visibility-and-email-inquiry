@@ -426,16 +426,14 @@ class WPEC_EI_Button_Style_Settings extends WPEC_Email_Inquiry_Admin_UI
     	<tr valign="top" class="button_hyperlink_margin_blue_message_tr" style=" ">
 			<th scope="row" class="titledesc">&nbsp;</th>
 			<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
-            <div style="width:450px;">
             <?php 
 				$button_hyperlink_margin_blue_message = '<div><strong>'.__( 'Tip', 'wpec_pcf' ).':</strong> '.__( 'If you see margin between the add to cart button and the email button before adding a value here that margin is added by your theme. Increasing the margin here will add to the themes default button margin.', 'wpec_pcf' ).'</div>
 				<div style="clear:both"></div>
                 <a class="button_hyperlink_margin_blue_message_dontshow" style="float:left;" href="javascript:void(0);">'.__( "Don't show again", 'wpec_pcf' ).'</a>
                 <a class="button_hyperlink_margin_blue_message_dismiss" style="float:right;" href="javascript:void(0);">'.__( "Dismiss", 'wpec_pcf' ).'</a>
                 <div style="clear:both"></div>';
-            	echo $this->blue_message_box( $button_hyperlink_margin_blue_message ); 
+            	echo $this->blue_message_box( $button_hyperlink_margin_blue_message, '450px' ); 
 			?>
-            </div>
 <style>
 .a3rev_panel_container .button_hyperlink_margin_blue_message_container {
 <?php if ( get_option( 'wpec_ei_button_hyperlink_margin_message_dontshow', 0 ) == 1 ) echo 'display: none !important;'; ?>

@@ -14,6 +14,7 @@
  * footer_print_scripts()
  * script_contact_popup()
  * admin_footer_scripts()
+ * admin_sidebar_menu_css()
  * plugin_extra_links()
  */
 class WPEC_PCF_Hook_Filter
@@ -376,7 +377,11 @@ jQuery(document).ready(function() {
 </script>
 	<?php
 	}
-			
+	
+	public static function admin_sidebar_menu_css() {
+		wp_enqueue_style( 'a3rev-wpec-ei-admin-sidebar-menu-style', WPEC_PCF_CSS_URL . '/admin_sidebar_menu.css' );
+	}
+		
 	public static function plugin_extra_links($links, $plugin_name) {
 		if ( $plugin_name != WPEC_PCF_NAME) {
 			return $links;

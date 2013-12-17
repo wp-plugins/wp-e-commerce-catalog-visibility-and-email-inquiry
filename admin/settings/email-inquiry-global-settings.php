@@ -239,7 +239,7 @@ class WPEC_EI_Global_Settings extends WPEC_Email_Inquiry_Admin_UI
 				'unchecked_label' 	=> __( 'HIDE', 'wpec_pcf' ),
 			),
 			array(
-				'desc'		=> '<table class="form-table"><tbody><tr valign="top"><td class="titledesc" scope="row" colspan="2" ><div>'.__( "The Email Inquiry Button / Hyperlink text will not work if the bespoke theme you are using removes or replaces (with a custom function) 2 core WP e-Commerce functions and does not use the WP e-Commerce template structure and hierarchy. The 2 core functions required are:", 'wpec_pcf' ).'</div><div>'.esc_attr("do_action('wpsc_product_form_fields_begin')").'</div><div>'.esc_attr("do_action('wpsc_product_form_fields_end')").'</div></td></tr><tr valign="top"><td class="titledesc" scope="row" colspan="2" ><div>'.__( "<strong>Note:</strong> The Email Inquiry Button shows just fine in the Default WordPress theme. You will only have an issue where a theme dev has made customized WP e-Commerce templates and functions and not followed the WP e-Commerce Codex. If this is the case you should change themes.", 'wpec_pcf' ).'</div></td></tr></tbody></table>',
+				'desc'		=> '<table class="form-table"><tbody><tr valign="top"><td class="titledesc" scope="row" colspan="2" ><div>'.__( "The Email Inquiry Button / Hyperlink text will not work if the bespoke theme you are using removes or replaces (with a custom function) 2 core WP e-Commerce functions and does not use the WP e-Commerce template structure and hierarchy. The 2 core functions required are:", 'wpec_pcf' ).'</div><p>'.esc_attr("do_action('wpsc_product_form_fields_begin')").'</p><p>'.esc_attr("do_action('wpsc_product_form_fields_end')").'</p></td></tr><tr valign="top"><td class="titledesc" scope="row" colspan="2" ><div>'.__( "<strong>Note:</strong> The Email Inquiry Button shows just fine in the Default WordPress theme. You will only have an issue where a theme dev has made customized WP e-Commerce templates and functions and not followed the WP e-Commerce Codex. If this is the case you should change themes.", 'wpec_pcf' ).'</div></td></tr></tbody></table>',
                 'type' 		=> 'heading',
 				'class'		=> 'rules_roles_explanation_container',
            	),
@@ -356,16 +356,14 @@ class WPEC_EI_Global_Settings extends WPEC_Email_Inquiry_Admin_UI
     	<tr valign="top" class="hide_inquiry_button_yellow_message_tr" style=" ">
 			<th scope="row" class="titledesc">&nbsp;</th>
 			<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
-            <div style="width:450px;">
             <?php 
 				$hide_inquiry_button_blue_message = '<div><strong>'.__( 'Note', 'wpec_pcf' ).':</strong> '.__( "If you do not apply the Show Email Inquiry Button Rule to your role i.e. 'administrator' you will need to either log out or open the site in another browser where you are not logged in to see the Email Inquiry Button feature is activated.", 'wpec_pcf' ).'</div>
                 <div style="clear:both"></div>
                 <a class="hide_inquiry_button_yellow_message_dontshow" style="float:left;" href="javascript:void(0);">'.__( "Don't show again", 'wpec_pcf' ).'</a>
                 <a class="hide_inquiry_button_yellow_message_dismiss" style="float:right;" href="javascript:void(0);">'.__( "Dismiss", 'wpec_pcf' ).'</a>
                 <div style="clear:both"></div>';
-            	echo $this->blue_message_box( $hide_inquiry_button_blue_message ); 
+            	echo $this->blue_message_box( $hide_inquiry_button_blue_message, '450px' ); 
 			?>
-            </div>
 <style>
 .a3rev_panel_container .hide_inquiry_button_yellow_message_container {
 <?php if ( $customized_settings['show_email_inquiry_button_before_login'] == 'no' && $customized_settings['show_email_inquiry_button_after_login'] == 'no' ) echo 'display: none;'; ?>

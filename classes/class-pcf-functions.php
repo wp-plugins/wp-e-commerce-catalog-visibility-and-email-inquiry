@@ -213,7 +213,7 @@ class WPEC_PCF_Functions
 	
 	public static function plugin_extension() {
 		$html = '';
-		$html .= '<a href="http://a3rev.com/shop/" target="_blank" style="float:right;margin-top:5px; margin-left:10px;" ><img src="'.WPEC_PCF_IMAGES_URL.'/a3logo.png" /></a>';
+		$html .= '<a href="http://a3rev.com/shop/" target="_blank" style="float:right;margin-top:5px; margin-left:10px;" ><div class="a3-plugin-ui-icon a3-plugin-ui-a3-rev-logo"></div></a>';
 		$html .= '<h3>'.__('Upgrade to Catalog Visibility Email inquiry Pro', 'wpec_pcf').'</h3>';
 		$html .= '<p>'.__("Visit the", 'wpec_pcf').' <a href="'.WPEC_PCF_AUTHOR_URI.'" target="_blank">'.__("a3rev website", 'wpec_pcf').'</a> '.__("to see all the extra features the Pro version of this plugin offers in the yellow box below plus the awesome power to individually customize these Catalog visibility and email inquiry settings on any product.", 'wpec_pcf').':</p>';
 		$html .= '<h3>'.__('Plugin Documentation', 'wpec_pcf').'</h3>';

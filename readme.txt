@@ -2,8 +2,8 @@
 Contributors: a3rev, A3 Revolution Software Development team
 Tags: WP e-Commerce Catalog Visibility, WP e-Commerce, WP e-Commerce Email Inquiry, e-commerce, wordpress ecommerce
 Requires at least: 3.5
-Tested up to: 3.7.1
-Stable tag: 1.0.9
+Tested up to: 3.8.0
+Stable tag: 1.1.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -66,6 +66,13 @@ in these files:
 * wpsc-list_view.php
 * wpsc-products_page.php
 * wpsc-single_product.php
+
+= Mobile Responsive App style admin interface =
+
+* 100% compatible with WordPress v3.8.0 admin interface.
+* Backward compatibility to WordPress v3.5.0
+* App style admin inteface.
+* Admin interface is optimized for mobiles and tablets.
 
 = Lite Version Support =
 
@@ -162,6 +169,14 @@ You can use this plugin only when you have installed the WP e-Commerce plugin.
  
 == Changelog ==
 
+= 1.1.0 - 2013/12/17 =
+* Feature - a3rev Plugin Framework admin interface upgraded to 100% Compatibility with WordPress v3.8.0 with backward compatibility.
+* Feature - a3rev framework 100% mobile and tablet responsive, portrait and landscape viewing.
+* Tweak - Upgraded dashboard switch and slider to Vector based display that shows when WordPress version 3.8.0 is activated.
+* Tweak - Upgraded all plugin .jpg icons and images to Vector based display for full compatibility with new WordPress version.
+* Tweak - Yellow sidebar on Quotes & Orders, Read More and Email Inquiry Ulimate Menus doe not show in Mobile screens to optimize screen space.
+* Tweak - Tested 100% compatible with WP 3.8.0
+
 = 1.0.9 - 2013/12/03 =
 * Feature - Added Roles based Rules - Apply Rules after users log in on a per role basis for Hide the Cart, Hide the Price (new  Pro Version Feature) Rules and show Email Inquiry button Rules.
 * Tweak - Added Rules & Roles Trouble Shooting text under Show | Hide switch on Rules and Roles menu and Email Inquiry settings menu.
@@ -178,15 +193,15 @@ You can use this plugin only when you have installed the WP e-Commerce plugin.
 * Feature - Rules & Roles menu - Product Page Rule 'Hide add to Cart' - Added setting to ON or OFF for logged in users independent of not logged in users. 
 * Feature - Email Inquiry menu broken up into tabs - Settings | Default Form | Button Style
 * Feature - Email Inquiry > Settings menu. Product Page Rule - Show Email Inquiry Button - Added setting to ON or OFF for logged in users independent of not logged in users.
-* Feature - Email Inquiry > Settings menu. Product Cards feature â€“ Option to turn email inquiry ON | Off on product cards independent of the product page.
+* Feature - Email Inquiry > Settings menu. Product Cards feature Ã¢â‚¬â€œ Option to turn email inquiry ON | Off on product cards independent of the product page.
 * Feature - Added House Keeping function to settings. Clean up on Deletion. Option - If ever deleted (not deactivated) this plugin it will completely remove all tables and data it has created.
 * Feature - Email Inquiry > Default Form > Setting menu - Inquiry Email goes to feature. Option to set an alternative email address to the  WPEC admin email address.
 * Feature - Email Inquiry > Default Form > Setting menu - cc email address feature. Option to add a cc email address for inquiries submitted.
-* Feature - Email Inquiry > Default Form >  Default Form Style menu - Default Form Header Title â€“ allows to set the pop-up form title to something other than the button title which is the default setting.
-* Feature - Email Inquiry > Default Form >  Default Form Style menu â€“ Form Send submit button â€“ allows to set the pop-up form send button text.
-* Feature - Email Inquiry > Default Form >  Default Form Style menu  - Activated Success Message â€“ allows to create a custom email successfully sent pop-up message.
+* Feature - Email Inquiry > Default Form >  Default Form Style menu - Default Form Header Title Ã¢â‚¬â€œ allows to set the pop-up form title to something other than the button title which is the default setting.
+* Feature - Email Inquiry > Default Form >  Default Form Style menu Ã¢â‚¬â€œ Form Send submit button Ã¢â‚¬â€œ allows to set the pop-up form send button text.
+* Feature - Email Inquiry > Default Form >  Default Form Style menu  - Activated Success Message Ã¢â‚¬â€œ allows to create a custom email successfully sent pop-up message.
 * Feature - Email Inquiry > Button Style - Added option to select between Button | Hyperlinked Text for the inquiry display.
-* Feature - Email Inquiry > Button Style â€“ Added option to position the Email Inquiry Button | Hyperlinked text above or below the relative position of the add to cart button.
+* Feature - Email Inquiry > Button Style Ã¢â‚¬â€œ Added option to position the Email Inquiry Button | Hyperlinked text above or below the relative position of the add to cart button.
 * Feature - Email Inquiry > Button Style. Added option to set padding in px above, below, left & right for the Email Inquiry button / Hyperlink.
 * Feature - New admin UI features check boxes replaced by switches, some dropdowns replaced by sliders.
 * Feature - Added intuitive triggers for admin panel settings. When selected corresponding feature settings appear.
@@ -242,6 +257,9 @@ You can use this plugin only when you have installed the WP e-Commerce plugin.
 
 
 == Upgrade Notice ==
+
+= 1.1.0 =
+Upgrade now for full a3rev Plugin Framework compatibility with WordPress version 3.8.0 admin UI upgrade. Admin panel full mobile and tablet responsive display plus 2 important bug fixes.
 
 = 1.0.9 =
 Upgrade now for a great new features - Apply Rules to logged in user Roles. Also 3 new Tweaks and 2 bug fixes.
