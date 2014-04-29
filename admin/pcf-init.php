@@ -3,7 +3,7 @@
  * Call this function when plugin is deactivated
  */
 function wpec_pcf_install(){
-	update_option('a3rev_wpec_pcf_lite_version', '1.1.0');
+	update_option('a3rev_wpec_pcf_lite_version', '1.1.1');
 	
 	// Set Settings Default from Admin Init
 	global $wpec_ei_admin_init;
@@ -27,6 +27,9 @@ function wpec_pcf_init() {
 }
 // Add language
 add_action('init', 'wpec_pcf_init');
+
+// Add custom style to dashboard
+add_action( 'admin_enqueue_scripts', array( 'WPEC_PCF_Hook_Filter', 'a3_wp_admin' ) );
 
 // Add admin sidebar menu css
 add_action( 'admin_enqueue_scripts', array( 'WPEC_PCF_Hook_Filter', 'admin_sidebar_menu_css' ) );
@@ -109,7 +112,7 @@ add_filter( 'plugin_row_meta', array('WPEC_PCF_Hook_Filter', 'plugin_extra_links
 			WPEC_PCF_Functions::lite_upgrade_version_1_0_8();
 		}
 		
-		update_option('a3rev_wpec_pcf_lite_version', '1.1.0');
+		update_option('a3rev_wpec_pcf_lite_version', '1.1.1');
 	}
 
 ?>
