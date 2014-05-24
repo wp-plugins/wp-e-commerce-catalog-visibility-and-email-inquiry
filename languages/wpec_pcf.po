@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP e-Commerce Catalog Visibility Email inquiry LITE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-29 14:40+0700\n"
-"PO-Revision-Date: 2014-04-29 14:40+0700\n"
+"POT-Creation-Date: 2014-05-24 10:45+0700\n"
+"PO-Revision-Date: 2014-05-24 10:45+0700\n"
 "Last-Translator: Nguyen Cong Tuan <mr.nguyencongtuan@gmail.com>\n"
 "Language-Team: a3rev\n"
 "Language: en\n"
@@ -241,19 +241,20 @@ msgid "Rules & Roles"
 msgstr ""
 
 #: admin/admin-ui.php:127
-#, php-format
-msgid "Settings inside this yellow border are %s Features."
+msgid ""
+"Advanced settings inside this yellow border are not activated on the Lite "
+"Version."
 msgstr ""
 
 #: admin/admin-ui.php:129
 #, php-format
 msgid ""
-"Upgrade to the <a href=\"%s\" target=\"_blank\">%s</a> to activate these "
-"settings."
+"The fully featured %s in availble for <a href=\"%s\" target=\"_blank\">Free "
+"Evaluation Trail Here</a>. No credit card required."
 msgstr ""
 
-#: admin/admin-ui.php:131 admin/admin-ui.php:133
-#: classes/class-pcf-metabox.php:135 classes/class-pcf-metabox.php:185
+#: admin/admin-ui.php:131 classes/class-pcf-metabox.php:135
+#: classes/class-pcf-metabox.php:185
 msgid "Pro Version"
 msgstr ""
 
@@ -931,106 +932,93 @@ msgid "Upgrade to Catalog Visibility Email inquiry Pro"
 msgstr ""
 
 #: classes/class-pcf-functions.php:224
-msgid "Visit the"
-msgstr ""
-
-#: classes/class-pcf-functions.php:224
-msgid "a3rev website"
-msgstr ""
-
-#: classes/class-pcf-functions.php:224
 msgid ""
-"to see all the extra features the Pro version of this plugin offers in the "
-"yellow box below plus the awesome power to individually customize these "
-"Catalog visibility and email inquiry settings on any product."
-msgstr ""
-
-#: classes/class-pcf-functions.php:225
-msgid "Plugin Documentation"
+"<strong>NOTE:</strong> All the functions inside the Yellow border on the "
+"plugins admin panel are extra functionality that is activated by upgrading "
+"to the Pro version"
 msgstr ""
 
 #: classes/class-pcf-functions.php:226
+msgid "WPEC Catalog Visibility and Email Pro"
+msgstr ""
+
+#: classes/class-pcf-functions.php:228
+#, php-format
+msgid "Trial the <a href=\"%s\" target=\"_blank\">Pro Version for Free</a>"
+msgstr ""
+
+#: classes/class-pcf-functions.php:229
+msgid "No credit card required."
+msgstr ""
+
+#: classes/class-pcf-functions.php:230
+#, php-format
+msgid ""
+"Immediate access to <a href=\"%s\" target=\"_blank\">developer support</a>."
+msgstr ""
+
+#: classes/class-pcf-functions.php:233
 msgid ""
 "All of our plugins have comprehensive online documentation. Please refer to "
 "the plugins docs before raising a support request"
 msgstr ""
 
-#: classes/class-pcf-functions.php:226
+#: classes/class-pcf-functions.php:233
 msgid "Visit the a3rev wiki."
 msgstr ""
 
-#: classes/class-pcf-functions.php:227
+#: classes/class-pcf-functions.php:234
 msgid "More a3rev Quality Plugins"
 msgstr ""
 
-#: classes/class-pcf-functions.php:228
+#: classes/class-pcf-functions.php:235
 msgid ""
 "Below is a list of the a3rev plugins that are available for free download "
 "from wordpress.org"
 msgstr ""
 
-#: classes/class-pcf-functions.php:229
+#: classes/class-pcf-functions.php:236
 msgid "WP e-Commerce Plugins"
 msgstr ""
 
-#: classes/class-pcf-functions.php:232
+#: classes/class-pcf-functions.php:239
 msgid "WP e-Commerce Products Quick View"
 msgstr ""
 
-#: classes/class-pcf-functions.php:233
+#: classes/class-pcf-functions.php:240
 msgid "WP e-Commerce Dynamic Gallery"
 msgstr ""
 
-#: classes/class-pcf-functions.php:234
+#: classes/class-pcf-functions.php:241
 msgid "WP e-Commerce Predictive Search"
 msgstr ""
 
-#: classes/class-pcf-functions.php:235
+#: classes/class-pcf-functions.php:242
 msgid "WP e-Commerce Compare Products"
 msgstr ""
 
-#: classes/class-pcf-functions.php:236
-msgid "WP e-Commerce Catalog Visibility & Email Inquiry"
-msgstr ""
-
-#: classes/class-pcf-functions.php:237
+#: classes/class-pcf-functions.php:243
 msgid "WP e-Commerce Grid View"
 msgstr ""
 
-#: classes/class-pcf-functions.php:241
+#: classes/class-pcf-functions.php:247
 msgid "WordPress Plugins"
 msgstr ""
 
-#: classes/class-pcf-functions.php:244
-msgid "Contact Us Page - Contact People"
-msgstr ""
-
-#: classes/class-pcf-functions.php:245
-msgid "WordPress Email Template"
-msgstr ""
-
-#: classes/class-pcf-functions.php:246
-msgid "Page View Count"
-msgstr ""
-
 #: classes/class-pcf-functions.php:250
-msgid "Help spread the Word about this plugin"
+msgid "a3 Responsive Slider"
 msgstr ""
 
 #: classes/class-pcf-functions.php:251
-msgid "Things you can do to help others find this plugin"
+msgid "Contact Us Page - Contact People"
+msgstr ""
+
+#: classes/class-pcf-functions.php:252
+msgid "WordPress Email Template"
 msgstr ""
 
 #: classes/class-pcf-functions.php:253
-msgid "Rate this plugin 5"
-msgstr ""
-
-#: classes/class-pcf-functions.php:253
-msgid "on WordPress.org"
-msgstr ""
-
-#: classes/class-pcf-functions.php:254
-msgid "Mark the plugin as a fourite"
+msgid "Page View Count"
 msgstr ""
 
 #: classes/class-pcf-hook.php:220

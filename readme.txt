@@ -2,8 +2,8 @@
 Contributors: a3rev, A3 Revolution Software Development team
 Tags: WP e-Commerce Catalog Visibility, WP e-Commerce, WP e-Commerce Email Inquiry, e-commerce, wordpress ecommerce
 Requires at least: 3.7
-Tested up to: 3.9
-Stable tag: 1.1.1
+Tested up to: 3.9.1
+Stable tag: 1.1.1.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -74,17 +74,27 @@ in these files:
 * App style admin inteface.
 * Admin interface is optimized for mobiles and tablets.
 
+= a3rev Plugins Lite & Pro Version Admin Interface =
+
+* All a3rev Lite Version plugins have exactly the same admin interface as the Pro Version.
+* Pro Version features and settings are inside of a Yellow border.
+* The Pro Version settings are all active on the admin panels But do not save and are not applied to the front end.
+* Upgrading to the Pro version activates all the Pro version Features and Settings and removes the Yellow side bar and borders.
+
 = Lite Version Support =
 
-As a Lite Version user please post all support requests to the plugins WordPress Support forum. We do not watch that forum and posting there you will be relying on another user for support not an a3rev team member. Pro Version Licence holders have 'write' access to the a3rev support forum and Lifetime priority support, not from support staff but from the developers.
+* As a Lite Version user please post all support requests to the plugins WordPress Support forum.
+* We do not watch that forum and posting there you will be relying on another user for support, not an a3rev team member.
+* Upgrading to a Pro Version Trail Licence gives 'write' access to the a3rev support forum.
+
 
 = Pro Version =
 
-For those who want more control there is a [PRO Version upgrade](http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/). 
-
 The PRO version advanced features include:
 
-* The Pro Version includes the additional Product Page Rule: Hide Product Prices.
+* Industry leading - Full Pro Version [Free Evaluation Trail](http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/). No Credit Card Required.
+* Immediate access to support from developers on the plugins [a3rev support forum](https://a3rev.com/forums/forum/wp-e-commerce-plugins/catalog-visibility-email-inquiry/).  
+* Includes the additional Product Page Rule: Hide Product Prices.
 * Per Product Page Customization. Customize Product Page Rules for every individual product from the Product page Email and Cart meta.
 * Gives you tremendous flexibility in setting up a mixed 'add to cart' and product brochure store.
 * Point and click Email Inquiry button creator - allows you to style the button anyway you like without writing a line of code.
@@ -168,6 +178,12 @@ The manual installation method involves downloading our plugin and uploading it 
 You can use this plugin only when you have installed the WP e-Commerce plugin.
  
 == Changelog ==
+
+= 1.1.1.1 - 2014/05/24 =
+* Tweak - Chnaged add_filter( 'gettext', array( $this, 'change_button_text' ), null, 2 ); to add_filter( 'gettext', array( $this, 'change_button_text' ), null, 3 );
+* Tweak - Update change_button_text() function from ( $original == 'Insert into Post' ) to ( is_admin() && $original === 'Insert into Post' )
+* Tweak - Checked and updated for full compatibility with WP e-Commerce Version 3.8.14.1 and WordPress version 3.9.1
+* Fix - Code tweaks to fix a3 Plugins Framework conflict with WP e-Commerce tax rates.
 
 = 1.1.1 - 2014/04/29 =
 * Tweak - a3rev Plugin Framework upgrade - all switch text show UPPERCASE
@@ -267,6 +283,9 @@ You can use this plugin only when you have installed the WP e-Commerce plugin.
 
 
 == Upgrade Notice ==
+
+= 1.1.1.1 =
+Update now for a bug fix - a3 Plugin Framework conflict with WP e-Commerce tax rates and full compatibility with WP e-Commerce v 3.8.14.1 and WordPress v 3.9.1.
 
 = 1.1.1 =
 Upgrade your plugin now for 6 code Tweaks and 1 bug fix for 100% compatibility with WP e-Commerce V 3.8.13 and WordPress V 3.9

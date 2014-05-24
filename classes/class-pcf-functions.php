@@ -221,8 +221,15 @@ class WPEC_PCF_Functions
 		$html = '';
 		$html .= '<a href="http://a3rev.com/shop/" target="_blank" style="float:right;margin-top:5px; margin-left:10px;" ><div class="a3-plugin-ui-icon a3-plugin-ui-a3-rev-logo"></div></a>';
 		$html .= '<h3>'.__('Upgrade to Catalog Visibility Email inquiry Pro', 'wpec_pcf').'</h3>';
-		$html .= '<p>'.__("Visit the", 'wpec_pcf').' <a href="'.WPEC_PCF_AUTHOR_URI.'" target="_blank">'.__("a3rev website", 'wpec_pcf').'</a> '.__("to see all the extra features the Pro version of this plugin offers in the yellow box below plus the awesome power to individually customize these Catalog visibility and email inquiry settings on any product.", 'wpec_pcf').':</p>';
-		$html .= '<h3>'.__('Plugin Documentation', 'wpec_pcf').'</h3>';
+		$html .= '<p>'.__("<strong>NOTE:</strong> All the functions inside the Yellow border on the plugins admin panel are extra functionality that is activated by upgrading to the Pro version", 'wpec_pcf').':</p>';
+		$html .= '<p>';
+		$html .= '<h3 style="margin-bottom:5px;">* <a href="'.WPEC_PCF_AUTHOR_URI.'" target="_blank">'.__('WPEC Catalog Visibility and Email Pro', 'wpec_pcf').'</a></h3>';
+		$html .= '<p>';
+		$html .= '* '. sprintf( __('Trial the <a href="%s" target="_blank">Pro Version for Free</a>', 'wpec_pcf'), WPEC_PCF_AUTHOR_URI ).'<br />';
+		$html .= '* '. __('No credit card required.', 'wpec_pcf').'<br />';
+		$html .= '* '. sprintf( __('Immediate access to <a href="%s" target="_blank">developer support</a>.', 'wpec_pcf'), 'http://a3rev.com/forums/forum/wp-e-commerce-plugins/catalog-visibility-email-inquiry/' );
+		$html .= '</p>';
+		
 		$html .= '<p>'.__('All of our plugins have comprehensive online documentation. Please refer to the plugins docs before raising a support request', 'wpec_pcf').'. <a href="http://docs.a3rev.com/user-guides/wp-e-commerce/wpec-catalog-visibility-and-email-inquiry/" target="_blank">'.__('Visit the a3rev wiki.', 'wpec_pcf').'</a></p>';
 		$html .= '<h3>'.__('More a3rev Quality Plugins', 'wpec_pcf').'</h3>';
 		$html .= '<p>'.__('Below is a list of the a3rev plugins that are available for free download from wordpress.org', 'wpec_pcf').'</p>';
@@ -233,7 +240,6 @@ class WPEC_PCF_Functions
 		$html .= '<li>* <a href="http://wordpress.org/plugins/wp-e-commerce-dynamic-gallery/" target="_blank">'.__('WP e-Commerce Dynamic Gallery', 'wpec_pcf').'</a></li>';
 		$html .= '<li>* <a href="http://wordpress.org/plugins/wp-e-commerce-predictive-search/" target="_blank">'.__('WP e-Commerce Predictive Search', 'wpec_pcf').'</a></li>';
 		$html .= '<li>* <a href="http://wordpress.org/plugins/wp-ecommerce-compare-products/" target="_blank">'.__('WP e-Commerce Compare Products', 'wpec_pcf').'</a></li>';
-		$html .= '<li>* <a href="http://wordpress.org/plugins/wp-e-commerce-catalog-visibility-and-email-inquiry/" target="_blank">'.__('WP e-Commerce Catalog Visibility & Email Inquiry', 'wpec_pcf').'</a></li>';
 		$html .= '<li>* <a href="http://wordpress.org/plugins/wp-e-commerce-grid-view/" target="_blank">'.__('WP e-Commerce Grid View', 'wpec_pcf').'</a></li>';
 		$html .= '</ul>';
 		$html .= '</p>';
@@ -241,17 +247,10 @@ class WPEC_PCF_Functions
 		$html .= '<h3>'.__('WordPress Plugins', 'wpec_pcf').'</h3>';
 		$html .= '<p>';
 		$html .= '<ul style="padding-left:10px;">';
+		$html .= '<li>* <a href="http://wordpress.org/plugins/a3-responsive-slider/" target="_blank">'.__('a3 Responsive Slider', 'wpec_pcf').'</a></li>';
 		$html .= '<li>* <a href="http://wordpress.org/plugins/contact-us-page-contact-people/" target="_blank">'.__('Contact Us Page - Contact People', 'wpec_pcf').'</a></li>';
 		$html .= '<li>* <a href="http://wordpress.org/plugins/wp-email-template/" target="_blank">'.__('WordPress Email Template', 'wpec_pcf').'</a></li>';
 		$html .= '<li>* <a href="http://wordpress.org/plugins/page-views-count/" target="_blank">'.__('Page View Count', 'wpec_pcf').'</a></li>';
-		$html .= '</ul>';
-		$html .= '</p>';
-		
-		$html .= '<h3>'.__('Help spread the Word about this plugin', 'wpec_pcf').'</h3>';
-		$html .= '<p>'.__("Things you can do to help others find this plugin", 'wpec_pcf');
-		$html .= '<ul style="padding-left:10px;">';
-		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/wp-e-commerce-catalog-visibility-and-email-inquiry/" target="_blank">'.__('Rate this plugin 5', 'wpec_pcf').' <img src="'.WPEC_PCF_IMAGES_URL.'/stars.png" align="top" style="width:auto; height:auto;" /> '.__('on WordPress.org', 'wpec_pcf').'</a></li>';
-		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/wp-e-commerce-catalog-visibility-and-email-inquiry/" target="_blank">'.__('Mark the plugin as a fourite', 'wpec_pcf').'</a></li>';
 		$html .= '</ul>';
 		$html .= '</p>';
 		return $html;
