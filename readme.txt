@@ -1,9 +1,9 @@
 === WP e-Commerce Catalog Visibility  ===
 Contributors: a3rev, A3 Revolution Software Development team
 Tags: WP e-Commerce Catalog Visibility, WP e-Commerce, WP e-Commerce Email Inquiry, e-commerce, wordpress ecommerce
-Requires at least: 3.5
-Tested up to: 3.8.0
-Stable tag: 1.1.0
+Requires at least: 3.7
+Tested up to: 3.9
+Stable tag: 1.1.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -69,8 +69,8 @@ in these files:
 
 = Mobile Responsive App style admin interface =
 
-* 100% compatible with WordPress v3.8.0 admin interface.
-* Backward compatibility to WordPress v3.5.0
+* 100% compatible with WordPress v3.9.0 admin interface.
+* Backward compatibility to WordPress v3.7.0
 * App style admin inteface.
 * Admin interface is optimized for mobiles and tablets.
 
@@ -122,7 +122,7 @@ Please note that we do not provide support for our Lite Version plugins. Hundred
 
 = Minimum Requirements =
 
-* WordPress 3.5.0
+* WordPress 3.7.0
 * WP e-Commerce 3.8.8.5
 * PHP version 5.2.4 or greater
 * MySQL version 5.0 or greater
@@ -168,6 +168,16 @@ The manual installation method involves downloading our plugin and uploading it 
 You can use this plugin only when you have installed the WP e-Commerce plugin.
  
 == Changelog ==
+
+= 1.1.1 - 2014/04/29 =
+* Tweak - a3rev Plugin Framework upgrade - all switch text show UPPERCASE
+* Tweak - Updated plugins wp-admin menu item vector image.
+* Tweak - Updated Framework help text font for consistency.
+* Tweak - Added description text to the top of each Pro Version yellow border section
+* Tweak - Added remove_all_filters('mce_external_plugins'); before call to wp_editor to remove extension scripts from other plugins.
+* Tweak - Added Custom encode to prevent email clients automatically adding <a> tag to URL's in form message.
+* Tweak - Checked and updated for full compatibility with WP e-Commerce Version 3.8.13  and WordPress version 3.9
+* Fix - Email Inquiry sending duplicate emails on themes that have script that duplicate the click event
 
 = 1.1.0 - 2013/12/17 =
 * Feature - a3rev Plugin Framework admin interface upgraded to 100% Compatibility with WordPress v3.8.0 with backward compatibility.
@@ -257,6 +267,9 @@ You can use this plugin only when you have installed the WP e-Commerce plugin.
 
 
 == Upgrade Notice ==
+
+= 1.1.1 =
+Upgrade your plugin now for 6 code Tweaks and 1 bug fix for 100% compatibility with WP e-Commerce V 3.8.13 and WordPress V 3.9
 
 = 1.1.0 =
 Upgrade now for full a3rev Plugin Framework compatibility with WordPress version 3.8.0 admin UI upgrade. Admin panel full mobile and tablet responsive display plus 2 important bug fixes.
