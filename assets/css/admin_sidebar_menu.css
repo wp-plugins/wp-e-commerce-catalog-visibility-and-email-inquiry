@@ -28,6 +28,10 @@
 	background:none;	
 }
 
+.wpec_ei_tab_bar .chosen-container {
+	width:300px !important;	
+}
+
 @media screen and ( max-width: 782px ) {
 	.auto-fold #adminmenu #toplevel_page_wpec-cart-email a.menu-top {
 		height:auto;	

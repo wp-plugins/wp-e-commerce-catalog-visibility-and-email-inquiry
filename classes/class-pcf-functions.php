@@ -223,11 +223,15 @@ class WPEC_PCF_Functions
 		$html .= '<h3>'.__('Upgrade to Catalog Visibility Email inquiry Pro', 'wpec_pcf').'</h3>';
 		$html .= '<p>'.__("<strong>NOTE:</strong> All the functions inside the Yellow border on the plugins admin panel are extra functionality that is activated by upgrading to the Pro version", 'wpec_pcf').':</p>';
 		$html .= '<p>';
-		$html .= '<h3 style="margin-bottom:5px;">* <a href="'.WPEC_PCF_AUTHOR_URI.'" target="_blank">'.__('WPEC Catalog Visibility and Email Pro', 'wpec_pcf').'</a></h3>';
+		
+		$html .= '<h3>* <a href="'.WPEC_PCF_AUTHOR_URI.'" target="_blank">'.__('WPEC Catalog Visibility and Email Pro', 'wpec_pcf').'</a> '.__('Features', 'wpec_pcf').':</h3>';
 		$html .= '<p>';
-		$html .= '* '. sprintf( __('Trial the <a href="%s" target="_blank">Pro Version for Free</a>', 'wpec_pcf'), WPEC_PCF_AUTHOR_URI ).'<br />';
-		$html .= '* '. __('No credit card required.', 'wpec_pcf').'<br />';
-		$html .= '* '. sprintf( __('Immediate access to <a href="%s" target="_blank">developer support</a>.', 'wpec_pcf'), 'http://a3rev.com/forums/forum/wp-e-commerce-plugins/catalog-visibility-email-inquiry/' );
+		$html .= '<ul style="padding-left:10px;">';
+		$html .= '<li>1. '.__("Rule: Hide Product Prices.", 'wpec_pcf').'</li>';
+		$html .= '<li>2. '.__('Email and Cart Product Page Meta.', 'wpec_pcf').'</li>';
+		$html .= '<li>3. '.__('WYSIWYG Email Inquiry button creator.', 'wpec_pcf').'</li>';
+		$html .= '<li>4. '.__('WYSIWYG pop-up form creator.', 'wpec_pcf').'</li>';
+		$html .= '</ul>';
 		$html .= '</p>';
 		
 		$html .= '<p>'.__('All of our plugins have comprehensive online documentation. Please refer to the plugins docs before raising a support request', 'wpec_pcf').'. <a href="http://docs.a3rev.com/user-guides/wp-e-commerce/wpec-catalog-visibility-and-email-inquiry/" target="_blank">'.__('Visit the a3rev wiki.', 'wpec_pcf').'</a></p>';
@@ -266,7 +270,7 @@ class WPEC_PCF_Functions
 	public static function wpec_ei_yellow_message_dismiss() {
 		check_ajax_referer( 'wpec_ei_yellow_message_dismiss', 'security' );
 		$session_name   = $_REQUEST['session_name'];
-		if ( !isset($_SESSION) ) { session_start(); } 
+		if ( !isset($_SESSION) ) { @session_start(); } 
 		$_SESSION[$session_name] = 1 ;
 		die();
 	}

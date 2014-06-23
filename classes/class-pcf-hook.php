@@ -373,8 +373,8 @@ function ei_getWidth() {
 		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 		
 		wp_enqueue_script('jquery');
-		wp_enqueue_style( 'a3rev-chosen-style', $wpec_ei_admin_interface->admin_plugin_url() . '/assets/js/chosen/chosen.css' );
-		wp_enqueue_script( 'chosen', $wpec_ei_admin_interface->admin_plugin_url() . '/assets/js/chosen/chosen.jquery' . $suffix . '.js', array( 'jquery' ), true, false );
+		wp_enqueue_style( 'a3rev-chosen-new-style', $wpec_ei_admin_interface->admin_plugin_url() . '/assets/js/chosen/chosen' . $suffix . '.css' );
+		wp_enqueue_script( 'a3rev-chosen-new', $wpec_ei_admin_interface->admin_plugin_url() . '/assets/js/chosen/chosen.jquery' . $suffix . '.js', array( 'jquery' ), true, false );
 	?>
 <script type="text/javascript">
 jQuery(document).ready(function() {

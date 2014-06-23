@@ -437,7 +437,7 @@ class WPEC_EI_Button_Style_Settings extends WPEC_Email_Inquiry_Admin_UI
 <style>
 .a3rev_panel_container .button_hyperlink_margin_blue_message_container {
 <?php if ( get_option( 'wpec_ei_button_hyperlink_margin_message_dontshow', 0 ) == 1 ) echo 'display: none !important;'; ?>
-<?php if ( !isset($_SESSION) ) { session_start(); } if ( isset( $_SESSION['wpec_ei_button_hyperlink_margin_message_dismiss'] ) ) echo 'display: none !important;'; ?>
+<?php if ( !isset($_SESSION) ) { @session_start(); } if ( isset( $_SESSION['wpec_ei_button_hyperlink_margin_message_dismiss'] ) ) echo 'display: none !important;'; ?>
 }
 </style>
 <script>

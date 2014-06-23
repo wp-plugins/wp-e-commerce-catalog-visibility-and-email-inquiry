@@ -3,7 +3,7 @@ Contributors: a3rev, A3 Revolution Software Development team
 Tags: WP e-Commerce Catalog Visibility, WP e-Commerce, WP e-Commerce Email Inquiry, e-commerce, wordpress ecommerce
 Requires at least: 3.7
 Tested up to: 3.9.1
-Stable tag: 1.1.1.1
+Stable tag: 1.1.1.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -85,14 +85,20 @@ in these files:
 
 * As a Lite Version user please post all support requests to the plugins WordPress Support forum.
 * We do not watch that forum and posting there you will be relying on another user for support, not an a3rev team member.
-* Upgrading to a Pro Version Trail Licence gives 'write' access to the a3rev support forum.
+* Upgrading to a Pro Version gives 'write' access to the a3rev support forum.
+
+>= Premium Support = 
+>
+>The a3rev team does not provide support for the WPEC Catalog Visibility and Email plugin on the WordPress.org forums. One on one developer support is available via the plugins a3rev [support forum](https://a3rev.com/forums/forum/wp-e-commerce-plugins/catalog-visibility-email-inquiry/) to people who have purchased a [WPEC Catalog Visibility and Email Pro](http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/) plugin Lifetime License. 
+>
+>The Pro Version has lots of extra features that coupled with developer support might be well worth your investment!
 
 
 = Pro Version =
 
 The PRO version advanced features include:
 
-* Industry leading - Full Pro Version [Free Evaluation Trail](http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/). No Credit Card Required.
+* Industry leading - [Full Pro Version](http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/). No Credit Card Required.
 * Immediate access to support from developers on the plugins [a3rev support forum](https://a3rev.com/forums/forum/wp-e-commerce-plugins/catalog-visibility-email-inquiry/).  
 * Includes the additional Product Page Rule: Hide Product Prices.
 * Per Product Page Customization. Customize Product Page Rules for every individual product from the Product page Email and Cart meta.
@@ -178,6 +184,12 @@ The manual installation method involves downloading our plugin and uploading it 
 You can use this plugin only when you have installed the WP e-Commerce plugin.
  
 == Changelog ==
+
+= 1.1.1.2 - 2014/06/23 =
+* Tweak - Updated chosen js script to latest version 1.0.1 on the a3rev Plugin Framework 
+* Tweak - Added support for placeholder feature for input, email , password , text area types
+* Tweak - Updated plugins description text and admin panel yellow sidebar text.
+* Fix - Add @ prefix for called session_start() function to fix the header warning
 
 = 1.1.1.1 - 2014/05/24 =
 * Tweak - Chnaged add_filter( 'gettext', array( $this, 'change_button_text' ), null, 2 ); to add_filter( 'gettext', array( $this, 'change_button_text' ), null, 3 );
@@ -283,6 +295,9 @@ You can use this plugin only when you have installed the WP e-Commerce plugin.
 
 
 == Upgrade Notice ==
+
+= 1.1.1.2 =
+Update now for 2 important framework code tweaks and 1 bug fix.
 
 = 1.1.1.1 =
 Update now for a bug fix - a3 Plugin Framework conflict with WP e-Commerce tax rates and full compatibility with WP e-Commerce v 3.8.14.1 and WordPress v 3.9.1.
