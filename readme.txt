@@ -2,8 +2,8 @@
 Contributors: a3rev, A3 Revolution Software Development team
 Tags: WP e-Commerce Catalog Visibility, WP e-Commerce, WP e-Commerce Email Inquiry, e-commerce, wordpress ecommerce
 Requires at least: 3.7
-Tested up to: 3.9.1
-Stable tag: 1.1.1.2
+Tested up to: 4.0
+Stable tag: 1.1.1.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -139,7 +139,7 @@ Please note that we do not provide support for our Lite Version plugins. Hundred
 = Minimum Requirements =
 
 * WordPress 3.7.0
-* WP e-Commerce 3.8.8.5
+* WP e-Commerce 3.8.14.3
 * PHP version 5.2.4 or greater
 * MySQL version 5.0 or greater
  
@@ -184,6 +184,11 @@ The manual installation method involves downloading our plugin and uploading it 
 You can use this plugin only when you have installed the WP e-Commerce plugin.
  
 == Changelog ==
+
+= 1.1.1.3 - 2014/09/09 =
+* Tweak - Updated google font face in plugin framework.
+* Tweak - Tested 100% compatible with WP e-Commerce 3.8.14.3
+* Tweak - Tested 100% compatible with WordPress Version 4.0
 
 = 1.1.1.2 - 2014/06/23 =
 * Tweak - Updated chosen js script to latest version 1.0.1 on the a3rev Plugin Framework 
@@ -295,6 +300,9 @@ You can use this plugin only when you have installed the WP e-Commerce plugin.
 
 
 == Upgrade Notice ==
+
+= 1.1.1.3 =
+Upgrade your plugin now for full compatibility with WordPress Version 4.0 and WP e-Commerce Version 3.8.14.3
 
 = 1.1.1.2 =
 Update now for 2 important framework code tweaks and 1 bug fix.

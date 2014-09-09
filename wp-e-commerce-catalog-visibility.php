@@ -3,7 +3,7 @@
 Plugin Name: WP e-Commerce Catalog Visibility Email inquiry LITE
 Plugin URI: http://a3rev.com/shop/catalog-visibilty-and-email-inquiry/
 Description: Remove add to cart function from all products on your WP e-Commerce store. Apply to all not logged in users and individually apply to any logged in user role. Add product email inquiry button or hyperlink text to all or any product with fully mobile responsive pop-up email inquiry form.
-Version: 1.1.1.2
+Version: 1.1.1.3
 Author: A3 Revolution
 Author URI: http://www.a3rev.com/
 License: This software is under commercial license and copyright to A3 Revolution Software Development team
