@@ -3,18 +3,6 @@
 /*-------------------------------------------------------------------------------------------*/
 @charset "UTF-8";
 
-@font-face {
-  font-family: "a3-sidebar-menu";
-  src:url("../fonts/a3-sidebar-menu.eot");
-  src:url("../fonts/a3-sidebar-menu.eot?#iefix") format("embedded-opentype"),
-    url("../fonts/a3-sidebar-menu.woff") format("woff"),
-    url("../fonts/a3-sidebar-menu.ttf") format("truetype"),
-    url("../fonts/a3-sidebar-menu.svg#a3-sidebar-menu") format("svg");
-  font-weight: normal;
-  font-style: normal;
-
-}
-
 #toplevel_page_wpec-cart-email .wp-menu-image:before {
   font-family: "a3-sidebar-menu" !important;
   font-style: normal !important;
@@ -38,6 +26,10 @@
 #toplevel_page_wpec-cart-email .wp-menu-image {
 	text-align:center;
 	background:none;	
+}
+
+.wpec_ei_tab_bar .chosen-container {
+	width:300px !important;	
 }
 
 @media screen and ( max-width: 782px ) {
