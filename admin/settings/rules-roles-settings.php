@@ -378,7 +378,7 @@ class WPEC_EI_Rules_Roles_Settings extends WPEC_Email_Inquiry_Admin_UI
 .a3rev_panel_container .hide_addtocart_yellow_message_container {
 <?php if ( $customized_settings['hide_addcartbt_before_login'] == 'no' && $customized_settings['hide_addcartbt_after_login'] == 'no' ) echo 'display: none;'; ?>
 <?php if ( get_option( 'wpec_ei_hide_addtocart_message_dontshow', 0 ) == 1 ) echo 'display: none !important;'; ?>
-<?php if ( !isset($_SESSION) ) { session_start(); } if ( isset( $_SESSION['wpec_ei_hide_addtocart_message_dismiss'] ) ) echo 'display: none !important;'; ?>
+<?php if ( !isset($_SESSION) ) { @session_start(); } if ( isset( $_SESSION['wpec_ei_hide_addtocart_message_dismiss'] ) ) echo 'display: none !important;'; ?>
 }
 </style>
 <script>
@@ -447,7 +447,7 @@ $(document).ready(function() {
 .a3rev_panel_container .hide_price_yellow_message_container {
 <?php if ( $customized_settings['hide_price_before_login'] == 'no' && $customized_settings['hide_price_after_login'] == 'no' ) echo 'display: none;'; ?>
 <?php if ( get_option( 'wpec_ei_hide_price_message_dontshow', 0 ) == 1 ) echo 'display: none !important;'; ?>
-<?php if ( !isset($_SESSION) ) { session_start(); } if ( isset( $_SESSION['wpec_ei_hide_price_message_dontshow'] ) ) echo 'display: none !important;'; ?>
+<?php if ( !isset($_SESSION) ) { @session_start(); } if ( isset( $_SESSION['wpec_ei_hide_price_message_dontshow'] ) ) echo 'display: none !important;'; ?>
 }
 </style>
 <script>
@@ -541,14 +541,14 @@ $(document).ready(function() {
 			 * Apply when page is loaded
 			 */
 			if ( $("input.hide_addcartbt_after_login:checked").val() == 'yes' ) {
-				$(".hide_addcartbt_after_login_container").show();
+				$('.hide_addcartbt_after_login_container').css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
 			} else {
-				$(".hide_addcartbt_after_login_container").hide();
+				$('.hide_addcartbt_after_login_container').css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden'} );
 			}
 			if ( $("input.hide_price_after_login:checked").val() == 'yes') {
-				$(".hide_price_after_login_container").show();
+				$('.hide_price_after_login_container').css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
 			} else {
-				$(".hide_price_after_login_container").hide();
+				$('.hide_price_after_login_container').css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden'} );
 			}
 
 		},
@@ -568,6 +568,7 @@ $(document).ready(function() {
 			 * Show Roles dropdown for : Hide Add to Cart Hide Price
 			 */
 			$(document).on( "a3rev-ui-onoff_checkbox-switch", '.hide_addcartbt_after_login', function( event, value, status ) {
+				$('.hide_addcartbt_after_login_container').hide().css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
 				if ( status == 'true' ) {
 					$(".hide_addcartbt_after_login_container").slideDown();
 				} else {
@@ -575,6 +576,7 @@ $(document).ready(function() {
 				}
 			});
 			$(document).on( "a3rev-ui-onoff_checkbox-switch", '.hide_price_after_login', function( event, value, status ) {
+				$('.hide_price_after_login_container').hide().css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
 				if ( status == 'true' ) {
 					$(".hide_price_after_login_container").slideDown();
 				} else {
