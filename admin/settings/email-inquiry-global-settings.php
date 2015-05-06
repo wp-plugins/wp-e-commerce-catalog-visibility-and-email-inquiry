@@ -368,7 +368,7 @@ class WPEC_EI_Global_Settings extends WPEC_Email_Inquiry_Admin_UI
 .a3rev_panel_container .hide_inquiry_button_yellow_message_container {
 <?php if ( $customized_settings['show_email_inquiry_button_before_login'] == 'no' && $customized_settings['show_email_inquiry_button_after_login'] == 'no' ) echo 'display: none;'; ?>
 <?php if ( get_option( 'wpec_ei_hide_inquiry_button_message_dontshow', 0 ) == 1 ) echo 'display: none !important;'; ?>
-<?php if ( !isset($_SESSION) ) { session_start(); } if ( isset( $_SESSION['wpec_ei_hide_inquiry_button_message_dismiss'] ) ) echo 'display: none !important;'; ?>
+<?php if ( !isset($_SESSION) ) { @session_start(); } if ( isset( $_SESSION['wpec_ei_hide_inquiry_button_message_dismiss'] ) ) echo 'display: none !important;'; ?>
 }
 </style>
 <script>
@@ -442,11 +442,10 @@ $(document).ready(function() {
 		}
 		
 		if ( $("input.show_email_inquiry_button_after_login:checked").val() == 'yes') {
-			$(".show_email_inquiry_button_after_login_container").show();
+			$('.show_email_inquiry_button_after_login_container').css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
 		} else {
-			$(".show_email_inquiry_button_after_login_container").hide();
+			$('.show_email_inquiry_button_after_login_container').css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden'} );
 		}
-		
 		
 		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.rules_roles_explanation', function( event, value, status ) {
 			if ( status == 'true' ) {
@@ -457,6 +456,7 @@ $(document).ready(function() {
 		});
 			
 		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.show_email_inquiry_button_after_login', function( event, value, status ) {
+			$('.show_email_inquiry_button_after_login_container').hide().css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
 			if ( status == 'true' ) {
 				$(".show_email_inquiry_button_after_login_container").slideDown();
 			} else {
