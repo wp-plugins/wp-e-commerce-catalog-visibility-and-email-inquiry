@@ -163,7 +163,6 @@ class WPEC_PCF_Hook_Filter
 	}
 	
 	public static function pcf_contact_popup() {
-		check_ajax_referer( 'pcf_contact_popup', 'security' );
 		
 		global $wpec_email_inquiry_contact_form_settings;
 		global $wpec_email_inquiry_customize_email_popup;
@@ -235,7 +234,6 @@ class WPEC_PCF_Hook_Filter
 	}
 	
 	public static function pcf_contact_action() {
-		check_ajax_referer( 'pcf_contact_action', 'security' );
 		$product_id 	= esc_attr( stripslashes( $_REQUEST['product_id'] ) );
 		$your_name 		= esc_attr( stripslashes( $_REQUEST['your_name'] ) );
 		$your_email 	= esc_attr( stripslashes( $_REQUEST['your_email'] ) );
