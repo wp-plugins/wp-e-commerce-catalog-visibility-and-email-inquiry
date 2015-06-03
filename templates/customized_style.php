@@ -16,7 +16,7 @@ extract($wpec_email_inquiry_customize_email_button);
 	margin-left: <?php echo $inquiry_button_margin_left; ?>px !important;
 	margin-right: <?php echo $inquiry_button_margin_right; ?>px !important;
 }
-body .pcf_button_container .wc_email_inquiry_button, body .pcf_button_container .pcf_contact_buton, body .pcf_button_container .wc_email_inquiry_button_3rd {
+body .pcf_button_container .pcf_contact_buton {
 	position: relative !important;
 	cursor:pointer;
 	display: inline-block !important;

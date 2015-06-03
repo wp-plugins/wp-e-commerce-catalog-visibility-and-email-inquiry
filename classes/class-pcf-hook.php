@@ -14,6 +14,7 @@
  * footer_print_scripts()
  * script_contact_popup()
  * admin_footer_scripts()
+ * a3_wp_admin()
  * admin_sidebar_menu_css()
  * plugin_extra_links()
  */
@@ -162,7 +163,6 @@ class WPEC_PCF_Hook_Filter
 	}
 	
 	public static function pcf_contact_popup() {
-		check_ajax_referer( 'pcf_contact_popup', 'security' );
 		
 		global $wpec_email_inquiry_contact_form_settings;
 		global $wpec_email_inquiry_customize_email_popup;
@@ -232,9 +232,8 @@ class WPEC_PCF_Hook_Filter
 	<?php		
 		die();
 	}
-		
+	
 	public static function pcf_contact_action() {
-		check_ajax_referer( 'pcf_contact_action', 'security' );
 		$product_id 	= esc_attr( stripslashes( $_REQUEST['product_id'] ) );
 		$your_name 		= esc_attr( stripslashes( $_REQUEST['your_name'] ) );
 		$your_email 	= esc_attr( stripslashes( $_REQUEST['your_email'] ) );
@@ -297,6 +296,11 @@ class WPEC_PCF_Hook_Filter
 		});
 		
 		$(document).on("click", ".pcf_form_button", function(){
+			if ( $(this).hasClass('pcf_email_inquiry_sending') ) {
+				return false;
+			}
+			$(this).addClass('pcf_email_inquiry_sending');
+			
 			var product_id = $(this).attr("product_id");
 			var your_name = $("#your_name_"+product_id).val();
 			var your_email = $("#your_email_"+product_id).val();
@@ -321,10 +325,10 @@ class WPEC_PCF_Hook_Filter
 				pcf_have_error = true;
 			}
 			if (pcf_have_error) {
+				$(this).removeClass('pcf_email_inquiry_sending');
 				alert(pcf_contact_error);
 				return false;
 			}
-			$(this).attr("disabled", "disabled");
 			$("#pcf_contact_loading_"+product_id).show();
 			
 			var data = {
@@ -367,8 +371,8 @@ function ei_getWidth() {
 		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 		
 		wp_enqueue_script('jquery');
-		wp_enqueue_style( 'a3rev-chosen-style', $wpec_ei_admin_interface->admin_plugin_url() . '/assets/js/chosen/chosen.css' );
-		wp_enqueue_script( 'chosen', $wpec_ei_admin_interface->admin_plugin_url() . '/assets/js/chosen/chosen.jquery' . $suffix . '.js', array( 'jquery' ), true, false );
+		wp_enqueue_style( 'a3rev-chosen-new-style', $wpec_ei_admin_interface->admin_plugin_url() . '/assets/js/chosen/chosen' . $suffix . '.css' );
+		wp_enqueue_script( 'a3rev-chosen-new', $wpec_ei_admin_interface->admin_plugin_url() . '/assets/js/chosen/chosen.jquery' . $suffix . '.js', array( 'jquery' ), true, false );
 	?>
 <script type="text/javascript">
 jQuery(document).ready(function() {
@@ -376,6 +380,10 @@ jQuery(document).ready(function() {
 });	
 </script>
 	<?php
+	}
+	
+	public static function a3_wp_admin() {
+		wp_enqueue_style( 'a3rev-wp-admin-style', WPEC_PCF_CSS_URL . '/a3_wp_admin.css' );
 	}
 	
 	public static function admin_sidebar_menu_css() {
@@ -390,6 +398,5 @@ jQuery(document).ready(function() {
 		$links[] = '<a href="http://wordpress.org/support/plugin/wp-e-commerce-catalog-visibility-and-email-inquiry/" target="_blank">'.__('Support', 'wpec_pcf').'</a>';
 		return $links;
 	}
-	
 }
 ?>
